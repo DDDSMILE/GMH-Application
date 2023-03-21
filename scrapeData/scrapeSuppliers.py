@@ -9,28 +9,26 @@ bytes = io.BytesIO()
 driver = webdriver.Chrome()
 
 # cam le
-# 233778
-# https://shopeefood.vn/da-nang/tiem-an-vat-nha-dau-do-an-vat-nhap-khau-nguyen-huu-tien.cta8nn
-# 130404
-# https://shopeefood.vn/da-nang/cua-hang-an-vat-thien-ly-shop-online
+# 203678
+# https://shopeefood.vn/da-nang/thuc-pham-sach-thao-nguyen-huynh-ngoc-du
 # ngu hanh son
-# 130792
-# https://shopeefood.vn/da-nang/kim-mart-70-nguyen-van-thoai
+# 123782
+# https://shopeefood.vn/da-nang/laban-mart-chau-thi-vinh-te
 # hai chau
-# 60114
-# https://shopeefood.vn/da-nang/bb-mini-mart-do-an-vat-da-nang
+# 74087
+# https://shopeefood.vn/da-nang/shop-rau-qua-yen-tieu-la
 # son tra
-# 207333
-# https://shopeefood.vn/da-nang/co-xuan-cung-cap-rau-cu-qua-ha-dac
+# 256763
+# https://shopeefood.vn/da-nang/chi-thao-trai-cay-si-le-ha-dac
 # lien chieu
 # 225160
-# https://shopeefood.vn/da-nang/vinamilk-giac-mo-sua-viet-dn-ton-duc-thang-gl20051
+# https://shopeefood.vn/da-nang/tuti-fruit-shop-trai-cay-nhap-khau-da-nang-ton-duc-thang
 # thanh khe
 # 128317
 # https://shopeefood.vn/da-nang/sieu-thi-co-op-mart-da-nang
 
-supplierId = '128317'
-linkWeb = 'https://shopeefood.vn/da-nang/sieu-thi-co-op-mart-da-nang'
+supplierId = '203678'
+linkWeb = 'https://shopeefood.vn/da-nang/thuc-pham-sach-thao-nguyen-huynh-ngoc-du'
 
 # Go to the Google home page
 driver.get(linkWeb)
@@ -39,30 +37,18 @@ dataFull = []
 
 # Access requests via the `requests` attribute
 for request in driver.requests:
-    if request.response:
-        if request.url.startswith('https://gappapi.deliverynow.vn/api/dish/get_delivery_dishes?id_type=2&request_id=' + supplierId):
-            # print(request.response.body)
-            res = request.response.body
-            bytes.write(res)
+    if request.url.startswith('https://gappapi.deliverynow.vn/api/delivery/get_detail?id_type=2&request_id=' + supplierId):
+        resData = request.response.body
+        data = json.loads(resData)
 
-            bytes.seek(0)
-            with gzip.GzipFile(fileobj=bytes, mode='rb') as f:
-                documents = f.read()  # type: bytes
-                str = documents.decode('utf-8')
-                data = json.loads(str)
-                rows = data['reply']['menu_infos']
-                # print(len(rows))
-                for i in range(len(rows)):
-                    rowDishes = len(data['reply']['menu_infos'][i]['dishes'])
-                    for j in range(rowDishes):
-                        id = data['reply']['menu_infos'][i]['dishes'][j]['id']
-                        name = data['reply']['menu_infos'][i]['dishes'][j]['name']
-                        photo = data['reply']['menu_infos'][i]['dishes'][j]['photos'][4]['value']
-                        price = data['reply']['menu_infos'][i]['dishes'][j]['price']['value']
-                        type = data['reply']['menu_infos'][i]['dish_type_name']
+        name = data['reply']['delivery_detail']['brand']['name']
+        photo = data['reply']['delivery_detail']['photos'][11]['value']
+        address = data['reply']['delivery_detail']['address']
+        print(name)
+        print(photo)
+        print(address)
+        dataFull.append((supplierId, name, photo, address))
 
-                        dataFull.append(
-                            (id, name, photo, price, type, supplierId))
-df = pd.DataFrame(dataFull, columns=['id', 'name', 'photo', 'price', 'type', 'supplierId'])
+df = pd.DataFrame(dataFull, columns=['id', 'name', 'photo', 'address'])
 print(df)
-# df.to_excel('test.xlsx')
+df.to_excel('test.xlsx')
