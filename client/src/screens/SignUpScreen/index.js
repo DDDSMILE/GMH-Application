@@ -3,6 +3,7 @@ import { ButtonForm, InputForm, PageForm } from "../../components/Form";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Fontisto from "react-native-vector-icons/Fontisto";
+import { Colors } from "../../constants";
 
 const SignUpScreen = () => {
   return (
@@ -13,7 +14,7 @@ const SignUpScreen = () => {
           <FontAwesome
             name="user"
             size={20}
-            color="#6CC51D"
+            color={Colors.GREEN_TEXT_TWO}
             style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
           />
         }
@@ -24,7 +25,7 @@ const SignUpScreen = () => {
           <MaterialCommunityIcons
             name="email"
             size={20}
-            color="#6CC51D"
+            color={Colors.GREEN_TEXT_TWO}
             style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
           />
         }
@@ -35,7 +36,7 @@ const SignUpScreen = () => {
           <Fontisto
             name="locked"
             size={20}
-            color="#6CC51D"
+            color={Colors.GREEN_TEXT_TWO}
             style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
           />
         }
@@ -48,7 +49,7 @@ const SignUpScreen = () => {
           color: "#15BE77",
           fontSize: 13,
           textDecorationLine: "underline",
-          fontWeight: 400,
+          fontFamily: "inter_regular",
           paddingBottom: 20,
         }}
       >
@@ -60,8 +61,8 @@ const SignUpScreen = () => {
 
 const styles = StyleSheet.create({
   title: {
+    fontFamily: "inter_medium",
     fontSize: 20,
-    fontWeight: 400,
     paddingBottom: 20,
   },
 });

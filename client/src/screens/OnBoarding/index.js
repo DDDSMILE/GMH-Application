@@ -1,29 +1,23 @@
 import { StyleSheet, Text, Image, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
+import { Colors, Fonts, Images } from "../../constants";
+import { Display } from "../../utils";
 
 const OnBoarding = () => {
   return (
     <View style={styles.page}>
-      <Image
-        style={styles.pattern}
-        source={{
-          uri: "https://res.cloudinary.com/du93troxt/image/upload/v1679647812/pattern_uxizbj.png",
-        }}
-      />
+      <Image style={styles.pattern} source={Images.PATTERNBG} />
       <View style={styles.content}>
-        <Image
-          style={styles.logo}
-          source={{
-            uri: "https://res.cloudinary.com/du93troxt/image/upload/v1679648686/Logo_mrr43p.png",
-          }}
-        />
+        <View style={{ alignItems: "center" }}>
+          <Image style={styles.logo} source={Images.LOGO} />
+        </View>
         <MaskedView
           style={{ height: 40, justifyContent: "center" }}
           maskElement={<Text style={styles.title}>GMH</Text>}
         >
           <LinearGradient
-            colors={["#53E88B", "#15BE77"]}
+            colors={[Colors.GREEN_LOGO_ONE, Colors.GREEN_LOGO_TWO]}
             start={{ x: 1, y: 1 }}
             end={{ x: 0, y: 0.33 }}
             style={{ flex: 1 }}
@@ -37,28 +31,28 @@ const OnBoarding = () => {
 
 const styles = StyleSheet.create({
   page: {
-    backgroundColor: "#fff",
+    backgroundColor: Colors.DEFAULT_WHITE,
     alignItems: "center",
     justifyContent: "center",
+    width: Display.setWidth(100),
   },
   pattern: {
-    height: 300,
+    height: Display.setHeight(40),
     aspectRatio: 7 / 6,
-    top: 0,
     opacity: 0.5,
   },
   title: {
-    fontSize: 30,
-    fontWeight: 400,
+    fontSize: 37,
+    fontFamily: "viga_regular",
     textAlign: "center",
   },
   subtitle: {
-    fontWeight: 600,
     fontSize: 14,
     textAlign: "center",
+    fontFamily: "inter_semi_bold",
   },
   logo: {
-    width: 150,
+    width: Display.setWidth(10),
     aspectRatio: 1,
   },
 });

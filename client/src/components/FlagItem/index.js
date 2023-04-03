@@ -7,7 +7,7 @@ const FlagItem = ({ code, name, dial_code, onPress }) => {
       style={styles.container}
       onPress={() => onPress({ code, name, dial_code })}
     >
-      <Image style={styles.flagImage} source={{ uri: getFlagIcon(code) }} />
+      <Image style={styles.flagImage} source={{ uri: getFlagIcon(code.toLowerCase()) }} />
       <Text style={styles.flagText}>{dial_code}</Text>
       <Text style={styles.flagText}>{name}</Text>
     </TouchableOpacity>

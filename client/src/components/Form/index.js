@@ -9,6 +9,9 @@ import {
 } from "react-native";
 import MaskedView from "@react-native-masked-view/masked-view";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { Colors, Images } from "../../constants";
+import colors from "../../constants/colors";
+import { Display } from "../../utils";
 
 const PageForm = ({ children }) => {
   return (
@@ -19,17 +22,10 @@ const PageForm = ({ children }) => {
           width: "100%",
           opacity: 0.9,
         }}
-        source={{
-          uri: "https://res.cloudinary.com/du93troxt/image/upload/v1679647812/pattern_uxizbj.png",
-        }}
+        source={Images.PATTERNBG}
       >
         <View style={styles.content}>
-          <Image
-            style={styles.logo}
-            source={{
-              uri: "https://res.cloudinary.com/du93troxt/image/upload/v1679648686/Logo_mrr43p.png",
-            }}
-          />
+          <Image style={styles.logo} source={Images.LOGO} />
           <MaskedView
             style={{ height: 40 }}
             maskElement={<Text style={styles.title}>GMH</Text>}
@@ -44,7 +40,7 @@ const PageForm = ({ children }) => {
           <Text style={styles.subtitle}>Go to market help you</Text>
         </View>
       </ImageBackground>
-      {children}
+      <View style={styles.container}>{children}</View>
     </View>
   );
 };
@@ -52,9 +48,9 @@ const PageForm = ({ children }) => {
 const ButtonForm = ({ text, width }) => {
   return (
     <LinearGradient
-      colors={["#AEDC81", "#6CC51D"]}
+      colors={[Colors.GREEN_TEXT_ONE, Colors.GREEN_TEXT_TWO]}
       style={styles.btn}
-      width={width}
+      width={width && Display.setWidth(width)}
     >
       <Text style={styles.btnText}>{text}</Text>
     </LinearGradient>
@@ -92,9 +88,7 @@ const HeaderPage = ({ children }) => {
           width: "100%",
           opacity: 0.5,
         }}
-        source={{
-          uri: "https://res.cloudinary.com/du93troxt/image/upload/v1679647812/pattern_uxizbj.png",
-        }}
+        source={Images.PATTERNBG}
       >
         {children}
       </ImageBackground>
@@ -128,9 +122,8 @@ const BackButton = () => {
 const styles = StyleSheet.create({
   /* PageForm */
   page: {
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: colors.DEFAULT_WHITE,
+    flex: 1,
   },
   content: {
     paddingTop: 50,
@@ -143,28 +136,34 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-    fontWeight: 400,
+    fontFamily: "viga_regular",
     textAlign: "center",
   },
   subtitle: {
-    fontWeight: 600,
+    fontFamily: "inter_semi_bold",
     fontSize: 14,
     textAlign: "center",
+  },
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 20,
   },
   /* ButtonForm */
   btn: {
     alignItems: "center",
     justifyContent: "center",
-    height: 50,
+    width: Display.setWidth(40),
+    height: Display.setHeight(7),
     marginTop: "auto",
     borderRadius: 15,
     marginBottom: 20,
   },
   btnText: {
     color: "#fff",
-    fontWeight: 600,
+    fontFamily: "inter_bold",
     fontSize: 16,
-    lineHeight: 24,
   },
   /* Input Form */
   formInput: {

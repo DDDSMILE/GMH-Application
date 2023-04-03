@@ -1,16 +1,29 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
-import { BackButton, HeaderPage } from "../../components/Form";
-import contrycode from "../../constants/contrycode";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  FlatList,
+  TextInput,
+} from "react-native";
+import FlagItem from "../../components/FlagItem";
+import { BackButton, ButtonForm, HeaderPage } from "../../components/Form";
+import countrycode from "../../constants/countrycode";
 import { getFlagIcon } from "../../constants/fetchApi";
+import colors from "../../constants/colors";
+import { Colors } from "react-native/Libraries/NewAppScreen";
+import { Display } from "../../utils";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const getDropdownStyle = (y) => ({ ...styles.countryDropdown, top: y + 60 });
 
 const InputPhoneScreen = () => {
   const [selectedCountry, setSelectedCountry] = useState(
-    contrycode.find((country) => country.name === "Viet Nam")
+    countrycode.find((country) => country.name === "Viet Nam")
   );
-  const [inputsContainerY, setInputsConatinerY] = useState(0);
+  const [inputsContainerY, setInputsContainerY] = useState(0);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [dropdownLayout, setDropdownLayout] = useState({});
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -29,67 +42,146 @@ const InputPhoneScreen = () => {
   };
 
   return (
-    <View>
+    <View
+      style={styles.container}
+      onStartShouldSetResponder={({ nativeEvent: { pageX, pageY } }) =>
+        closeDropdown(pageX, pageY)
+      }
+    >
       <HeaderPage>
         <BackButton />
       </HeaderPage>
-      <View>
-        <Text style={styles.title}>Hãy điền số điện thoại của bạn</Text>
-
+      <Text style={styles.title}>Hãy điền số điện thoại của bạn</Text>
+      <View
+        style={styles.inputsContainer}
+        onLayout={({
+          nativeEvent: {
+            layout: { y },
+          },
+        }) => setInputsContainerY(y)}
+      >
         <TouchableOpacity
-          style={{
-            backgroundColor: "#fff",
-            width: 50,
-            marginRight: 10,
-            borderRadius: 8,
-            height: 60,
-            justifyContent: "space-evenly",
-            alignItems: "center",
-            borderWidth: 0.5,
-            borderColor: "#000",
-            flexDirection: "row",
-          }}
+          style={styles.countryListContainer}
           onPress={() => setIsDropdownOpen(!isDropdownOpen)}
         >
           <Image
             source={{ uri: getFlagIcon(selectedCountry.code.toLowerCase()) }}
-            style={{ height: 20, width: 20 }}
+            style={styles.flatIcon}
           />
-          <Text
-            style={{
-              fontSize: 14,
-              lineHeight: 14 * 1.4,
-              color: "#000",
-            }}
-          >
+          <Text style={styles.countryCodeText}>
             {selectedCountry.dial_code}
           </Text>
+          <MaterialIcons name="keyboard-arrow-down" size={18} />
         </TouchableOpacity>
+        <View style={styles.phoneInputContainer}>
+          <TextInput
+            placeholder="Số điện thoại"
+            placeholderTextColor={colors.DEFAULT_GREY}
+            selectionColor={colors.DEFAULT_GREY}
+            keyboardType="number-pad"
+            onFocus={() => setIsDropdownOpen(false)}
+            style={styles.inputText}
+            onChangeText={(text) =>
+              setPhoneNumber(selectedCountry?.dial_code + text)
+            }
+          />
+        </View>
       </View>
       {isDropdownOpen && (
-        <View style={getDropdownStyle(inputsContainerY)}
-        ></View>
+        <View
+          style={getDropdownStyle(inputsContainerY)}
+          onLayout={({
+            nativeEvent: {
+              layout: { x, y, height, width },
+            },
+          }) => setDropdownLayout({ x, y, height, width })}
+        >
+          <FlatList
+            data={countrycode}
+            keyExtractor={(item) => item.code}
+            renderItem={({ item }) => (
+              <FlagItem
+                {...item}
+                onPress={(country) => {
+                  setSelectedCountry(country);
+                  setIsDropdownOpen(false);
+                }}
+              />
+            )}
+          />
+        </View>
       )}
+      <View style={{ alignItems: "center", justifyContent: "center" }}>
+        <ButtonForm text={"Tiếp theo"} width={80} />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.DEFAULT_WHITE,
+  },
   title: {
+    fontFamily: "inter_medium",
     fontSize: 20,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
   countryDropdown: {
-    backgroundColor: "#fff",
+    backgroundColor: colors.DEFAULT_GREY,
     position: "absolute",
-    width: 80,
-    height: 50,
+    width: Display.setWidth(80),
+    height: Display.setHeight(50),
     marginLeft: 20,
     borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#fff",
+    borderWidth: 0.5,
+    borderColor: colors.DEFAULT_GREY,
     zIndex: 3,
+  },
+  inputsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginHorizontal: 20,
+    marginVertical: 50,
+  },
+  countryListContainer: {
+    backgroundColor: Colors.DEFAULT_WHITE,
+    width: Display.setWidth(22),
+    marginRight: 5,
+    borderRadius: 8,
+    height: Display.setHeight(6),
+    justifyContent: "space-evenly",
+    alignItems: "center",
+    borderWidth: 0.5,
+    borderColor: "#000",
+    flexDirection: "row",
+  },
+  countryCodeText: {
+    fontFamily: "inter_medium",
+    lineHeight: 14 * 1.4,
+    color: colors.DEFAULT_BLACK,
+  },
+  flatIcon: {
+    height: 20,
+    width: 20,
+  },
+  phoneInputContainer: {
+    backgroundColor: colors.DEFAULT_WHITE,
+    paddingHorizontal: 10,
+    borderRadius: 8,
+    borderWidth: 0.5,
+    borderColor: colors.DEFAULT_GREY,
+    justifyContent: "center",
+    flex: 1,
+  },
+  inputText: {
+    fontSize: 18,
+    textAlignVertical: "center",
+    padding: 0,
+    height: Display.setHeight(6),
+    color: colors.DEFAULT_BLACK,
   },
 });
 
