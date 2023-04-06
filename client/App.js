@@ -10,6 +10,10 @@ import { Fonts } from "./src/constants";
 import OTPScreen from "./src/screens/OTPScreen";
 import RegisterLocation from "./src/screens/RegisterLocation";
 import DoneScreen from "./src/screens/DoneScreen";
+import EmptyOrder from "./src/screens/EmptyOrder";
+import NotFound from "./src/screens/NotFound";
+import SuggestionScreen from "./src/screens/SuggestionScreen";
+import Home from "./src/screens/Home";
 
 const customFonts = {
   inter_black: Fonts.INTER_BLACK,
@@ -37,7 +41,11 @@ export default function App() {
       {/* <InputPhoneScreen/> */}
       {/* <OTPScreen /> */}
       {/* <RegisterLocation /> */}
-      <DoneScreen/>
+      {/* <DoneScreen/> */}
+      {/* <EmptyOrder/> */}
+      {/* <NotFound /> */}
+      {/* <SuggestionScreen/> */}
+      <Home/>
       <StatusBar style="auto" />
     </View>
   );

@@ -119,6 +119,27 @@ const BackButton = () => {
   );
 };
 
+const NotFoundForm = ({ children, image, title, subtitle }) => {
+  return (
+    <View>
+      {children}
+      <View style={styles.contentNotFound}>
+        <Image source={image} />
+        <View
+          style={{
+            alignItems: "center",
+            paddingTop: 40,
+            justifyContent: "center",
+          }}
+        >
+          <Text style={styles.titleNotFound}>{title}</Text>
+          <Text style={styles.subtitleNotFound}>{subtitle}</Text>
+        </View>
+      </View>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   /* PageForm */
   page: {
@@ -173,6 +194,29 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     marginBottom: 25,
   },
+  /* NotFoundForm */
+  contentNotFound: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: Display.setWidth(40),
+  },
+  titleNotFound: {
+    fontSize: 28,
+    fontFamily: "inter_bold",
+  },
+  subtitleNotFound: {
+    fontSize: 17,
+    paddingTop: 10,
+    fontFamily: "inter_regular",
+    color: colors.DEFAULT_GREY,
+  },
 });
 
-export { PageForm, ButtonForm, InputForm, HeaderPage, BackButton };
+export {
+  PageForm,
+  ButtonForm,
+  InputForm,
+  HeaderPage,
+  BackButton,
+  NotFoundForm,
+};
