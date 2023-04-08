@@ -4,6 +4,8 @@ import { Images } from "../../constants";
 import TypeItem from "../../components/TypeItem";
 import dishes from "../../assets/data/dishes";
 import ProductItem from "../../components/ProductItem";
+import { Display } from "../../utils";
+import colors from "../../constants/colors";
 
 const typeItems = [
   {
@@ -35,11 +37,17 @@ const typeItems = [
 
 const Home = () => {
   return (
-    <View style={{ paddingVertical: 20, paddingHorizontal: 10 }}>
+    <View
+      style={{
+        paddingVertical: 50,
+        paddingHorizontal: 10,
+        backgroundColor: "#f1eff1",
+      }}
+    >
       <SearchBar />
-      <View>
+      <View style={{ paddingVertical: 20 }}>
         <Text style={styles.title}>Loại sản phẩm</Text>
-        <ScrollView horizontal={true}>
+        <ScrollView horizontal>
           {typeItems.map((item) => (
             <TypeItem
               key={item.text}
@@ -51,17 +59,27 @@ const Home = () => {
         </ScrollView>
       </View>
       <Text style={styles.title}>Sản phẩm nổi bật</Text>
-
-      <ScrollView horizontal={true}>
-        {dishes?.map((dish, index) => {
-          <ProductItem
-            key={index}
-            name={dish.name}
-            price={dish.price}
-            photo={dish.photo}
-          />;
-        })}
-      </ScrollView>
+      <View
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100%",
+        }}
+      >
+        <ScrollView>
+          {dishes.map((dish) => (
+            <ProductItem
+              key={dish.id}
+              name={dish.name}
+              price={dish.price}
+              photo={dish.photo}
+            />
+          ))}
+        </ScrollView>
+      </View>
+      <View>
+        <Text>Control</Text>
+      </View>
     </View>
   );
 };
