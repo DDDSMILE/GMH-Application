@@ -35,13 +35,14 @@ const typeItems = [
   },
 ];
 
-const Home = () => {
+const HomeScreen = () => {
   return (
     <View
       style={{
         paddingVertical: 50,
         paddingHorizontal: 10,
         backgroundColor: "#f1eff1",
+        flex: 1,
       }}
     >
       <SearchBar />
@@ -63,7 +64,7 @@ const Home = () => {
         style={{
           justifyContent: "center",
           alignItems: "center",
-          width: "100%",
+          paddingBottom: 50,
         }}
       >
         <ScrollView>
@@ -92,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default HomeScreen;

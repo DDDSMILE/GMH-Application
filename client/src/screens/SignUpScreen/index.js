@@ -3,9 +3,13 @@ import { ButtonForm, InputForm, PageForm } from "../../components/Form";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Fontisto from "react-native-vector-icons/Fontisto";
+import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../constants";
+import { useState } from "react";
 
 const SignUpScreen = () => {
+  const [isShowPassword, setIsShowPassword] = useState();
+
   return (
     <PageForm>
       <Text style={styles.title}>Đăng ký tài khoản</Text>
@@ -22,17 +26,6 @@ const SignUpScreen = () => {
       />
       <InputForm
         icon={
-          <MaterialCommunityIcons
-            name="email"
-            size={20}
-            color={Colors.GREEN_TEXT_TWO}
-            style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
-          />
-        }
-        label={"Email"}
-      />
-      <InputForm
-        icon={
           <Fontisto
             name="locked"
             size={20}
@@ -42,6 +35,16 @@ const SignUpScreen = () => {
         }
         label={"Mật khẩu"}
         inputType="password"
+        isShowPassword={isShowPassword}
+        lastIcon={
+          <Feather
+            size={20}
+            name={isShowPassword ? "eye" : "eye-off"}
+            color={Colors.DEFAULT_GREY}
+            style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
+            onPress={() => setIsShowPassword(!isShowPassword)}
+          />
+        }
       />
       <ButtonForm text={"Tạo tài khoản"} width={150} />
       <Text

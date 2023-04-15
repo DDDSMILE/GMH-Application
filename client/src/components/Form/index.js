@@ -57,7 +57,14 @@ const ButtonForm = ({ text, width }) => {
   );
 };
 
-const InputForm = ({ label, icon, inputType, keyboardType }) => {
+const InputForm = ({
+  label,
+  icon,
+  inputType,
+  keyboardType,
+  lastIcon,
+  isShowPassword,
+}) => {
   return (
     <View style={styles.formInput}>
       {icon}
@@ -66,7 +73,7 @@ const InputForm = ({ label, icon, inputType, keyboardType }) => {
           placeholder={label}
           keyboardType={keyboardType}
           style={{ flex: 1, paddingVertical: 0 }}
-          secureTextEntry={true}
+          secureTextEntry={isShowPassword ? false : true}
         />
       ) : (
         <TextInput
@@ -75,6 +82,7 @@ const InputForm = ({ label, icon, inputType, keyboardType }) => {
           style={{ flex: 1, paddingVertical: 0 }}
         />
       )}
+      {lastIcon}
     </View>
   );
 };

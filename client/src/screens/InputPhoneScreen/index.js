@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   countryDropdown: {
-    backgroundColor: colors.DEFAULT_GREY,
+    backgroundColor: "#fbf7fb",
     position: "absolute",
     width: Display.setWidth(80),
     height: Display.setHeight(50),
@@ -145,6 +145,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginHorizontal: 20,
     marginVertical: 50,
+    backgroundColor: "#fbf7fb",
   },
   countryListContainer: {
     backgroundColor: Colors.DEFAULT_WHITE,
@@ -175,6 +176,7 @@ const styles = StyleSheet.create({
     borderColor: colors.DEFAULT_GREY,
     justifyContent: "center",
     flex: 1,
+    backgroundColor: "#fbf7fb",
   },
   inputText: {
     fontSize: 18,

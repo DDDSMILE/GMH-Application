@@ -2,9 +2,13 @@ import { View, Text, StyleSheet } from "react-native";
 import { ButtonForm, InputForm, PageForm } from "../../components/Form";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Fontisto from "react-native-vector-icons/Fontisto";
+import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../constants";
+import { useState } from "react";
 
 const SignInScreen = () => {
+  const [isShowPassword, setIsShowPassword] = useState();
+
   return (
     <PageForm>
       <Text style={styles.title}>Chào mừng bạn trở lại!</Text>
@@ -30,6 +34,16 @@ const SignInScreen = () => {
         }
         label={"Mật khẩu"}
         inputType="password"
+        isShowPassword={isShowPassword}
+        lastIcon={
+          <Feather
+            size={20}
+            name={isShowPassword ? "eye" : "eye-off"}
+            color={Colors.DEFAULT_GREY}
+            style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
+            onPress={() => setIsShowPassword(!isShowPassword)}
+          />
+        }
       />
       <Text
         style={{

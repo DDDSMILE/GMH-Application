@@ -1,19 +1,20 @@
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
+import { useFonts } from "expo-font";
+import { Fonts } from "./src/constants";
 import OnBoarding from "./src/screens/OnBoarding";
 import LoadingScreen from "./src/screens/Loading";
 import SignInScreen from "./src/screens/SignInScreen";
 import SignUpScreen from "./src/screens/SignUpScreen";
 import InputPhoneScreen from "./src/screens/InputPhoneScreen";
-import { useFonts } from "expo-font";
-import { Fonts } from "./src/constants";
 import OTPScreen from "./src/screens/OTPScreen";
 import RegisterLocation from "./src/screens/RegisterLocation";
 import DoneScreen from "./src/screens/DoneScreen";
 import EmptyOrder from "./src/screens/EmptyOrder";
 import NotFound from "./src/screens/NotFound";
 import SuggestionScreen from "./src/screens/SuggestionScreen";
-import Home from "./src/screens/Home";
+import HomeScreen from "./src/screens/HomeScreen";
+import Navigators from "./src/navigators";
 
 const customFonts = {
   inter_black: Fonts.INTER_BLACK,
@@ -45,8 +46,8 @@ export default function App() {
       {/* <EmptyOrder/> */}
       {/* <NotFound /> */}
       {/* <SuggestionScreen/> */}
-      <Home/>
-      <StatusBar style="auto" />
+      <HomeScreen />
+      {/* <Navigators/> */}
     </View>
   );
 }
