@@ -1,6 +1,7 @@
 import express from "express";
 import usersRoute from "./routes/user.route.js";
 import shipperRoute from "./routes/shipper.route.js";
+import dishesRoute from "./routes/dishes.route.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import cors from "cors";
@@ -20,3 +21,4 @@ app.use(cors());
 
 app.use("/api/v1/user", usersRoute);
 app.use("/api/v1/shipper", shipperRoute);
+app.use("/api/v1/dishes", dishesRoute);
