@@ -1,5 +1,6 @@
 import express from "express";
 import usersRoute from "./routes/user.route.js";
+import shipperRoute from "./routes/shipper.route.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import cors from "cors";
@@ -17,4 +18,5 @@ app.use(
 );
 app.use(cors());
 
-app.use("/api/v1", usersRoute);
+app.use("/api/v1/user", usersRoute);
+app.use("/api/v1/shipper", shipperRoute);
