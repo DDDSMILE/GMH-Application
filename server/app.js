@@ -3,6 +3,7 @@ import usersRoute from "./routes/user.route.js";
 import shippersRoute from "./routes/shipper.route.js";
 import dishesRoute from "./routes/dishes.route.js";
 import suppliersRoute from "./routes/suppliers.route.js";
+import adminRoute from "./routes/admin.route.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import cors from "cors";
@@ -20,6 +21,7 @@ app.use(
 );
 app.use(cors());
 
+app.use("/api/v1/admin", adminRoute);
 app.use("/api/v1/user", usersRoute);
 app.use("/api/v1/shipper", shippersRoute);
 app.use("/api/v1/dishes", dishesRoute);
