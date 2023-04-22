@@ -12,6 +12,7 @@ export const sendToken = (res, user, statusCode, message) => {
     name: user.name,
     address: user.address,
     phone_number: user.phone_number,
+    email: user.email,
     lat: user.lat,
     long: user.long,
     orders: user.orders,
