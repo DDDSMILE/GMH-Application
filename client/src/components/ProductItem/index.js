@@ -3,13 +3,13 @@ import colors from "../../constants/colors";
 import { Display } from "../../utils";
 import { Button } from "react-native-elements";
 
-const ProductItem = ({ name, photo, price }) => {
+const ProductItem = ({ item }) => {
   return (
     <View style={styles.container}>
       <View style={styles.image}>
-        {photo && (
+        {item.photo && (
           <Image
-            source={{ uri: photo }}
+            source={{ uri: item.photo }}
             style={{ width: 120, aspectRatio: 1 }}
           />
         )}
@@ -22,7 +22,7 @@ const ProductItem = ({ name, photo, price }) => {
             height: 45,
           }}
         >
-          {name}
+          {item.name}
         </Text>
         <Text
           style={{
@@ -32,7 +32,10 @@ const ProductItem = ({ name, photo, price }) => {
             paddingBottom: 10,
           }}
         >
-          {price.toLocaleString("vi", { style: "currency", currency: "VND" })}
+          {item.price.toLocaleString("vi", {
+            style: "currency",
+            currency: "VND",
+          })}
         </Text>
         <Button
           size="md"

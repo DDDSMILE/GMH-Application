@@ -6,6 +6,7 @@ import {
   View,
   Image,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import MaskedView from "@react-native-masked-view/masked-view";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -45,17 +46,29 @@ const PageForm = ({ children }) => {
   );
 };
 
-const ButtonForm = ({ text, width, onPress }) => {
+const ButtonForm = ({ text, width, onPress, disable }) => {
   return (
-    <LinearGradient
-      colors={[Colors.GREEN_TEXT_ONE, Colors.GREEN_TEXT_TWO]}
-      style={styles.btn}
-      width={width && Display.setWidth(width)}
-    >
-      <Text style={styles.btnText} onPress={onPress}>
-        {text}
-      </Text>
-    </LinearGradient>
+    <View>
+      {disable ? (
+        <LinearGradient
+          colors={["#999", "#999"]}
+          style={styles.btn}
+          width={width && Display.setWidth(width)}
+        >
+          <Text style={styles.btnText}>{text}</Text>
+        </LinearGradient>
+      ) : (
+        <LinearGradient
+          colors={[Colors.GREEN_TEXT_ONE, Colors.GREEN_TEXT_TWO]}
+          style={styles.btn}
+          width={width && Display.setWidth(width)}
+        >
+          <Text style={styles.btnText} onPress={onPress}>
+            {text}
+          </Text>
+        </LinearGradient>
+      )}
+    </View>
   );
 };
 
@@ -109,7 +122,7 @@ const HeaderPage = ({ children }) => {
   );
 };
 
-const BackButton = () => {
+const BackButton = ({ onPress }) => {
   return (
     <View
       style={{
@@ -127,6 +140,7 @@ const BackButton = () => {
         size={30}
         color={"#da6217"}
         style={{ left: 5, top: 5 }}
+        onPress={onPress}
       />
     </View>
   );

@@ -275,8 +275,8 @@ export const answerChatGPT = async (req, res) => {
       .split(" ")
       .filter((word) => lowArr.some((item) => item.includes(word)));
 
-    const answer = await sendChatGPT(message);
-    res.status(201).json({ success: true, result: answer });
+    // const answer = await sendChatGPT(message);
+    res.status(201).json({ success: true, result: result });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }

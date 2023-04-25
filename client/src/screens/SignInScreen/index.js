@@ -2,25 +2,33 @@ import { View, Text, StyleSheet } from "react-native";
 import { ButtonForm, InputForm, PageForm } from "../../components/Form";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../constants";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/auth.slice";
+import { useFocusEffect } from "@react-navigation/native";
 
 const SignInScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
-  
+
   const [formState, setFormState] = useState({
     name: "",
     password: "",
   });
+  const [isDisableState, setDisableState] = useState(true);
 
   const [isShowPassword, setIsShowPassword] = useState();
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     const { name, password } = formState;
     dispatch(login({ name, password }));
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      setDisableState(!Boolean(formState));
+    })
+  );
 
   return (
     <PageForm>
@@ -60,7 +68,7 @@ const SignInScreen = ({ navigation }) => {
             name={isShowPassword ? "eye" : "eye-off"}
             color={Colors.DEFAULT_GREY}
             style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
-            onPress={() => setIsShowPassword(!isShowPassword)}
+            onPress={() => setIsShowPassword(isShowPassword)}
           />
         }
       />
@@ -72,6 +80,7 @@ const SignInScreen = ({ navigation }) => {
           textDecorationLine: "underline",
           paddingBottom: 20,
         }}
+        onPress={() => navigation.navigate("inputphonenumber")}
       >
         Quên mật khẩu?
       </Text>
@@ -88,10 +97,16 @@ const SignInScreen = ({ navigation }) => {
           style={{ fontWeight: 700 }}
           onPress={() => navigation.navigate("signup")}
         >
+          {" "}
           đăng ký
         </Text>
       </Text>
-      <ButtonForm onPress={handleLogin} text={"Đăng nhập"} width={150} />
+      <ButtonForm
+        disable={isDisableState}
+        onPress={handleLogin}
+        text={"Đăng nhập"}
+        width={150}
+      />
     </PageForm>
   );
 };

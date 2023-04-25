@@ -7,7 +7,7 @@ import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../constants";
 import { useState } from "react";
 
-const SignUpScreen = () => {
+const SignUpScreen = ({ navigation }) => {
   const [isShowPassword, setIsShowPassword] = useState();
 
   return (
@@ -46,7 +46,14 @@ const SignUpScreen = () => {
           />
         }
       />
-      <ButtonForm text={"Tạo tài khoản"} width={150} />
+      <ButtonForm
+        onPress={() => {
+          navigation.navigate("inputphonenumber");
+        }}
+        disable={false}
+        text={"Tạo tài khoản"}
+        width={150}
+      />
       <Text
         style={{
           color: "#15BE77",
@@ -54,6 +61,9 @@ const SignUpScreen = () => {
           textDecorationLine: "underline",
           fontFamily: "inter_regular",
           paddingBottom: 20,
+        }}
+        onPress={() => {
+          navigation.navigate("signin");
         }}
       >
         Đã có tài khoản? Bấm để đăng nhập

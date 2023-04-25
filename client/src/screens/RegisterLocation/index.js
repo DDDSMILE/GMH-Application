@@ -4,11 +4,11 @@ import { Images } from "../../constants";
 import colors from "../../constants/colors";
 import { Display } from "../../utils";
 
-const RegisterLocation = () => {
+const RegisterLocation = ({ navigation }) => {
   return (
     <View>
       <HeaderPage>
-        <BackButton />
+        <BackButton onPress={() => navigation.navigate("inputphonenumber")} />
       </HeaderPage>
       <View style={styles.container}>
         <Text style={styles.title}>Cập nhật vị trí của bạn</Text>

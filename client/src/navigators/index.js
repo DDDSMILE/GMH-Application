@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 const AppNavigator = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(loadUser());

@@ -1,4 +1,11 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import SearchBar from "../../components/SearchBar";
 import { Images } from "../../constants";
 import TypeItem from "../../components/TypeItem";
@@ -6,6 +13,9 @@ import dishes from "../../assets/data/dishes";
 import ProductItem from "../../components/ProductItem";
 import { Display } from "../../utils";
 import colors from "../../constants/colors";
+import { useEffect, useState } from "react";
+import { getDishes } from "../../services/dishes";
+import axios from "axios";
 
 const typeItems = [
   {
@@ -36,6 +46,39 @@ const typeItems = [
 ];
 
 const HomeScreen = () => {
+  const [dishes, setDishes] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const getDishesPerPage = async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await axios.get(
+        `http://10.0.2.2:3001/api/v1/dishes/type=all/page/${currentPage}/min=&max=/sort=`
+      );
+      setDishes([...dishes, ...data.dishes]);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const renderLoader = () => {
+    return isLoading ? (
+      <View style={styles.loaderStyle}>
+        <ActivityIndicator size="large" color="#aaa" />
+      </View>
+    ) : null;
+  };
+
+  const loadMoreItem = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  useEffect(() => {
+    getDishesPerPage();
+  }, [currentPage]);
+
   return (
     <View
       style={{
@@ -67,16 +110,14 @@ const HomeScreen = () => {
           paddingBottom: 50,
         }}
       >
-        <ScrollView>
-          {dishes.map((dish) => (
-            <ProductItem
-              key={dish.id}
-              name={dish.name}
-              price={dish.price}
-              photo={dish.photo}
-            />
-          ))}
-        </ScrollView>
+        <FlatList
+          data={dishes}
+          renderItem={({ item }) => <ProductItem item={item} />}
+          keyExtractor={(item, key) => key}
+          ListFooterComponent={renderLoader}
+          onEndReached={loadMoreItem}
+          onEndReachedThreshold={0}
+        />
       </View>
       <View>
         <Text>Control</Text>

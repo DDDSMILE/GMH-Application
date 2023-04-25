@@ -23,6 +23,23 @@ const authSlice = createSlice({
       state.error = null;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(login.pending, (state) => {
+      state.loading = true;
+    }),
+      builder.addCase(login.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.loading = false;
+        state.error = null;
+      }),
+      builder.addCase(login.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      }),
+      builder.addCase(loadUser.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+      });
+  },
 });
 
 export const login = createAsyncThunk(

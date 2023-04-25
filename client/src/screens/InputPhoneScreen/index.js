@@ -19,7 +19,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const getDropdownStyle = (y) => ({ ...styles.countryDropdown, top: y + 60 });
 
-const InputPhoneScreen = () => {
+const InputPhoneScreen = ({ navigation }) => {
   const [selectedCountry, setSelectedCountry] = useState(
     countrycode.find((country) => country.name === "Viet Nam")
   );
@@ -49,7 +49,7 @@ const InputPhoneScreen = () => {
       }
     >
       <HeaderPage>
-        <BackButton />
+        <BackButton onPress={() => navigation.navigate("signup")} />
       </HeaderPage>
       <Text style={styles.title}>Hãy điền số điện thoại của bạn</Text>
       <View
@@ -112,7 +112,13 @@ const InputPhoneScreen = () => {
         </View>
       )}
       <View style={{ alignItems: "center", justifyContent: "center" }}>
-        <ButtonForm text={"Tiếp theo"} width={80} />
+        <ButtonForm
+          onPress={() => {
+            navigation.navigate("otp");
+          }}
+          text={"Tiếp theo"}
+          width={80}
+        />
       </View>
     </View>
   );

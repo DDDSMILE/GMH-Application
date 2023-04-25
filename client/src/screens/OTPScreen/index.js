@@ -3,7 +3,7 @@ import { BackButton, ButtonForm, HeaderPage } from "../../components/Form";
 import { useRef, useState } from "react";
 import colors from "../../constants/colors";
 
-const OTPScreen = () => {
+const OTPScreen = ({ navigation }) => {
   const firstInput = useRef();
   const secondInput = useRef();
   const thirdInput = useRef();
@@ -13,7 +13,7 @@ const OTPScreen = () => {
   return (
     <View>
       <HeaderPage>
-        <BackButton />
+        <BackButton onPress={() => navigation.navigate("inputphonenumber")} />
       </HeaderPage>
       <View style={styles.container}>
         <Text style={styles.title}>Xác nhận số điện thoại</Text>
@@ -76,7 +76,11 @@ const OTPScreen = () => {
         </View>
         {/* OTP Container */}
         <View style={{ marginTop: 50 }}>
-          <ButtonForm width={80} text={"Tiếp theo"} />
+          <ButtonForm
+            onPress={() => navigation.navigate("registerlocation")}
+            width={80}
+            text={"Tiếp theo"}
+          />
         </View>
         <Text style={{ fontFamily: "inter_medium" }}>
           Bạn không nhận được mã? Hãy chờ sau 5 phút
@@ -91,7 +95,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 20,
     alignItems: "center",
-    backgroundColor: colors.DEFAULT_WHITE,
   },
   title: {
     fontSize: 25,
