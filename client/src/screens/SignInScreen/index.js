@@ -1,32 +1,51 @@
 import { View, Text, StyleSheet } from "react-native";
 import { ButtonForm, InputForm, PageForm } from "../../components/Form";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import Fontisto from "react-native-vector-icons/Fontisto";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../constants";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../store/auth.slice";
 
-const SignInScreen = () => {
+const SignInScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
+  
+  const [formState, setFormState] = useState({
+    name: "",
+    password: "",
+  });
+
   const [isShowPassword, setIsShowPassword] = useState();
+
+  const handleLogin = async () => {
+    const { name, password } = formState;
+    dispatch(login({ name, password }));
+  };
 
   return (
     <PageForm>
       <Text style={styles.title}>Chào mừng bạn trở lại!</Text>
       <InputForm
+        onChangeText={(text) =>
+          setFormState((prev) => ({ ...prev, name: text }))
+        }
         icon={
-          <MaterialCommunityIcons
-            name="email"
+          <Feather
+            name="user"
             size={20}
             color={Colors.GREEN_TEXT_TWO}
             style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
           />
         }
-        label={"Email"}
+        label={"Tên đăng nhập"}
       />
       <InputForm
+        onChangeText={(text) =>
+          setFormState((prev) => ({ ...prev, password: text }))
+        }
         icon={
-          <Fontisto
-            name="locked"
+          <Feather
+            name="lock"
             size={20}
             color={Colors.GREEN_TEXT_TWO}
             style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
@@ -65,9 +84,14 @@ const SignInScreen = () => {
         }}
       >
         Bạn chưa có tài khoản?, hãy
-        <Text style={{ fontWeight: 700 }}> đăng ký</Text>
+        <Text
+          style={{ fontWeight: 700 }}
+          onPress={() => navigation.navigate("signup")}
+        >
+          đăng ký
+        </Text>
       </Text>
-      <ButtonForm text={"Đăng nhập"} width={150} />
+      <ButtonForm onPress={handleLogin} text={"Đăng nhập"} width={150} />
     </PageForm>
   );
 };

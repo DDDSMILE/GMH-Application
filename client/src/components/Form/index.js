@@ -45,14 +45,16 @@ const PageForm = ({ children }) => {
   );
 };
 
-const ButtonForm = ({ text, width }) => {
+const ButtonForm = ({ text, width, onPress }) => {
   return (
     <LinearGradient
       colors={[Colors.GREEN_TEXT_ONE, Colors.GREEN_TEXT_TWO]}
       style={styles.btn}
       width={width && Display.setWidth(width)}
     >
-      <Text style={styles.btnText}>{text}</Text>
+      <Text style={styles.btnText} onPress={onPress}>
+        {text}
+      </Text>
     </LinearGradient>
   );
 };
@@ -64,6 +66,7 @@ const InputForm = ({
   keyboardType,
   lastIcon,
   isShowPassword,
+  onChangeText,
 }) => {
   return (
     <View style={styles.formInput}>
@@ -74,12 +77,14 @@ const InputForm = ({
           keyboardType={keyboardType}
           style={{ flex: 1, paddingVertical: 0 }}
           secureTextEntry={isShowPassword ? false : true}
+          onChangeText={onChangeText}
         />
       ) : (
         <TextInput
           placeholder={label}
           keyboardType={keyboardType}
           style={{ flex: 1, paddingVertical: 0 }}
+          onChangeText={onChangeText}
         />
       )}
       {lastIcon}

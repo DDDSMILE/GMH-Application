@@ -1,4 +1,6 @@
+import { DishesModel } from "../models/dishes.model.js";
 import { UserModel } from "../models/user.model.js";
+import { sendChatGPT } from "../utils/sendChatGPT.js";
 import { sendSMS } from "../utils/sendSMS.js";
 import { sendToken } from "../utils/sendToken.js";
 import cloudinary from "cloudinary";
@@ -256,6 +258,25 @@ export const resetPassword = async (req, res) => {
     res
       .status(200)
       .json({ success: true, message: `Password Changed Successfully` });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+/* CHATGPT */
+export const answerChatGPT = async (req, res) => {
+  try {
+    const message = req.body.text;
+    const data = await DishesModel.distinct("name");
+
+    const lowStr = message.toLowerCase();
+    const lowArr = data.map((item) => item.toLowerCase());
+    const result = lowStr
+      .split(" ")
+      .filter((word) => lowArr.some((item) => item.includes(word)));
+
+    const answer = await sendChatGPT(message);
+    res.status(201).json({ success: true, result: answer });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }
