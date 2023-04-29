@@ -10,10 +10,16 @@ const OTPScreen = ({ navigation }) => {
   const fourthInput = useRef();
   const [otp, setOtp] = useState({ 1: "", 2: "", 3: "", 4: "" });
 
+  const handleRegister = () => {
+    const flatten = (obj) => Object.values(obj).flat();
+    const verityOtp = Number(flatten(otp).join(""));
+    console.log(verityOtp);
+  };
+
   return (
     <View>
       <HeaderPage>
-        <BackButton onPress={() => navigation.navigate("inputphonenumber")} />
+        <BackButton onPress={() => navigation.goBack()} />
       </HeaderPage>
       <View style={styles.container}>
         <Text style={styles.title}>Xác nhận số điện thoại</Text>
@@ -77,7 +83,10 @@ const OTPScreen = ({ navigation }) => {
         {/* OTP Container */}
         <View style={{ marginTop: 50 }}>
           <ButtonForm
-            onPress={() => navigation.navigate("registerlocation")}
+            onPress={() => {
+              handleRegister();
+              navigation.navigate("registerlocation");
+            }}
             width={80}
             text={"Tiếp theo"}
           />

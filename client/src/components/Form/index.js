@@ -80,6 +80,7 @@ const InputForm = ({
   lastIcon,
   isShowPassword,
   onChangeText,
+  value,
 }) => {
   return (
     <View style={styles.formInput}>
@@ -91,6 +92,7 @@ const InputForm = ({
           style={{ flex: 1, paddingVertical: 0 }}
           secureTextEntry={isShowPassword ? false : true}
           onChangeText={onChangeText}
+          value={value}
         />
       ) : (
         <TextInput
@@ -98,6 +100,7 @@ const InputForm = ({
           keyboardType={keyboardType}
           style={{ flex: 1, paddingVertical: 0 }}
           onChangeText={onChangeText}
+          value={value}
         />
       )}
       {lastIcon}
@@ -124,7 +127,7 @@ const HeaderPage = ({ children }) => {
 
 const BackButton = ({ onPress }) => {
   return (
-    <View
+    <TouchableOpacity
       style={{
         width: 45,
         height: 45,
@@ -133,16 +136,17 @@ const BackButton = ({ onPress }) => {
         left: 25,
         top: 38,
         borderRadius: 15,
+        zIndex: 1000,
       }}
+      onPress={onPress}
     >
       <Ionicons
         name="chevron-back-outline"
         size={30}
         color={"#da6217"}
         style={{ left: 5, top: 5 }}
-        onPress={onPress}
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 

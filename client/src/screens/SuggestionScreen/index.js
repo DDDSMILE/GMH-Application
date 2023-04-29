@@ -56,7 +56,7 @@ const SuggestionScreen = () => {
   return (
     <View>
       <HeaderPage>
-        <BackButton />
+        <BackButton onPress={() => navigation.goBack()} />
         <View style={{ alignItems: "center", marginTop: 45 }}>
           <Text style={{ fontSize: 18, fontFamily: "inter_medium" }}>
             Hôm nay ăn gì

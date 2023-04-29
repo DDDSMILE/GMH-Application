@@ -1,40 +1,13 @@
-import { useEffect, useState } from "react";
-import { View, Text, Image, StyleSheet, ActivityIndicator } from "react-native";
-import axios from "axios";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ActivityIndicator,
+  TouchableOpacity,
+} from "react-native";
 
-const TypeItem = ({ text, pathImage, color }) => {
-  const [dishes, setDishes] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const getDishesPerPage = async () => {
-    setIsLoading(true);
-    try {
-      const { data } = await axios.get(
-        `http://10.0.2.2:3001/api/v1/dishes/type=all/page/${currentPage}/min=&max=/sort=`
-      );
-      setDishes([...dishes, ...data.dishes]);
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const renderLoader = () => {
-    return isLoading ? (
-      <View style={styles.loaderStyle}>
-        <ActivityIndicator size="large" color="#aaa" />
-      </View>
-    ) : null;
-  };
-
-  const loadMoreItem = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  useEffect(() => {
-    getDishesPerPage();
-  }, [currentPage]);
-
+const TypeItem = ({ text, pathImage, color, navigation }) => {
   return (
     <View
       style={{
@@ -44,9 +17,15 @@ const TypeItem = ({ text, pathImage, color }) => {
         alignItems: "center",
       }}
     >
-      <View backgroundColor={color} style={styles.content}>
+      <TouchableOpacity
+        backgroundColor={color}
+        style={styles.content}
+        onPress={() => {
+          navigation.navigate("typeproduct", { type: text });
+        }}
+      >
         {pathImage && <Image source={pathImage} />}
-      </View>
+      </TouchableOpacity>
       <Text style={{ fontFamily: "inter_medium", color: "#868889" }}>
         {text}
       </Text>

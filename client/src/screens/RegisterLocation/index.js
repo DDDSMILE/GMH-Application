@@ -3,12 +3,49 @@ import { BackButton, ButtonForm, HeaderPage } from "../../components/Form";
 import { Images } from "../../constants";
 import colors from "../../constants/colors";
 import { Display } from "../../utils";
+import * as Location from "expo-location";
+import { useEffect, useState } from "react";
 
 const RegisterLocation = ({ navigation }) => {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [address, setAddress] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+    })();
+  }, []);
+
+  const handleRegister = async () => {
+    // DEFAULT LOCATION
+    const DEFAULT_LOCATION = {
+      latitude: 16.049372951103447,
+      longitude: 108.16047413865257,
+    };
+
+    const loc = {
+      lat: DEFAULT_LOCATION?.latitude,
+      lng: DEFAULT_LOCATION?.longitude,
+    };
+    setLocation(loc);
+
+    let adrs = await Location.reverseGeocodeAsync(DEFAULT_LOCATION);
+    const { name, streetNumber, street, subregion, region } = adrs[0];
+    const address = `${
+      name || streetNumber
+    }, ${street}, ${subregion}, ${region}`;
+    setAddress(address);
+  };
+
   return (
     <View>
       <HeaderPage>
-        <BackButton onPress={() => navigation.navigate("inputphonenumber")} />
+        <BackButton onPress={() => navigation.goBack()} />
       </HeaderPage>
       <View style={styles.container}>
         <Text style={styles.title}>Cập nhật vị trí của bạn</Text>
@@ -35,8 +72,13 @@ const RegisterLocation = ({ navigation }) => {
             <Text style={{ fontFamily: "inter_medium" }}>Vị trí của bạn</Text>
           </View>
           <TouchableOpacity style={styles.locationButton}>
-            <Text style={{ fontFamily: "inter_semi_bold" }}>
-              Cài đặt vị trí
+            <Text
+              style={{
+                fontFamily: "inter_semi_bold",
+                textAlign: "center",
+              }}
+            >
+              {address || "Cài đặt vị trí"}
             </Text>
           </TouchableOpacity>
         </View>
@@ -44,7 +86,7 @@ const RegisterLocation = ({ navigation }) => {
       <View
         style={{ alignItems: "center", marginVertical: Display.setWidth(60) }}
       >
-        <ButtonForm text={"Hoàn thành"} />
+        <ButtonForm onPress={() => handleRegister()} text={"Hoàn thành"} />
       </View>
     </View>
   );

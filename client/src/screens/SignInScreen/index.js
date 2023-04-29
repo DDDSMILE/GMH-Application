@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import { ButtonForm, InputForm, PageForm } from "../../components/Form";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../constants";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/auth.slice";
 import { useFocusEffect } from "@react-navigation/native";
@@ -15,7 +15,7 @@ const SignInScreen = ({ navigation }) => {
     name: "",
     password: "",
   });
-  const [isDisableState, setDisableState] = useState(true);
+  const [isDisableState, setDisableState] = useState(false);
 
   const [isShowPassword, setIsShowPassword] = useState();
 
@@ -24,16 +24,21 @@ const SignInScreen = ({ navigation }) => {
     dispatch(login({ name, password }));
   };
 
-  useFocusEffect(
-    useCallback(() => {
-      setDisableState(!Boolean(formState));
-    })
-  );
+  useEffect(() => {
+    setDisableState(!Boolean(formState));
+  });
+
+  // useFocusEffect(
+  //   useCallback(() => {
+  //     setDisableState(!Boolean(formState));
+  //   })
+  // );
 
   return (
     <PageForm>
       <Text style={styles.title}>Chào mừng bạn trở lại!</Text>
       <InputForm
+        value={formState.name}
         onChangeText={(text) =>
           setFormState((prev) => ({ ...prev, name: text }))
         }
@@ -48,6 +53,7 @@ const SignInScreen = ({ navigation }) => {
         label={"Tên đăng nhập"}
       />
       <InputForm
+        value={formState.password}
         onChangeText={(text) =>
           setFormState((prev) => ({ ...prev, password: text }))
         }
@@ -68,7 +74,7 @@ const SignInScreen = ({ navigation }) => {
             name={isShowPassword ? "eye" : "eye-off"}
             color={Colors.DEFAULT_GREY}
             style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
-            onPress={() => setIsShowPassword(isShowPassword)}
+            onPress={() => setIsShowPassword(!isShowPassword)}
           />
         }
       />

@@ -5,17 +5,55 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Fontisto from "react-native-vector-icons/Fontisto";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../constants";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useFocusEffect } from "@react-navigation/native";
 
 const SignUpScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
   const [isShowPassword, setIsShowPassword] = useState();
+
+  const [formState, setFormState] = useState({
+    name: "",
+    password: "",
+  });
+  const [formError, setFormError] = useState("");
+
+  const handleRegister = async () => {
+    const { name, password } = formState;
+
+    console.log(formState);
+
+    if (!name || !password) {
+      setFormError("Phải điền hết tất cả");
+      setTimeout(() => {
+        setFormError("");
+      }, 4000);
+      return;
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      setFormError("");
+      setFormState({
+        name: "",
+        password: "",
+      });
+    }, [])
+  );
 
   return (
     <PageForm>
       <Text style={styles.title}>Đăng ký tài khoản</Text>
       <InputForm
+        value={formState.name}
+        onChangeText={(text) =>
+          setFormState((prev) => ({ ...prev, name: text }))
+        }
         icon={
-          <FontAwesome
+          <Feather
             name="user"
             size={20}
             color={Colors.GREEN_TEXT_TWO}
@@ -25,9 +63,13 @@ const SignUpScreen = ({ navigation }) => {
         label={"Tên đăng nhập"}
       />
       <InputForm
+        value={formState.password}
+        onChangeText={(text) =>
+          setFormState((prev) => ({ ...prev, password: text }))
+        }
         icon={
-          <Fontisto
-            name="locked"
+          <Feather
+            name="lock"
             size={20}
             color={Colors.GREEN_TEXT_TWO}
             style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
@@ -48,6 +90,7 @@ const SignUpScreen = ({ navigation }) => {
       />
       <ButtonForm
         onPress={() => {
+          handleRegister();
           navigation.navigate("inputphonenumber");
         }}
         disable={false}

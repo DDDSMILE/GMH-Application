@@ -28,6 +28,10 @@ const InputPhoneScreen = ({ navigation }) => {
   const [dropdownLayout, setDropdownLayout] = useState({});
   const [phoneNumber, setPhoneNumber] = useState("");
 
+  const handleRegister = async () => {
+    console.log(phoneNumber);
+  };
+
   const closeDropdown = (pageX, pageY) => {
     if (isDropdownOpen) {
       if (
@@ -49,7 +53,7 @@ const InputPhoneScreen = ({ navigation }) => {
       }
     >
       <HeaderPage>
-        <BackButton onPress={() => navigation.navigate("signup")} />
+        <BackButton onPress={() => navigation.goBack()} />
       </HeaderPage>
       <Text style={styles.title}>Hãy điền số điện thoại của bạn</Text>
       <View
@@ -114,6 +118,7 @@ const InputPhoneScreen = ({ navigation }) => {
       <View style={{ alignItems: "center", justifyContent: "center" }}>
         <ButtonForm
           onPress={() => {
+            handleRegister();
             navigation.navigate("otp");
           }}
           text={"Tiếp theo"}
@@ -139,8 +144,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#fbf7fb",
     position: "absolute",
     width: Display.setWidth(80),
-    height: Display.setHeight(50),
+    height: Display.setHeight(5),
     marginLeft: 20,
+    paddingTop: 5,
     borderRadius: 10,
     borderWidth: 0.5,
     borderColor: colors.DEFAULT_GREY,
