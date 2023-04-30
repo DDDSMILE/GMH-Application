@@ -23,11 +23,11 @@ router.route("/login").post(login);
 
 router.route("/logout").get(logout);
 
-router.route("/me").get(getMyProfile);
+router.route("/me").get(isAuthenticated, getMyProfile);
 
-router.route("/updateprofile").put(updateProfile);
+router.route("/updateprofile").put(isAuthenticated, updateProfile);
 
-router.route("/updatepassword").put(updatePassword);
+router.route("/updatepassword").put(isAuthenticated, updatePassword);
 
 router.route("/forgetpassword").post(forgetPassword);
 

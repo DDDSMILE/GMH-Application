@@ -1,6 +1,11 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { BackButton, ButtonForm, HeaderPage } from "../../components/Form";
+import {
+  BackButton,
+  ButtonForm,
+  HeaderPage,
+  InputForm,
+} from "../../components/Form";
 import CardItem from "../../components/CardItem";
 import { Images } from "../../constants";
 import { Display } from "../../utils";
@@ -52,11 +57,10 @@ const suggestionItem = [
   },
 ];
 
-const SuggestionScreen = () => {
+const SuggestionScreen = ({ navigation }) => {
   return (
     <View>
       <HeaderPage>
-        <BackButton onPress={() => navigation.goBack()} />
         <View style={{ alignItems: "center", marginTop: 45 }}>
           <Text style={{ fontSize: 18, fontFamily: "inter_medium" }}>
             Hôm nay ăn gì
@@ -81,6 +85,7 @@ const SuggestionScreen = () => {
           style={{
             paddingTop: 10,
             alignItems: "center",
+            height: Display.setHeight(50),
           }}
         >
           <FlatList
@@ -90,12 +95,21 @@ const SuggestionScreen = () => {
                 text={item.text}
                 pathImage={item.pathImage}
                 color={item.color}
+                onStartShouldSetResponder={() =>
+                  navigation.navigate("chat", { type: item.text })
+                }
               />
             )}
             numColumns={2}
             keyExtractor={(item, index) => index}
           />
         </View>
+      </View>
+      <View style={{ alignItems: "center", paddingTop: 90 }}>
+        <ButtonForm
+          text={"Bỏ qua"}
+          onPress={() => navigation.navigate("home")}
+        />
       </View>
     </View>
   );

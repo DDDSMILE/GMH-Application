@@ -1,9 +1,13 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { Display } from "../../utils";
 
-const CardItem = ({ text, pathImage, color }) => {
+const CardItem = ({ text, pathImage, color, onStartShouldSetResponder }) => {
   return (
-    <View style={styles.content} backgroundColor={color}>
+    <View
+      style={styles.content}
+      backgroundColor={color}
+      onStartShouldSetResponder={onStartShouldSetResponder}
+    >
       <Text style={styles.text}>{text}</Text>
       {pathImage && <Image style={styles.image} source={pathImage} />}
     </View>

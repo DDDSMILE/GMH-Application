@@ -4,6 +4,7 @@ import { BackButton, HeaderPage } from "../../components/Form";
 
 const TypeProduct = ({ route, navigation }) => {
   const { type } = route.params;
+
   return (
     <View>
       <HeaderPage>

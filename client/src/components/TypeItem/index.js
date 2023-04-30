@@ -21,7 +21,7 @@ const TypeItem = ({ text, pathImage, color, navigation }) => {
         backgroundColor={color}
         style={styles.content}
         onPress={() => {
-          navigation.navigate("typeproduct", { type: text });
+          navigation.navigate("type_product", { type: text });
         }}
       >
         {pathImage && <Image source={pathImage} />}

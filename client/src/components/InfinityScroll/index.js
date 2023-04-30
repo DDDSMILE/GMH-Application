@@ -2,7 +2,6 @@ import { ActivityIndicator, FlatList, View } from "react-native";
 import ProductItem from "../../components/ProductItem";
 import { useEffect, useState } from "react";
 import { getDishes } from "../../services/dishes";
-import axios from "axios";
 
 const InfinityScroll = ({ type }) => {
   const [dishes, setDishes] = useState([]);
@@ -12,9 +11,7 @@ const InfinityScroll = ({ type }) => {
   const getDishesPerPage = async () => {
     setIsLoading(true);
     try {
-      const { data } = await axios.get(
-        `http://10.0.2.2:3001/api/v1/dishes/type=${type}/page/${currentPage}/min=&max=/sort=`
-      );
+      const data = await getDishes(type, currentPage);
       setDishes([...dishes, ...data.dishes]);
       setIsLoading(false);
     } catch (err) {
