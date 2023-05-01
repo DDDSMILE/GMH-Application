@@ -1,6 +1,6 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 import { BackButton, ButtonForm, HeaderPage } from "../../components/Form";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import colors from "../../constants/colors";
 
 const OTPScreen = ({ navigation }) => {
@@ -9,10 +9,18 @@ const OTPScreen = ({ navigation }) => {
   const thirdInput = useRef();
   const fourthInput = useRef();
   const [otp, setOtp] = useState({ 1: "", 2: "", 3: "", 4: "" });
+  const [verityOtp, setVerityOtp] = useState("");
+
+  const [isDisableState, setDisableState] = useState(true);
+
+  useEffect(() => {
+    const flatten = (obj) => Object.values(obj).flat();
+    const vOtp = Number(flatten(otp).join(""));
+    vOtp.toString().length > 3 ? setDisableState(false) : setDisableState(true);
+    setVerityOtp(vOtp);
+  }, [otp]);
 
   const handleRegister = () => {
-    const flatten = (obj) => Object.values(obj).flat();
-    const verityOtp = Number(flatten(otp).join(""));
     console.log(verityOtp);
   };
 
@@ -83,6 +91,7 @@ const OTPScreen = ({ navigation }) => {
         {/* OTP Container */}
         <View style={{ marginTop: 50 }}>
           <ButtonForm
+            disable={isDisableState}
             onPress={() => {
               handleRegister();
               navigation.navigate("registerlocation");

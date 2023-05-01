@@ -1,10 +1,10 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import { ButtonForm, InputForm, PageForm } from "../../components/Form";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../constants";
 import { useState, useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../store/auth.slice";
+import { login, resetError } from "../../store/auth.slice";
 import { useFocusEffect } from "@react-navigation/native";
 
 const SignInScreen = ({ navigation }) => {
@@ -15,24 +15,40 @@ const SignInScreen = ({ navigation }) => {
     name: "",
     password: "",
   });
-  const [isDisableState, setDisableState] = useState(false);
+  const [formError, setFormError] = useState("");
+  const [isDisableState, setDisableState] = useState(true);
 
   const [isShowPassword, setIsShowPassword] = useState();
 
   const handleLogin = () => {
     const { name, password } = formState;
+
+    if (!name || !password) {
+      setFormError("Hãy điền đầy đủ 2 ô");
+      setTimeout(() => {
+        setFormError("");
+      }, 4000);
+      return;
+    }
     dispatch(login({ name, password }));
   };
 
-  useEffect(() => {
-    setDisableState(!Boolean(formState));
-  });
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(resetError());
+      setFormError("");
+      setFormState({
+        name: "",
+        password: "",
+      });
+    }, [])
+  );
 
-  // useFocusEffect(
-  //   useCallback(() => {
-  //     setDisableState(!Boolean(formState));
-  //   })
-  // );
+  useEffect(() => {
+    formState.name.length > 5 && formState.password.length > 5
+      ? setDisableState(false)
+      : setDisableState(true);
+  }, [formState]);
 
   return (
     <PageForm>
@@ -78,6 +94,11 @@ const SignInScreen = ({ navigation }) => {
           />
         }
       />
+      {(error || formError !== "") && (
+        <View>
+          <Text>{error ? error : formError}</Text>
+        </View>
+      )}
       <Text
         style={{
           color: Colors.GREEN_LOGO_TWO,
@@ -107,12 +128,16 @@ const SignInScreen = ({ navigation }) => {
           đăng ký
         </Text>
       </Text>
-      <ButtonForm
-        disable={isDisableState}
-        onPress={handleLogin}
-        text={"Đăng nhập"}
-        width={150}
-      />
+      {loading ? (
+        <ActivityIndicator size="small" />
+      ) : (
+        <ButtonForm
+          disable={isDisableState}
+          onPress={handleLogin}
+          text={"Đăng nhập"}
+          width={150}
+        />
+      )}
     </PageForm>
   );
 };

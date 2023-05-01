@@ -4,6 +4,7 @@ import SignUpScreen from "../../screens/SignUpScreen";
 import RegisterLocation from "../../screens/RegisterLocation";
 import InputPhoneScreen from "../../screens/InputPhoneScreen";
 import OTPScreen from "../../screens/OTPScreen";
+import DoneScreen from "../../screens/DoneScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +19,7 @@ const AuthNavigator = () => {
       <Stack.Screen name="inputphonenumber" component={InputPhoneScreen} />
       <Stack.Screen name="otp" component={OTPScreen} />
       <Stack.Screen name="registerlocation" component={RegisterLocation} />
+      <Stack.Screen name="done" component={DoneScreen} />
     </Stack.Navigator>
   );
 };

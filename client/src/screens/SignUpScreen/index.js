@@ -5,7 +5,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Fontisto from "react-native-vector-icons/Fontisto";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../constants";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -19,6 +19,7 @@ const SignUpScreen = ({ navigation }) => {
     password: "",
   });
   const [formError, setFormError] = useState("");
+  const [isDisableState, setDisableState] = useState(true);
 
   const handleRegister = async () => {
     const { name, password } = formState;
@@ -43,6 +44,12 @@ const SignUpScreen = ({ navigation }) => {
       });
     }, [])
   );
+
+  useEffect(() => {
+    formState.name.length > 5 && formState.password.length > 5
+      ? setDisableState(false)
+      : setDisableState(true);
+  }, [formState]);
 
   return (
     <PageForm>
@@ -93,7 +100,7 @@ const SignUpScreen = ({ navigation }) => {
           handleRegister();
           navigation.navigate("inputphonenumber");
         }}
-        disable={false}
+        disable={isDisableState}
         text={"Tạo tài khoản"}
         width={150}
       />

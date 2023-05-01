@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -27,6 +27,11 @@ const InputPhoneScreen = ({ navigation }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [dropdownLayout, setDropdownLayout] = useState({});
   const [phoneNumber, setPhoneNumber] = useState("");
+
+  const [isDisableState, setDisableState] = useState(true);
+  useEffect(() => {
+    phoneNumber.length > 11 ? setDisableState(false) : setDisableState(true);
+  }, [phoneNumber]);
 
   const handleRegister = async () => {
     console.log(phoneNumber);
@@ -117,6 +122,7 @@ const InputPhoneScreen = ({ navigation }) => {
       )}
       <View style={{ alignItems: "center", justifyContent: "center" }}>
         <ButtonForm
+          disable={isDisableState}
           onPress={() => {
             handleRegister();
             navigation.navigate("otp");

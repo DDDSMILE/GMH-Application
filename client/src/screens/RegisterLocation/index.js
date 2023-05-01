@@ -7,9 +7,14 @@ import * as Location from "expo-location";
 import { useEffect, useState } from "react";
 
 const RegisterLocation = ({ navigation }) => {
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
-  const [address, setAddress] = useState(null);
+  const [location, setLocation] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [address, setAddress] = useState("");
+  const [isDisableState, setDisableState] = useState(true);
+
+  useEffect(() => {
+    address.length > 0 ? setDisableState(false) : setDisableState(true);
+  }, [address]);
 
   useEffect(() => {
     (async () => {
@@ -21,7 +26,7 @@ const RegisterLocation = ({ navigation }) => {
     })();
   }, []);
 
-  const handleRegister = async () => {
+  const handleGetLocation = async () => {
     // DEFAULT LOCATION
     const DEFAULT_LOCATION = {
       latitude: 16.049372951103447,
@@ -40,6 +45,11 @@ const RegisterLocation = ({ navigation }) => {
       name || streetNumber
     }, ${street}, ${subregion}, ${region}`;
     setAddress(address);
+  };
+
+  console.log(address);
+  const handleRegister = async () => {
+    console.log(address);
   };
 
   return (
@@ -71,7 +81,10 @@ const RegisterLocation = ({ navigation }) => {
             />
             <Text style={{ fontFamily: "inter_medium" }}>Vị trí của bạn</Text>
           </View>
-          <TouchableOpacity style={styles.locationButton}>
+          <TouchableOpacity
+            style={styles.locationButton}
+            onPress={() => handleGetLocation()}
+          >
             <Text
               style={{
                 fontFamily: "inter_semi_bold",
@@ -86,7 +99,14 @@ const RegisterLocation = ({ navigation }) => {
       <View
         style={{ alignItems: "center", marginVertical: Display.setWidth(60) }}
       >
-        <ButtonForm onPress={() => handleRegister()} text={"Hoàn thành"} />
+        <ButtonForm
+          disable={isDisableState}
+          onPress={() => {
+            handleRegister();
+            navigation.navigate("done");
+          }}
+          text={"Hoàn thành"}
+        />
       </View>
     </View>
   );

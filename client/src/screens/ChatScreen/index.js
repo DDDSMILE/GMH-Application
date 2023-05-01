@@ -8,33 +8,76 @@ const ChatScreen = ({ route, navigation }) => {
   const { type } = route.params;
   const [messages, setMessages] = useState([]);
 
-  const { questions, answer } = SuggestionAnswers.find(
+  const { question, answer } = SuggestionAnswers.find(
     (item) => item.name === type
   );
 
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: answer,
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: "GMH",
-          avatar: "https://placeimg.com/140/140/any",
+    let default_text = [];
+    if (question && answer) {
+      default_text = [
+        {
+          _id: 1,
+          text: answer,
+          createdAt: new Date(),
+          user: {
+            _id: 2,
+            name: "GMH",
+            avatar:
+              "https://res.cloudinary.com/du93troxt/image/upload/v1682910574/chatbot_ndm7dj.png",
+          },
         },
-      },
-      {
-        _id: 3,
-        text: questions,
-        createdAt: new Date(),
-        user: {
-          _id: 4,
-          name: "GMH",
-          avatar: "https://placeimg.com/140/140/any",
+        {
+          _id: 3,
+          text: question,
+          createdAt: new Date(),
+          user: {
+            _id: 4,
+            name: "GMH",
+            avatar:
+              "https://res.cloudinary.com/du93troxt/image/upload/v1682910574/chatbot_ndm7dj.png",
+          },
         },
-      },
-    ]);
+      ];
+    } else {
+      default_text = [
+        {
+          _id: 1,
+          text: "Hãy cho chúng tôi biết, hôm nay bạn muốn ăn gì?",
+          createdAt: new Date(),
+          quickReplies: {
+            type: "radio",
+            keepIt: true,
+            values: [
+              {
+                title: "😋Vịt om bầu",
+                value: "Vịt om bầu",
+              },
+              {
+                title: "Cá bơn nướng",
+                value: "Cá bơn nướng",
+              },
+              {
+                title: "Đá bào",
+                value: "Đá bào",
+              },
+              {
+                title: "Cơm chiên chân châu",
+                value: "Cơm chiên chân châu",
+              },
+            ],
+          },
+          user: {
+            _id: 2,
+            name: "GMH",
+            avatar:
+              "https://res.cloudinary.com/du93troxt/image/upload/v1682910574/chatbot_ndm7dj.png",
+          },
+        },
+      ];
+    }
+
+    setMessages(default_text);
   }, []);
 
   const onSend = useCallback((messages = []) => {

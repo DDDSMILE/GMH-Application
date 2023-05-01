@@ -2,9 +2,8 @@ export default [
   {
     id: "1",
     name: "Đồ cay",
-    questions: "Hãy gợi ý cho tôi thực phẩm để làm món ăn cay ?",
+    question: "Hãy gợi ý cho tôi thực phẩm để làm món ăn cay ?",
     answer: `Một số thực phẩm bạn có thể sử dụng để tạo ra món ăn cay bao gồm:
-
         Ớt: Đây là nguyên liệu thường được sử dụng nhất để tạo ra độ cay trong món ăn. Các loại ớt như jalapenos, cayenne, habanero và Thai chilies đều có độ cay khác nhau và có thể được sử dụng để tăng cường hương vị cay trong các món ăn khác nhau.
         
         Gừng: Gừng cũng là một lựa chọn tốt để tăng cường độ cay trong món ăn. Bạn có thể sử dụng gừng tươi hoặc gừng khô để làm cho món ăn của bạn cay hơn.
@@ -20,7 +19,7 @@ export default [
   {
     id: "2",
     name: "Rau củ",
-    questions: "Hãy gợi ý cho tôi thực phẩm để làm món ăn có nhiều rau củ ?",
+    question: "Hãy gợi ý cho tôi thực phẩm để làm món ăn có nhiều rau củ ?",
     answer: `Đây là một số loại rau củ bạn có thể sử dụng để tạo ra món ăn có nhiều rau củ:
 
     Cà rốt: Cà rốt là một loại rau củ giàu chất dinh dưỡng và có thể được sử dụng để tạo ra nhiều loại món ăn như salad, súp và xào.
@@ -40,7 +39,7 @@ export default [
   {
     id: "3",
     name: "Ít chất béo",
-    questions: "Hãy gợi ý cho tôi thực phẩm để làm món ăn có ít chất béo ?",
+    question: "Hãy gợi ý cho tôi thực phẩm để làm món ăn có ít chất béo ?",
     answer: `Đây là một số thực phẩm có ít chất béo bạn có thể sử dụng để tạo ra món ăn:
 
     Thịt gà không da: Thịt gà không da là một nguồn protein tốt và ít chất béo hơn so với các loại thịt khác như thịt bò hoặc thịt lợn.
@@ -60,7 +59,7 @@ export default [
   {
     id: "4",
     name: "Nhiều đạm",
-    questions: "Hãy gợi ý cho tôi thực phẩm để làm món ăn nhiều đạm ?",
+    question: "Hãy gợi ý cho tôi thực phẩm để làm món ăn nhiều đạm ?",
     answer: `Đây là một số thực phẩm giàu đạm mà bạn có thể sử dụng để tạo ra các món ăn:
 
     Thịt: Thịt là một nguồn giàu đạm, đặc biệt là thịt gà, thịt bò, thịt heo, thịt cừu và cá hồi. Bạn có thể sử dụng chúng để nấu các món ăn như thịt kho tàu, thịt bò xào hành tây, cá hồi nướng...
@@ -80,7 +79,7 @@ export default [
   {
     id: "5",
     name: "Món chay",
-    questions: "Hãy gợi ý cho tôi thực phẩm để làm món ăn chay ?",
+    question: "Hãy gợi ý cho tôi thực phẩm để làm món ăn chay ?",
     answer: `Đây là một số thực phẩm bạn có thể sử dụng để tạo ra các món ăn chay:
 
     Đậu hủ: Đậu hủ là một loại thực phẩm chay giàu chất đạm và có thể được sử dụng để thay thế thịt trong các món ăn chay như phở chay, bún chay, xào rau củ, canh chay, nấu chay...
@@ -100,7 +99,7 @@ export default [
   {
     id: "6",
     name: "Món mặn",
-    questions: "Hãy gợi ý cho tôi thực phẩm để làm món ăn mặn ?",
+    question: "Hãy gợi ý cho tôi thực phẩm để làm món ăn mặn ?",
     answer: `Đây là một số thực phẩm mặn mà bạn có thể sử dụng để tạo ra các món ăn:
 
     Thịt: Thịt bò, thịt heo, thịt gà và thịt cừu đều là những nguyên liệu chính để tạo ra các món ăn mặn, như thịt kho, thịt xào, thịt nướng, thịt chiên...
@@ -118,7 +117,7 @@ export default [
   {
     id: "7",
     name: "Trái cây",
-    questions: "Hãy gợi ý cho tôi thực phẩm để làm tiệc trái cây ăn nhẹ ?",
+    question: "Hãy gợi ý cho tôi thực phẩm để làm tiệc trái cây ăn nhẹ ?",
     answer: `Đây là một số thực phẩm phù hợp để làm tiệc trái cây ăn nhẹ:
 
     Trái cây tươi: Đây là loại thực phẩm không thể thiếu trong tiệc trái cây. Bạn có thể chọn các loại trái cây như dưa hấu, xoài, đu đủ, dâu tây, kiwi, nho, táo, cam...
@@ -140,7 +139,7 @@ export default [
   {
     id: "8",
     name: "Đồ ngọt",
-    questions: "Hãy gợi ý cho tôi thực phẩm để làm món ngọt ?",
+    question: "Hãy gợi ý cho tôi thực phẩm để làm món ngọt ?",
     answer: `Đây là một số thực phẩm phù hợp để làm món ngọt:
 
     Trái cây tươi: Trái cây tươi như dưa hấu, dâu tây, nho, táo, cam, quýt, kiwi, xoài, chôm chôm, đào, lê... là những lựa chọn tuyệt vời cho món ngọt.
@@ -156,5 +155,11 @@ export default [
     Đường: Đường là một nguyên liệu quen thuộc để làm món ngọt. Bạn có thể sử dụng đường để làm các loại bánh, kem, trái cây ngâm đường...
     
     Những thực phẩm này sẽ giúp bạn tạo ra món ngọt ngon miệng và đầy hương vị. Tuy nhiên, cần lưu ý sử dụng đúng lượng để tránh ảnh hưởng đến sức khỏe.`,
+  },
+  {
+    id: "9",
+    name: "Khác",
+    question: null,
+    answer: null,
   },
 ];
