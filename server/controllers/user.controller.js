@@ -11,7 +11,7 @@ export const register = async (req, res) => {
   try {
     const { name, phone_number, password } = req.body;
 
-    const avatar = req.files.avatar.tempFilePath;
+    // const avatar = req.files.avatar.tempFilePath;
 
     let user = await UserModel.findOne({ name });
     if (user) {
@@ -21,21 +21,21 @@ export const register = async (req, res) => {
     }
     const otp = Math.floor(Math.random() * 10000);
 
-    const mycloud = await cloudinary.v2.uploader.upload(avatar, {
-      folder: "users",
-    });
+    // const mycloud = await cloudinary.v2.uploader.upload(avatar, {
+    //   folder: "users",
+    // });
 
-    fs.rmSync("./tmp", { recursive: true });
+    // fs.rmSync("./tmp", { recursive: true });
 
     // expiry otp = 5*60*1000 (ms)
     user = await UserModel.create({
       name,
       phone_number,
       password,
-      avatar: {
-        public_id: mycloud.public_id,
-        url: mycloud.secure_url,
-      },
+      // avatar: {
+      //   public_id: mycloud.public_id,
+      //   url: mycloud.secure_url,
+      // },
       otp,
       otp_expiry: new Date(Date.now() + process.env.OTP_EXPIRY * 60 * 1000),
     });
@@ -267,16 +267,16 @@ export const resetPassword = async (req, res) => {
 export const answerChatGPT = async (req, res) => {
   try {
     const message = req.body.text;
-    const data = await DishesModel.distinct("name");
+    // const data = await DishesModel.distinct("name");
 
-    const lowStr = message.toLowerCase();
-    const lowArr = data.map((item) => item.toLowerCase());
-    const result = lowStr
-      .split(" ")
-      .filter((word) => lowArr.some((item) => item.includes(word)));
+    // const lowStr = message.toLowerCase();
+    // const lowArr = data.map((item) => item.toLowerCase());
+    // const result = lowStr
+    //   .split(" ")
+    //   .filter((word) => lowArr.some((item) => item.includes(word)));
 
-    // const answer = await sendChatGPT(message);
-    res.status(201).json({ success: true, result: result });
+    const answer = await sendChatGPT(message);
+    res.status(201).json({ success: true, result: answer });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }

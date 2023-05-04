@@ -8,6 +8,7 @@ import { Colors } from "../../constants";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFocusEffect } from "@react-navigation/native";
+import { register } from "../../store/auth.slice";
 
 const SignUpScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -20,18 +21,65 @@ const SignUpScreen = ({ navigation }) => {
   });
   const [formError, setFormError] = useState("");
   const [isDisableState, setDisableState] = useState(true);
+  const [isCorrectPassword, setCorrectPassword] = useState(false);
 
-  const handleRegister = async () => {
+  useEffect(() => {
     const { name, password } = formState;
 
-    console.log(formState);
+    const checkPasswordValidity = (value) => {
+      const isNonWhiteSpace = /^\S*$/;
+      if (!isNonWhiteSpace.test(value)) {
+        return "Mật khẩu không được chứa khoảng trắng";
+      }
 
-    if (!name || !password) {
-      setFormError("Phải điền hết tất cả");
-      setTimeout(() => {
-        setFormError("");
-      }, 4000);
-      return;
+      const isContainsUppercase = /^(?=.*[A-Z]).*$/;
+      if (!isContainsUppercase.test(value)) {
+        return "Mật khẩu phải có ít nhất một ký tự chữ hoa";
+      }
+
+      const isContainsLowercase = /^(?=.*[a-z]).*$/;
+      if (!isContainsLowercase.test(value)) {
+        return "Mật khẩu phải có ít nhất một ký tự chữ thường";
+      }
+
+      const isContainsNumber = /^(?=.*[0-9]).*$/;
+      if (!isContainsNumber.test(value)) {
+        return "Mật khẩu phải chứa ít nhất một chữ số";
+      }
+
+      const isContainsSymbol =
+        /^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]).*$/;
+      if (!isContainsSymbol.test(value)) {
+        return "Mật khẩu phải chứa ít nhất một kí hiệu đặt biệt";
+      }
+
+      const isValidLength = /^.{8,24}$/;
+      if (!isValidLength.test(value)) {
+        return "Mật khẩu phải dài từ 8 đến 24 ký tự.";
+      }
+
+      return null;
+    };
+
+    const message = checkPasswordValidity(password);
+
+    if (password.length > 0) {
+      if (!message) {
+        setCorrectPassword(true);
+        setFormError("Mật khẩu của bạn hợp lệ và mạnh");
+      } else {
+        setFormError(message);
+      }
+    }
+  }, [formState]);
+
+  const handleRegister = () => {
+    const { name, password } = formState;
+    console.log(isCorrectPassword);
+    if (isCorrectPassword) {
+      navigation.navigate("inputphonenumber");
+      console.log(formState);
+      // dispatch(register({ name, password }));
     }
   };
 
@@ -95,11 +143,13 @@ const SignUpScreen = ({ navigation }) => {
           />
         }
       />
+      {(error || formError !== "") && (
+        <View>
+          <Text>{error ? error : formError}</Text>
+        </View>
+      )}
       <ButtonForm
-        onPress={() => {
-          handleRegister();
-          navigation.navigate("inputphonenumber");
-        }}
+        onPress={() => handleRegister()}
         disable={isDisableState}
         text={"Tạo tài khoản"}
         width={150}

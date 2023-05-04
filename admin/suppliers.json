@@ -1,0 +1,142 @@
+[
+    {
+        "name": "Khô Gà Lá Chanh - Shop Online",
+        "address": "9 Phạm Thế Hiển, P. Khuê Trung, Quận Cẩm Lệ, Đà Nẵng"
+    },
+    {
+        "name": "Tiệm Ăn Vặt Nhà Đậu - Đồ Ăn Vặt Nhập Khẩu - Nguyễn Hữu Tiến",
+        "address": "Chung Cư 11CT05 (Gần Vinmart+), Nguyễn Hữu Tiến, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng"
+    },
+    {
+        "name": "Quầy Củ Quả - Gia Vị - Đường Nguyễn Nhàn",
+        "address": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng"
+    },
+    {
+        "name": "Thực Phẩm Sạch Hoàng Linh Food - Gà Ủ Muối - Mẹ Thứ",
+        "address": "161 Mẹ Thứ, P. Hoà Xuân, Quận Cẩm Lệ, Đà Nẵng"
+    },
+    {
+        "name": "Bách Hoá Làm Bánh Anton - Bầu Tràm 3",
+        "address": "07 Bầu Tràm 3, P. Khuê Trung, Quận Cẩm Lệ, Đà Nẵng"
+    },
+    {
+        "name": "Chinn's Food - Nguyên Liệu Tokkbokki",
+        "address": "K15/11 Phan Chu Trinh, P. Hải Châu 1, Quận Hải Châu, Đà Nẵng"
+    },
+    {
+        "name": "BB Mini Mart - Đồ Ăn Vặt Đà Nẵng",
+        "address": "53 Trần Kế Xương, P. Hải Châu 2, Quận Hải Châu, Đà Nẵng"
+    },
+    {
+        "name": "Thực Phẩm Sạch - Cô Lan",
+        "address": "149/43/29 Lê Đình Lý, P. Hòa Thuận Đông, Quận Hải Châu, Đà Nẵng"
+    },
+    {
+        "name": "Shop Rau Quả Yến - Tiểu La",
+        "address": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng"
+    },
+    {
+        "name": "Đặc Sản 3 Miền - Hoàng Diệu",
+        "address": "280/17 Hoàng Diệu, P. Bình Hiên, Quận Hải Châu, Đà Nẵng"
+    },
+    {
+        "name": "Tiệm Ăn Ah CÁ - Set Trà Sữa & Đồ Ăn Vặt - Đặng Tất",
+        "address": "5 Đặng Tất, P. Hòa Khánh Nam, Quận Liên Chiểu, Đà Nẵng"
+    },
+    {
+        "name": "Chả Cá Đỏ Lý Sơn",
+        "address": "16/22 Nguyễn Như Hạnh, P. Hòa Minh, Quận Liên Chiểu, Đà Nẵng"
+    },
+    {
+        "name": "Thiên Đường Ăn Vặt - Nguyễn Như Hạnh",
+        "address": "218/16 Nguyễn Như Hạnh, P. Hòa Minh, Quận Liên Chiểu, Đà Nẵng"
+    },
+    {
+        "name": "Mèo - Khô Gà Lá Chanh - Shop Online",
+        "address": "302 Hồ Tùng Mậu, P. Hòa Minh, Quận Liên Chiểu, Đà Nẵng"
+    },
+    {
+        "name": "TH True Mart - Âu Cơ - 70000284",
+        "address": "72 Âu Cơ, Quận Liên Chiểu, Đà Nẵng"
+    },
+    {
+        "name": "Laban Mart - Châu Thị Vĩnh Tế",
+        "address": "37 Châu Thị Vĩnh Tế, P. Bắc Mỹ Phú, Quận Ngũ Hành Sơn, Đà Nẵng"
+    },
+    {
+        "name": "Kim Liên - Minimart",
+        "address": "26 Lê Quang Đạo, P. Mỹ An, Quận Ngũ Hành Sơn, Đà Nẵng"
+    },
+    {
+        "name": "Thu Hà Lội - Sản Phẩm Sạch - Shop Online",
+        "address": "27 Lê Văn Hưu, P. Mỹ An, Quận Ngũ Hành Sơn, Đà Nẵng"
+    },
+    {
+        "name": "Gạo ST24 & ST25 - Gạo Ngon Nhất Thế Giới",
+        "address": "57 Ngũ Hành Sơn, P. Mỹ An, Quận Ngũ Hành Sơn, Đà Nẵng"
+    },
+    {
+        "name": "A Năm - Chuyên Gà Tươi Sống",
+        "address": "198 Châu Thị Vĩnh Tế, Quận Ngũ Hành Sơn, Đà Nẵng"
+    },
+    {
+        "name": "Kim Chi Hàn Quốc - Nhà Rốt",
+        "address": "111 Nguyễn Văn Thoại, P. An Hải Đông, Quận Sơn Trà, Đà Nẵng"
+    },
+    {
+        "name": "Andros - Trái Cây Tươi Đông Lạnh - Lý Nhật Quang",
+        "address": "18 Lý Nhật Quang, P. Nại Hiên Đông, Quận Sơn Trà, Đà Nẵng"
+    },
+    {
+        "name": "Siêu Thị Mini Phương - Hồ Hán Thương",
+        "address": "57 Hồ Hán Thương, P. Nại Hiên Đông, Quận Sơn Trà, Đà Nẵng"
+    },
+    {
+        "name": "Cô Xuân - Cung Cấp Rau Củ Quả - Hà Đặc",
+        "address": "107 Hà Đặc, P. Phước Mỹ, Quận Sơn Trà, Đà Nẵng"
+    },
+    {
+        "name": "Vân Mart - Thực Phẩm Đông Lạnh - 57 Đông Giang",
+        "address": "57 Đông Giang, P. An Hải Tây, Quận Sơn Trà, Đà Nẵng"
+    },
+    {
+        "name": "Danh - Tạp Hóa Tiêu Dùng",
+        "address": "168 Vũ Quỳnh, Quận Thanh Khê, Đà Nẵng"
+    },
+    {
+        "name": "Siêu Thị Co.op Mart Đà Nẵng",
+        "address": "478 Điện Biên Phủ, P. Thanh Khê Đông, Quận Thanh Khê, Đà Nẵng"
+    },
+    {
+        "name": "TH True Mart - Hùng Vương - 70000147",
+        "address": "339 Hùng Vương, P. Vĩnh Trung, Quận Thanh Khê, Đà Nẵng"
+    },
+    {
+        "name": "Cô Liên - Đồ Ăn Vặt Đông Lạnh",
+        "address": "220/12 Hải Phòng, P. Tân Chính, Quận Thanh Khê, Đà Nẵng"
+    },
+    {
+        "name": "Đại Lộc Phát - Đặc Sản Miền Trung",
+        "address": "12 Hoàng Hoa Thám, P. Tân Chính, Quận Thanh Khê, Đà Nẵng"
+    },
+    {
+        "name": "Shop Mẹ Sóc - Thực Phẩm & Sữa",
+        "address": "Trung Sơn, Xã Hòa Liên, Hòa Vang, Đà Nẵng"
+    },
+    {
+        "name": "Cô Tấm - Chả Bò & Chả Heo - Nguyễn Khả Trạc",
+        "address": "69 Nguyễn Khả Trạc, Hòa Vang, Đà Nẵng"
+    },
+    {
+        "name": "Pate Loan Nguyễn - Pate & Cà Phê Pha Sẵn - Shop Online",
+        "address": "143 Phạm Hùng, X. Hoà Châu, Hòa Vang, Đà Nẵng"
+    },
+    {
+        "name": "CP Five Star - 337 Nguyễn Hồng Ánh",
+        "address": "337 Nguyễn Hồng Ánh, X. Hoà Châu, Hòa Vang, Đà Nẵng"
+    },
+    {
+        "name": "Quán Gà Vịt Quê Ty Ty - Lò Mổ Gà Vịt",
+        "address": "Lò Mổ Gà Vịt Thôn Cồn Mong, Xã Hòa Phước, Hòa Vang, Đà Nẵng"
+    }
+]

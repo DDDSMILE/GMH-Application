@@ -29,12 +29,29 @@ const InputPhoneScreen = ({ navigation }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   const [isDisableState, setDisableState] = useState(true);
+  const [formError, setFormError] = useState("");
+  const [isCorrectPhoneNumber, setIsCorrectPhoneNumber] = useState(false);
   useEffect(() => {
+    const checkPhoneNumberValidity = (value) => {
+      const isPhoneNumber = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
+      if (!isPhoneNumber.test(value)) {
+        return "Hãy điền số điện thoại của bạn";
+      }
+    };
+    const message = checkPhoneNumberValidity(phoneNumber);
+    if (!message) {
+      setIsCorrectPhoneNumber(true);
+      setFormError("");
+    } else {
+      setFormError(message);
+    }
     phoneNumber.length > 11 ? setDisableState(false) : setDisableState(true);
   }, [phoneNumber]);
 
   const handleRegister = async () => {
-    console.log(phoneNumber);
+    if (isCorrectPhoneNumber) {
+      console.log(phoneNumber);
+    }
   };
 
   const closeDropdown = (pageX, pageY) => {
@@ -118,6 +135,11 @@ const InputPhoneScreen = ({ navigation }) => {
               />
             )}
           />
+        </View>
+      )}
+      {formError !== "" && (
+        <View>
+          <Text>{formError}</Text>
         </View>
       )}
       <View style={{ alignItems: "center", justifyContent: "center" }}>

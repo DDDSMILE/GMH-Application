@@ -18,6 +18,21 @@ export const login = async ({ name, password }) => {
   }
 };
 
+export const register = async ({ name, password }) => {
+  try {
+    const { data } = await axios.post(
+      `${API_URL}/register`,
+      { name, password },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};
+
 export const getUser = async () => {
   try {
     const { data } = await axios.get(`${API_URL}/me`);
