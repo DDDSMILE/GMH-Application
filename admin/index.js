@@ -1,46 +1,44 @@
 import puppeteer from "puppeteer";
 import fs from "fs";
 
-(async () => {
-  const urls = [
-    "https://shopeefood.vn/da-nang/kho-ga-la-chanh-shop-online",
-    "https://shopeefood.vn/da-nang/tiem-an-vat-nha-dau-do-an-vat-nhap-khau-nguyen-huu-tien.cta8nn",
-    "https://shopeefood.vn/da-nang/quay-cu-qua-gia-vi-duong-nguyen-nhan.flojhd",
-    "https://shopeefood.vn/da-nang/thuc-pham-sach-hoang-linh-food-ga-u-muoi-me-thu",
-    "https://shopeefood.vn/da-nang/bach-hoa-lam-banh-anton-bau-tram-3",
-    "https://shopeefood.vn/da-nang/chinn-s-food-nguyen-lieu-tokkbokki",
-    "https://shopeefood.vn/da-nang/bb-mini-mart-do-an-vat-da-nang",
-    "https://shopeefood.vn/da-nang/thuc-pham-sach-co-lan",
-    "https://shopeefood.vn/da-nang/shop-rau-qua-yen-tieu-la",
-    "https://shopeefood.vn/da-nang/dac-san-3-mien-hoang-dieu",
-    "https://shopeefood.vn/da-nang/tiem-an-ah-ca-set-tra-sua-do-an-vat-dang-tat",
-    "https://shopeefood.vn/da-nang/cha-ca-do-ly-son",
-    "https://shopeefood.vn/da-nang/thien-duong-an-vat-nguyen-nhu-hanh",
-    "https://shopeefood.vn/da-nang/meo-kho-ga-la-chanh-shop-online",
-    "https://shopeefood.vn/da-nang/th-true-mart-au-co-70000284",
-    "https://shopeefood.vn/da-nang/laban-mart-chau-thi-vinh-te",
-    "https://shopeefood.vn/da-nang/kim-lien-minimart",
-    "https://shopeefood.vn/da-nang/thu-ha-loi-san-pham-sach-shop-online",
-    "https://shopeefood.vn/da-nang/gao-st24-st25-gao-ngon-nhat-the-gioi",
-    "https://shopeefood.vn/da-nang/a-nam-chuyen-ga-tuoi-song",
-    "https://shopeefood.vn/da-nang/kim-chi-han-quoc-nha-rot",
-    "https://shopeefood.vn/da-nang/andros-trai-cay-tuoi-dong-lanh-ly-nhat-quang",
-    "https://shopeefood.vn/da-nang/sieu-thi-mini-phuong-ho-han-thuong",
-    "https://shopeefood.vn/da-nang/co-xuan-cung-cap-rau-cu-qua-ha-dac",
-    "https://shopeefood.vn/da-nang/van-mart-thuc-pham-dong-lanh-57-dong-giang",
-    "https://shopeefood.vn/da-nang/danh-tap-hoa-tieu-dung",
-    "https://shopeefood.vn/da-nang/sieu-thi-co-op-mart-da-nang",
-    "https://shopeefood.vn/da-nang/th-true-mart-hung-vuong-70000147",
-    "https://shopeefood.vn/da-nang/co-lien-do-an-vat-dong-lanh",
-    "https://shopeefood.vn/da-nang/dai-loc-phat-dac-san-mien-trung",
-    "https://shopeefood.vn/da-nang/shop-me-soc-thuc-pham-sua",
-    "https://shopeefood.vn/da-nang/co-tam-cha-bo-cha-heo-nguyen-kha-trac",
-    "https://shopeefood.vn/da-nang/pate-loan-nguyen-pate-ca-phe-pha-san-shop-online",
-    "https://shopeefood.vn/da-nang/cp-five-star-337-nguyen-hong-anh",
-    "https://shopeefood.vn/da-nang/quan-ga-vit-que-ty-ty-lo-mo-ga-vit",
-  ];
+const urls = [
+  "https://shopeefood.vn/da-nang/kho-ga-la-chanh-shop-online",
+  "https://shopeefood.vn/da-nang/tiem-an-vat-nha-dau-do-an-vat-nhap-khau-nguyen-huu-tien.cta8nn",
+  "https://shopeefood.vn/da-nang/quay-cu-qua-gia-vi-duong-nguyen-nhan.flojhd",
+  "https://shopeefood.vn/da-nang/thuc-pham-sach-hoang-linh-food-ga-u-muoi-me-thu",
+  "https://shopeefood.vn/da-nang/bach-hoa-lam-banh-anton-bau-tram-3",
+  "https://shopeefood.vn/da-nang/chinn-s-food-nguyen-lieu-tokkbokki",
+  "https://shopeefood.vn/da-nang/bb-mini-mart-do-an-vat-da-nang",
+  "https://shopeefood.vn/da-nang/thuc-pham-sach-co-lan",
+  "https://shopeefood.vn/da-nang/shop-rau-qua-yen-tieu-la",
+  "https://shopeefood.vn/da-nang/dac-san-3-mien-hoang-dieu",
+  "https://shopeefood.vn/da-nang/tiem-an-ah-ca-set-tra-sua-do-an-vat-dang-tat",
+  "https://shopeefood.vn/da-nang/cha-ca-do-ly-son",
+  "https://shopeefood.vn/da-nang/thien-duong-an-vat-nguyen-nhu-hanh",
+  "https://shopeefood.vn/da-nang/meo-kho-ga-la-chanh-shop-online",
+  "https://shopeefood.vn/da-nang/laban-mart-chau-thi-vinh-te",
+  "https://shopeefood.vn/da-nang/kim-lien-minimart",
+  "https://shopeefood.vn/da-nang/thu-ha-loi-san-pham-sach-shop-online",
+  "https://shopeefood.vn/da-nang/gao-st24-st25-gao-ngon-nhat-the-gioi",
+  "https://shopeefood.vn/da-nang/a-nam-chuyen-ga-tuoi-song",
+  "https://shopeefood.vn/da-nang/kim-chi-han-quoc-nha-rot",
+  "https://shopeefood.vn/da-nang/andros-trai-cay-tuoi-dong-lanh-ly-nhat-quang",
+  "https://shopeefood.vn/da-nang/sieu-thi-mini-phuong-ho-han-thuong",
+  "https://shopeefood.vn/da-nang/co-xuan-cung-cap-rau-cu-qua-ha-dac",
+  "https://shopeefood.vn/da-nang/van-mart-thuc-pham-dong-lanh-57-dong-giang",
+  "https://shopeefood.vn/da-nang/danh-tap-hoa-tieu-dung",
+  "https://shopeefood.vn/da-nang/sieu-thi-co-op-mart-da-nang",
+  "https://shopeefood.vn/da-nang/co-lien-do-an-vat-dong-lanh",
+  "https://shopeefood.vn/da-nang/dai-loc-phat-dac-san-mien-trung",
+  "https://shopeefood.vn/da-nang/shop-me-soc-thuc-pham-sua",
+  "https://shopeefood.vn/da-nang/co-tam-cha-bo-cha-heo-nguyen-kha-trac",
+  "https://shopeefood.vn/da-nang/pate-loan-nguyen-pate-ca-phe-pha-san-shop-online",
+  "https://shopeefood.vn/da-nang/cp-five-star-337-nguyen-hong-anh",
+  "https://shopeefood.vn/da-nang/quan-ga-vit-que-ty-ty-lo-mo-ga-vit",
+];
+
+const scrapeDishes = async () => {
   let dishes = [];
-  let suppliers = [];
 
   for (const url of urls) {
     const browser = await puppeteer.launch({
@@ -890,21 +888,8 @@ import fs from "fs";
         name_supplier: name_supplier,
       };
     });
+
     dishes.push(...result, result);
-
-    const address_supplier = await page.evaluate(
-      () => document.querySelector(".address-restaurant").innerText
-    );
-
-    // const photo_supplier = await page.evaluate(
-    //   () => document.querySelector(".detail-restaurant-img img").src
-    // );
-
-    suppliers.push({
-      name: name_supplier,
-      address: address_supplier,
-      // photo: photo_supplier,
-    });
 
     await browser.close();
   }
@@ -916,9 +901,53 @@ import fs from "fs";
     if (err) throw err;
     console.log("File saved successfully");
   });
+};
 
+const scrapeSuppliers = async () => {
+  let suppliers = [];
+
+  for (const url of urls) {
+    const browser = await puppeteer.launch({
+      headless: "new",
+      timeout: 0,
+    });
+
+    const page = await browser.newPage();
+    await page.goto(url, {
+      waitUntil: "load",
+    });
+
+    await page.setViewport({ width: 1280, height: 200000 });
+
+    await page.waitForSelector(".title-menu");
+
+    const name_supplier = await page.evaluate(
+      () => document.querySelector(".name-restaurant").innerText
+    );
+
+    const address_supplier = await page.evaluate(
+      () => document.querySelector(".address-restaurant").innerText
+    );
+
+    const photo_supplier = await page.evaluate(
+      () => document.querySelector(".detail-restaurant-img img").src
+    );
+
+    suppliers.push({
+      name: name_supplier,
+      address: address_supplier,
+      photo: photo_supplier,
+    });
+
+    await browser.close();
+  }
+
+  // Save data to JSON file
   fs.writeFile("suppliers.json", JSON.stringify(suppliers), (err) => {
     if (err) throw err;
     console.log("File saved successfully");
   });
-})();
+};
+
+// scrapeSuppliers();
+scrapeDishes();
