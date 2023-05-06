@@ -1,5 +1,10 @@
 import puppeteer from "puppeteer";
-import fs from "fs";
+import fse from "fs-extra";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const urls = [
   "https://shopeefood.vn/da-nang/kho-ga-la-chanh-shop-online",
@@ -897,10 +902,14 @@ const scrapeDishes = async () => {
   const flatDishes = dishes.flat(2);
 
   // Save data to JSON file
-  fs.writeFile("dishes.json", JSON.stringify(flatDishes), (err) => {
-    if (err) throw err;
-    console.log("File saved successfully");
-  });
+  fse.outputFile(
+    __dirname + `/data/dishes.json`,
+    JSON.stringify(flatDishes),
+    (err) => {
+      if (err) throw err;
+      console.log("File saved successfully");
+    }
+  );
 };
 
 const scrapeSuppliers = async () => {
@@ -943,11 +952,15 @@ const scrapeSuppliers = async () => {
   }
 
   // Save data to JSON file
-  fs.writeFile("suppliers.json", JSON.stringify(suppliers), (err) => {
-    if (err) throw err;
-    console.log("File saved successfully");
-  });
+  fse.outputFile(
+    __dirname + `/data/suppliers.json`,
+    JSON.stringify(suppliers),
+    (err) => {
+      if (err) throw err;
+      console.log("File saved successfully");
+    }
+  );
 };
 
-// scrapeSuppliers();
+scrapeSuppliers();
 scrapeDishes();

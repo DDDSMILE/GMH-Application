@@ -14,7 +14,7 @@ const DishesSchema = new mongoose.Schema(
     type: {
       type: String,
     },
-    supplierId: {
+    name_supplier: {
       type: String,
     },
   },

@@ -2,10 +2,10 @@ import mongoose from "mongoose";
 
 const SuppliersSchema = new mongoose.Schema(
   {
-    id: {
+    name: {
       type: String,
     },
-    name: {
+    address: {
       type: String,
     },
     photo: {
