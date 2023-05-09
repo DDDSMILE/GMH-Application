@@ -8,9 +8,7 @@ import {
   resetPassword,
   updateProfileShipper,
   getShipper,
-  deleteShipper,
-  updatedSuppliers,
-  updatedDishes,
+  deleteShipper
 } from "../controllers/admin.controller.js";
 import { isAuthenticated } from "../middleware/auth.js";
 
@@ -36,10 +34,5 @@ router.route("/create_shipper").post(isAuthenticated, createShipper);
 router
   .route("/updated_shipper/:id")
   .post(isAuthenticated, updateProfileShipper);
-
-/* UPDATE SUPPLIERS, DISHES */
-router.route("/updated_suppliers").post(isAuthenticated, updatedSuppliers);
-
-router.route("/updated_dishes").post(isAuthenticated, updatedDishes);
 
 export default router;

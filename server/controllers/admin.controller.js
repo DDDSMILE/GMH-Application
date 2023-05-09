@@ -6,6 +6,7 @@ import { sendToken } from "../utils/sendToken.js";
 import { sendMail } from "../utils/sendMail.js";
 import { SuppliersModel } from "../models/suppliers.model.js";
 import { DishesModel } from "../models/dishes.model.js";
+import { drinkKeyWords, foodKeyWords, fruitWords, urls, vegetablesWords } from "../utils/crapeData.js";
 
 /* LOGIN */
 export const login = async (req, res) => {
@@ -248,44 +249,6 @@ export const updateProfileShipper = async (req, res) => {
     res
       .status(200)
       .json({ success: true, message: "Profile Updated successfully" });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
-  }
-};
-
-export const updatedSuppliers = async (req, res) => {
-  try {
-    const jsonDataSuppliers = req.body;
-
-    // Check if jsonData is an array
-    if (!Array.isArray(jsonDataSuppliers)) {
-      throw new Error("JSON data must be an array");
-    }
-
-    const suppliers = await SuppliersModel.updateMany(jsonDataSuppliers);
-    await suppliers.save();
-    res
-      .status(200)
-      .json({ success: true, message: "Suppliers data updated successfully" });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
-  }
-};
-
-export const updatedDishes = async (req, res) => {
-  try {
-    const jsonDataDishes = req.body;
-
-    // Check if jsonData is an array
-    if (!Array.isArray(jsonDataDishes)) {
-      throw new Error("JSON data must be an array");
-    }
-
-    const dishes = await DishesModel.updateMany(jsonDataDishes);
-    await dishes.save();
-    res
-      .status(200)
-      .json({ success: true, message: "Dishes data updated successfully" });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }

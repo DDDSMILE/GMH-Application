@@ -34,6 +34,13 @@ export const getDishesWithPaginate = async (req, res) => {
         .sort(sortParam);
     }
 
+    if (page === 'all') {
+      dishes = await DishesModel.find({
+        price: { $gte: minPrice, $lte: maxPrice },
+      })
+        .sort(sortParam);
+    }
+
     res.status(200).json({ success: true, message: "Done", dishes: dishes });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });

@@ -11,6 +11,9 @@ const SuppliersSchema = new mongoose.Schema(
     photo: {
       type: String,
     },
+    open_time: {
+      type: String
+    }
   },
   { timestamps: true }
 );

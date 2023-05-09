@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "name": "Khô gà lá chanh (2 hộp/1 kg)",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/1fd9fb36-efd8-42d9-b74c-f618618685e3.jpg",
+        "price": 180000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    },
+    {
+        "id": 2,
+        "name": "Bột trà xanh (gói 100g)",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/4602a2b9-d76e-4760-82f7-b403d146369a.jpg",
+        "price": 20000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    },
+    {
+        "id": 3,
+        "name": "Tinh bột nghệ (gói 100g)",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/5252651a-acd5-446f-aee2-97cda25209a2.jpg",
+        "price": 30000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    },
+    {
+        "id": 4,
+        "name": "Bột ngũ cốc (2 hộp/1 kg)",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/dcf516a1-a795-483f-b73c-e2a775f77ac4.jpg",
+        "price": 100000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    },
+    {
+        "id": 5,
+        "name": "Kem mask đắp mặt cực thích",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/88249bc5-b824-40eb-b473-df42ef5fb689.jpg",
+        "price": 40000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    },
+    {
+        "id": 6,
+        "name": "Ủ Trắng Cà Phê",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/cf9974b8-592f-44c0-bf41-f827c61f9b25.jpg",
+        "price": 70000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    },
+    {
+        "id": 7,
+        "name": "Khô gà lá chanh (2 hộp/1 kg)",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/1fd9fb36-efd8-42d9-b74c-f618618685e3.jpg",
+        "price": 180000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    },
+    {
+        "id": 8,
+        "name": "Bột trà xanh (gói 100g)",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/4602a2b9-d76e-4760-82f7-b403d146369a.jpg",
+        "price": 20000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    },
+    {
+        "id": 9,
+        "name": "Tinh bột nghệ (gói 100g)",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/5252651a-acd5-446f-aee2-97cda25209a2.jpg",
+        "price": 30000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    },
+    {
+        "id": 10,
+        "name": "Bột ngũ cốc (2 hộp/1 kg)",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/dcf516a1-a795-483f-b73c-e2a775f77ac4.jpg",
+        "price": 100000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    },
+    {
+        "id": 11,
+        "name": "Kem mask đắp mặt cực thích",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/88249bc5-b824-40eb-b473-df42ef5fb689.jpg",
+        "price": 40000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    },
+    {
+        "id": 12,
+        "name": "Ủ Trắng Cà Phê",
+        "photo": "https://images.foody.vn/res/g95/949019/s120x120/cf9974b8-592f-44c0-bf41-f827c61f9b25.jpg",
+        "price": 70000,
+        "type": "khác",
+        "name_supplier": "Khô Gà Lá Chanh - Shop Online"
+    }
+]
