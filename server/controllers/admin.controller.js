@@ -6,7 +6,13 @@ import { sendToken } from "../utils/sendToken.js";
 import { sendMail } from "../utils/sendMail.js";
 import { SuppliersModel } from "../models/suppliers.model.js";
 import { DishesModel } from "../models/dishes.model.js";
-import { drinkKeyWords, foodKeyWords, fruitWords, urls, vegetablesWords } from "../utils/crapeData.js";
+import {
+  drinkKeyWords,
+  foodKeyWords,
+  fruitWords,
+  urls,
+  vegetablesWords,
+} from "../utils/crapeData.js";
 
 /* LOGIN */
 export const login = async (req, res) => {
@@ -149,9 +155,7 @@ export const getAllShippers = async (req, res) => {
   try {
     const shippers = await ShipperModel.find({});
 
-    res
-      .status(200)
-      .json({ success: true, message: "done", shippers: shippers });
+    res.status(200).json({ success: true, message: "done", data: shippers });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }
@@ -162,7 +166,7 @@ export const getShipper = async (req, res) => {
     const id = req.params.id;
 
     const shipper = await ShipperModel.find({ _id: id });
-    res.status(200).json({ success: true, message: "done", shipper: shipper });
+    res.status(200).json({ success: true, message: "done", data: shipper });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }
@@ -182,7 +186,7 @@ export const deleteShipper = async (req, res) => {
 
 export const createShipper = async (req, res) => {
   try {
-    const { name, username, phone_number, password } = req.body;
+    const { name, username, phone_number, address, email, password } = req.body;
 
     const avatar = req.files.avatar.tempFilePath;
 
@@ -204,6 +208,8 @@ export const createShipper = async (req, res) => {
       username,
       password,
       phone_number,
+      address,
+      email,
       avatar: {
         public_id: mycloud.public_id,
         url: mycloud.secure_url,

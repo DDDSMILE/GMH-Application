@@ -8,7 +8,7 @@ import {
   resetPassword,
   updateProfileShipper,
   getShipper,
-  deleteShipper
+  deleteShipper,
 } from "../controllers/admin.controller.js";
 import { isAuthenticated } from "../middleware/auth.js";
 
@@ -23,16 +23,14 @@ router.route("/forgetpassword").post(forgetPassword);
 router.route("/resetpassword").put(resetPassword);
 
 /* CRUD SHIPPERS */
-router.route("/all_shippers").get(isAuthenticated, getAllShippers);
+router.route("/all_shippers").get(getAllShippers);
 
-router.route("/get_shipper/:id").get(isAuthenticated, getShipper);
+router.route("/get_shipper/:id").get(getShipper);
 
-router.route("/delete_shipper/:id").delete(isAuthenticated, deleteShipper);
+router.route("/delete_shipper/:id").delete(deleteShipper);
 
-router.route("/create_shipper").post(isAuthenticated, createShipper);
+router.route("/create_shipper").post(createShipper);
 
-router
-  .route("/updated_shipper/:id")
-  .post(isAuthenticated, updateProfileShipper);
+router.route("/updated_shipper/:id").post(updateProfileShipper);
 
 export default router;

@@ -3,10 +3,16 @@ import { config } from "dotenv";
 import { connectDatabase } from "./config/database.js";
 import cloudinary from "cloudinary";
 
-import cron from 'node-cron';
+import cron from "node-cron";
 import puppeteer from "puppeteer";
 import { DishesModel } from "./models/dishes.model.js";
-import { drinkKeyWords, foodKeyWords, fruitWords, urls, vegetablesWords } from "./utils/crapeData.js";
+import {
+  drinkKeyWords,
+  foodKeyWords,
+  fruitWords,
+  urls,
+  vegetablesWords,
+} from "./utils/crapeData.js";
 import { SuppliersModel } from "./models/suppliers.model.js";
 
 config({
@@ -60,7 +66,9 @@ const updatedDishes = async () => {
           product.type = "thực phẩm";
         } else if (drinkKeyWords.some((key2) => product.name.includes(key2))) {
           product.type = "đồ uống";
-        } else if (vegetablesWords.some((key3) => product.name.includes(key3))) {
+        } else if (
+          vegetablesWords.some((key3) => product.name.includes(key3))
+        ) {
           product.type = "rau củ";
         } else if (fruitWords.some((key4) => product.name.includes(key4))) {
           product.type = "trái cây";
@@ -124,13 +132,13 @@ const updatedSuppliers = async () => {
 
       const open_time = await page.evaluate(
         () => document.querySelector(".time").innerText
-      )
+      );
 
       suppliers.push({
         name: name_supplier,
         address: address_supplier,
         photo: photo_supplier,
-        open_time: open_time
+        open_time: open_time,
       });
 
       await browser.close();
@@ -145,13 +153,13 @@ const updatedSuppliers = async () => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 cron.schedule("0 1 * * *", () => {
   console.log("Start crape data at 1:00 AM");
   // updatedDishes();
   // updatedSuppliers();
-})
+});
 
 app.listen(process.env.PORT, () => {
   console.log("listening on port " + process.env.PORT);

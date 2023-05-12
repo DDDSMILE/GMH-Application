@@ -45,7 +45,7 @@ const SignInScreen = ({ navigation }) => {
   );
 
   useEffect(() => {
-    formState.name.length > 5 && formState.password.length > 5
+    formState.name.length > 1 && formState.password.length > 5
       ? setDisableState(false)
       : setDisableState(true);
   }, [formState]);

@@ -1,11 +1,20 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import colors from "../../constants/colors";
 import { Display } from "../../utils";
 import { Button } from "react-native-elements";
+import { useEffect, useState } from "react";
+import { Colors } from "../../constants";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem, decreaseItem, increaseItem } from "../../store/order.slice";
 
 const ProductItem = ({ item }) => {
+  const [quantity, setQuantity] = useState(0);
+  const { items, total } = useSelector((state) => state.order);
+  const dispatch = useDispatch();
+  console.log(items);
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container}>
       <View style={styles.image}>
         {item.photo && (
           <Image
@@ -37,23 +46,43 @@ const ProductItem = ({ item }) => {
             currency: "VND",
           })}
         </Text>
-        <Button
-          size="md"
-          buttonStyle={{
-            borderColor: colors.GREEN_TEXT_ONE,
-            borderWidth: 2,
-            width: Display.setWidth(30),
-          }}
-          titleStyle={{
-            fontFamily: "inter_medium",
-            color: colors.GREEN_TEXT_TWO,
-            fontSize: 13,
-          }}
-          title="Thêm vào giỏ"
-          type="outline"
-        />
+
+        {false ? (
+          <View style={styles.box}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => dispatch(decreaseItem({ item: item }))}
+            >
+              <Text style={styles.text}>-</Text>
+            </TouchableOpacity>
+            {/* <Text style={styles.quantity}>{items[0].item.qty}</Text> */}
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => dispatch(increaseItem({ item: item }))}
+            >
+              <Text style={styles.text}>+</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <Button
+            size="md"
+            buttonStyle={{
+              borderColor: colors.GREEN_TEXT_ONE,
+              borderWidth: 2,
+              width: Display.setWidth(30),
+            }}
+            titleStyle={{
+              fontFamily: "inter_medium",
+              color: colors.GREEN_TEXT_TWO,
+              fontSize: 13,
+            }}
+            title="Thêm vào giỏ"
+            type="outline"
+            onPress={() => dispatch(addItem({ item: item }))}
+          />
+        )}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -71,6 +100,28 @@ const styles = StyleSheet.create({
   content: {
     paddingLeft: 10,
     width: Display.setWidth(50),
+  },
+  box: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  button: {
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: Colors.GREEN_TEXT_TWO,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontFamily: "inter_extra_bold",
+    color: "#fff",
+  },
+  quantity: {
+    marginHorizontal: 10,
+    fontFamily: "inter_extra_bold",
+    fontSize: 16,
+    color: Colors.GREEN_TEXT_TWO,
   },
 });
 

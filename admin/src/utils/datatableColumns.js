@@ -54,5 +54,31 @@ export const suppliersColumns = [
     field: "open_time",
     headerName: "Thời gian mở cửa",
     width: 150,
-  }
-]
+  },
+];
+
+export const shippersColumn = [
+  { field: "id", headerName: "Mã số nhân viên", width: 170 },
+  {
+    field: "name",
+    headerName: "Tên nhân viên",
+    width: 350,
+    renderCell: (params) => {
+      return (
+        <div className="cellWithImg">
+          <img
+            className="cellImg"
+            src={params.row.avatar.url}
+            alt="product-img"
+          />
+          {params.row.name}
+        </div>
+      );
+    },
+  },
+  {
+    field: "phone_number",
+    headerName: "Số điện thoại",
+    width: 150,
+  },
+];

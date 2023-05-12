@@ -16,15 +16,24 @@ export const getDishesWithPaginate = async (req, res) => {
     const sortDishes = req.params.sort || "asc";
     const sortParam = sortDishes === "asc" ? { price: 1 } : { price: -1 };
 
+    // Search data
+    let search = undefined;
+    if (req.params.search) {
+      search = decodeURIComponent(req.params.search);
+    }
+
     let dishes = [];
-    if (productType === "all") {
+
+    if ((search === null || search === undefined) && productType === "all") {
       dishes = await DishesModel.find({
         price: { $gte: minPrice, $lte: maxPrice },
       })
         .limit(pageSize)
         .skip(offset)
         .sort(sortParam);
-    } else {
+    }
+
+    if ((search === null || search === undefined) && productType !== "all") {
       dishes = await DishesModel.find({
         type: productType,
         price: { $gte: minPrice, $lte: maxPrice },
@@ -34,11 +43,31 @@ export const getDishesWithPaginate = async (req, res) => {
         .sort(sortParam);
     }
 
-    if (page === 'all') {
+    if (search && productType == "all") {
       dishes = await DishesModel.find({
+        name: { $regex: search, $options: "i" },
         price: { $gte: minPrice, $lte: maxPrice },
       })
+        .limit(pageSize)
+        .skip(offset)
         .sort(sortParam);
+    }
+
+    if (search && productType !== "all") {
+      dishes = await DishesModel.find({
+        name: { $regex: search, $options: "i" },
+        type: productType,
+        price: { $gte: minPrice, $lte: maxPrice },
+      })
+        .limit(pageSize)
+        .skip(offset)
+        .sort(sortParam);
+    }
+
+    if (page === "all") {
+      dishes = await DishesModel.find({
+        price: { $gte: minPrice, $lte: maxPrice },
+      }).sort(sortParam);
     }
 
     res.status(200).json({ success: true, message: "Done", dishes: dishes });

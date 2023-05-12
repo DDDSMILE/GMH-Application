@@ -3,6 +3,7 @@ import HomeScreen from "../../screens/HomeScreen";
 import TypeProduct from "../../screens/TypeProduct";
 import SuggestionScreen from "../../screens/SuggestionScreen";
 import ChatScreen from "../../screens/ChatScreen";
+import SearchScreen from "../../screens/SearchScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -16,6 +17,7 @@ const FoodNavigator = () => {
       <Stack.Screen name="type_product" component={TypeProduct} />
       <Stack.Screen name="suggest_product" component={SuggestionScreen} />
       <Stack.Screen name="chat" component={ChatScreen} />
+      <Stack.Screen name="search" component={SearchScreen} />
     </Stack.Navigator>
   );
 };

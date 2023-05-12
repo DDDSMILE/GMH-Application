@@ -3,6 +3,7 @@ import { BackButton, HeaderPage } from "../../components/Form";
 import { useCallback, useEffect, useState } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 import SuggestionAnswers from "../../assets/data/suggestions";
+import { chatgpt } from "../../services/user";
 
 const ChatScreen = ({ route, navigation }) => {
   const { type } = route.params;
@@ -84,7 +85,37 @@ const ChatScreen = ({ route, navigation }) => {
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
     );
+    const question = messages[0].text;
+    fetchApi({ question });
   }, []);
+
+  const fetchApi = async ({ question }) => {
+    const { data } = await chatgpt({ question });
+    addNewMessage(data);
+  };
+
+  const addNewMessage = (data) => {
+    const value = {
+      _id: Math.random(999999999999),
+      text: data,
+      createdAt: new Date(),
+      user: {
+        _id: 2,
+        name: "GMH",
+        avatar:
+          "https://res.cloudinary.com/du93troxt/image/upload/v1682910574/chatbot_ndm7dj.png",
+      },
+    };
+
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, value)
+    );
+  };
+
+  const onQuickReply = (quickReply) => {
+    const question = quickReply[0].value;
+    fetchApi({ question });
+  };
 
   return (
     <>
@@ -103,6 +134,7 @@ const ChatScreen = ({ route, navigation }) => {
         placeholder="Hôm nay bạn muốn ăn món gì?"
         messages={messages}
         onSend={(messages) => onSend(messages)}
+        onQuickReply={(quickReplies) => onQuickReply(quickReplies)}
         user={{
           _id: 1,
         }}

@@ -266,17 +266,23 @@ export const resetPassword = async (req, res) => {
 /* CHATGPT */
 export const answerChatGPT = async (req, res) => {
   try {
-    const message = req.body.text;
-    // const data = await DishesModel.distinct("name");
+    const message = req.body.question;
 
-    // const lowStr = message.toLowerCase();
-    // const lowArr = data.map((item) => item.toLowerCase());
-    // const result = lowStr
-    //   .split(" ")
-    //   .filter((word) => lowArr.some((item) => item.includes(word)));
+    const data = await DishesModel.distinct("name");
 
-    const answer = await sendChatGPT(message);
-    res.status(201).json({ success: true, result: answer });
+    const answer = await sendChatGPT({ message });
+
+    const lowStr = answer.toLowerCase();
+    const lowArr = data.map((item) => item.toLowerCase());
+    const keywordFilter = lowStr
+      .split(" ")
+      .filter((word) => lowArr.some((item) => item.includes(word)));
+
+    res.status(201).json({
+      success: true,
+      data: answer.replaceAll("\\n", "<br/>"),
+      productFilter: keywordFilter,
+    });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }

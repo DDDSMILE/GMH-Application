@@ -15,7 +15,7 @@ const TypeProduct = ({ route, navigation }) => {
           </Text>
         </View>
       </HeaderPage>
-      <InfinityScroll type={type} />
+      <InfinityScroll typeProduct={type} />
     </View>
   );
 };
