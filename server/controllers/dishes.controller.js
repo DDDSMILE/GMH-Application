@@ -5,7 +5,7 @@ export const getDishesWithPaginate = async (req, res) => {
     // Get data from database according to page value
     const page = req.params.page || 1;
     const productType = decodeURIComponent(req.params.type);
-    const pageSize = 10;
+    const pageSize = 1;
     const offset = (page - 1) * pageSize;
 
     // Get data from database according to (min,max) price
