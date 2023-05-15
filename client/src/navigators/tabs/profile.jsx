@@ -1,5 +1,11 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeScreen } from "../../screens/profile";
+import {
+  Addresses,
+  HomeScreen,
+  ManageAddress,
+  ManageInformationScreen,
+  ManagePasswordScreen,
+} from "../../screens/profile";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,6 +18,10 @@ const ProfileNavigator = () => {
       }}
     >
       <Stack.Screen name="home" component={HomeScreen} />
+      <Stack.Screen name="addresses" component={Addresses} />
+      <Stack.Screen name="manage_address" component={ManageAddress} />
+      <Stack.Screen name="information" component={ManageInformationScreen} />
+      <Stack.Screen name="password" component={ManagePasswordScreen} />
     </Stack.Navigator>
   );
 };

@@ -1,6 +1,15 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Images } from "../../../constants";
 import { TypeItem, InfinityScroll, SearchBar } from "../../../components/food";
+import { useSelector } from "react-redux";
+import { Fontisto } from "@expo/vector-icons";
+import colors from "../../../constants/colors";
 
 const typeItems = [
   {
@@ -31,6 +40,12 @@ const typeItems = [
 ];
 
 const HomeScreen = ({ navigation }) => {
+  const { items: orderItems, total: orderTotal } = useSelector(
+    (state) => state.order
+  );
+
+  const handlePlaceOrder = () => navigation.navigate("order");
+
   return (
     <View
       style={{
@@ -57,6 +72,33 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <Text style={styles.title}>Sản phẩm nổi bật</Text>
       <InfinityScroll typeProduct={"all"} navigation={navigation} />
+      {orderItems.length > 0 && (
+        <View style={styles.placeOrderContainer}>
+          <View style={styles.placeOrderPrice}>
+            <Fontisto
+              name="shopping-bag"
+              size={18}
+              color={colors.GREEN_LOGO_TWO}
+            />
+            <Text style={styles.placeOrderPriceText}>
+              {orderTotal.toLocaleString("vi", {
+                style: "currency",
+                currency: "VND",
+              })}
+            </Text>
+          </View>
+          <TouchableOpacity onPress={handlePlaceOrder}>
+            <View style={styles.placeOrderCTA}>
+              <Text style={styles.placeOrderCTAText}>Xem giỏ hàng</Text>
+              <View style={styles.placeOrderCTAQty}>
+                <Text style={styles.placeOrderCTAQtyText}>
+                  {orderItems.length}
+                </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };
@@ -66,6 +108,66 @@ const styles = StyleSheet.create({
     fontFamily: "inter_bold",
     fontSize: 18,
     paddingBottom: 20,
+  },
+  placeOrderContainer: {
+    position: "absolute",
+    bottom: 20,
+    left: 10,
+    right: 10,
+    backgroundColor: "#fff",
+    padding: 12,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4.59,
+    elevation: 5,
+    borderRadius: 10,
+  },
+  placeOrderPrice: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginRight: 6,
+  },
+  placeOrderPriceText: {
+    fontSize: 14,
+    fontFamily: "inter_semi_bold",
+    color: "#000",
+    marginLeft: 12,
+  },
+  placeOrderCTA: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.GREEN_LOGO_TWO,
+    paddingVertical: 12,
+    paddingHorizontal: 40,
+    borderRadius: 10,
+  },
+  placeOrderCTAText: {
+    fontSize: 14,
+    fontFamily: "inter_semi_bold",
+    color: "#fff",
+    marginRight: 12,
+  },
+  placeOrderCTAQty: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.GREEN_LOGO_ONE,
+    padding: 1,
+    width: 20,
+    height: 20,
+    borderRadius: 4,
+  },
+  placeOrderCTAQtyText: {
+    fontSize: 12,
+    fontFamily: "inter_semi_bold",
+    color: "#fff",
   },
 });
 

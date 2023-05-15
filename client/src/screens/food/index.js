@@ -8,3 +8,5 @@ export { default as SearchScreen } from "./search";
 export { default as SuggestionScreen } from "./suggestion";
 export { default as TypeProduct } from "./typeproduct";
 export { default as DetailScreen } from "./detail";
+export { default as OrderScreen } from "./order";
+export { default as CheckoutScreen } from "./checkout";

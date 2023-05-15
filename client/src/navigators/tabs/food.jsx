@@ -6,6 +6,8 @@ import {
   ChatScreen,
   SearchScreen,
   DetailScreen,
+  OrderScreen,
+  CheckoutScreen,
 } from "../../screens/food";
 
 const Stack = createNativeStackNavigator();
@@ -22,6 +24,8 @@ const FoodNavigator = () => {
       <Stack.Screen name="chat" component={ChatScreen} />
       <Stack.Screen name="search" component={SearchScreen} />
       <Stack.Screen name="detail" component={DetailScreen} />
+      <Stack.Screen name="order" component={OrderScreen} />
+      <Stack.Screen name="checkout" component={CheckoutScreen} />
     </Stack.Navigator>
   );
 };

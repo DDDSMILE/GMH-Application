@@ -4,15 +4,6 @@ import { ShipperModel } from "../models/shipper.model.js";
 import { AdminModel } from "../models/admin.model.js";
 import { sendToken } from "../utils/sendToken.js";
 import { sendMail } from "../utils/sendMail.js";
-import { SuppliersModel } from "../models/suppliers.model.js";
-import { DishesModel } from "../models/dishes.model.js";
-import {
-  drinkKeyWords,
-  foodKeyWords,
-  fruitWords,
-  urls,
-  vegetablesWords,
-} from "../utils/crapeData.js";
 
 /* LOGIN */
 export const login = async (req, res) => {

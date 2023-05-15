@@ -272,16 +272,60 @@ export const answerChatGPT = async (req, res) => {
 
     const answer = await sendChatGPT({ message });
 
-    const lowStr = answer.toLowerCase();
-    const lowArr = data.map((item) => item.toLowerCase());
-    const keywordFilter = lowStr
-      .split(" ")
-      .filter((word) => lowArr.some((item) => item.includes(word)));
+    // const lowStr = answer.toLowerCase();
+    // const lowArr = data.map((item) => item.toLowerCase());
+    // const keywordFilter = lowStr
+    //   .split(" ")
+    //   .filter((word) => lowArr.some((item) => item.includes(word)));
+
+    // Sử dụng split() để tách chuỗi thành mảng các từ
+    const string = answer.replace(/\n/g, "");
+    const wordsA = string.split(" ");
+
+    // Chia nhỏ mảng thành các phần tử có 2 từ
+    const arrayA = wordsA.reduce((result, word, index) => {
+      if (index % 2 === 0) {
+        result.push(wordsA.slice(index, index + 2).join(" "));
+      }
+      return result;
+    }, []);
+
+    const matchingKeywords = arrayA.filter((keywordA) => {
+      const wordsA = keywordA.split(" ");
+      return data.some((keywordB) => {
+        const wordsB = keywordB.split(" ");
+        const commonWords = wordsA.filter((wordA) => {
+          return wordsB.some((wordB) => {
+            return wordA.toLowerCase() === wordB.toLowerCase();
+          });
+        });
+        return commonWords.length >= 2;
+      });
+    });
+
+    const results = [];
+    const searchKeywords = async () => {
+      for (let k in matchingKeywords) {
+        try {
+          const result = await DishesModel.findOne({
+            name: { $regex: k, $options: "i" },
+          }).exec();
+          if (result) {
+            results.push(result);
+          }
+        } catch (error) {
+          throw new Error();
+        }
+      }
+    };
+
+    await searchKeywords();
 
     res.status(201).json({
       success: true,
-      data: answer.replaceAll("\\n", "<br/>"),
-      productFilter: keywordFilter,
+      data: string,
+      matchingKeywords: matchingKeywords,
+      productFilter: results,
     });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
