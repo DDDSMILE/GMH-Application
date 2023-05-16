@@ -9,7 +9,7 @@ import fs from "fs";
 /* REGISTER */
 export const register = async (req, res) => {
   try {
-    const { name, phone_number, password } = req.body;
+    const { name, phone_number, address, password } = req.body;
 
     // const avatar = req.files.avatar.tempFilePath;
 
@@ -21,21 +21,12 @@ export const register = async (req, res) => {
     }
     const otp = Math.floor(Math.random() * 10000);
 
-    // const mycloud = await cloudinary.v2.uploader.upload(avatar, {
-    //   folder: "users",
-    // });
-
-    // fs.rmSync("./tmp", { recursive: true });
-
     // expiry otp = 5*60*1000 (ms)
     user = await UserModel.create({
       name,
       phone_number,
       password,
-      // avatar: {
-      //   public_id: mycloud.public_id,
-      //   url: mycloud.secure_url,
-      // },
+      address,
       otp,
       otp_expiry: new Date(Date.now() + process.env.OTP_EXPIRY * 60 * 1000),
     });
@@ -48,7 +39,6 @@ export const register = async (req, res) => {
       201,
       "OTP sent to your phone number, please verify your account"
     );
-    res.status(200).json({ message: "ok" });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }
@@ -58,18 +48,19 @@ export const register = async (req, res) => {
 export const verify = async (req, res) => {
   try {
     const otp = Number(req.body.otp);
-
-    const user = await UserModel.findById(req.user._id);
+    console.log(otp);
+    const user = await UserModel.findById(req.body.user._id);
+    console.log(user);
 
     if (user.otp !== otp || user.otp_expiry < Date.now()) {
       return res
         .status(400)
         .json({ success: false, message: "Invalid OTP or has been expired" });
+    } else {
+      user.verified = true;
+      user.otp = null;
+      user.otp_expiry = null;
     }
-
-    user.verified = true;
-    user.otp = null;
-    user.otp_expiry = null;
 
     await user.save();
 

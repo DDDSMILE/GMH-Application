@@ -5,6 +5,7 @@ import colors from "../../../constants/colors";
 import { Display } from "../../../utils";
 import * as Location from "expo-location";
 import { useEffect, useState } from "react";
+import { getData, storeData } from "../../../utils/asyncStorage";
 
 const RegisterLocation = ({ navigation }) => {
   const [location, setLocation] = useState("");
@@ -47,9 +48,8 @@ const RegisterLocation = ({ navigation }) => {
     setAddress(address);
   };
 
-  console.log(address);
   const handleRegister = async () => {
-    console.log(address);
+    storeData("register_address", address);
   };
 
   return (
@@ -103,9 +103,9 @@ const RegisterLocation = ({ navigation }) => {
           disable={isDisableState}
           onPress={() => {
             handleRegister();
-            navigation.navigate("done");
+            navigation.navigate("inputphonenumber");
           }}
-          text={"Hoàn thành"}
+          text={"Tiếp theo"}
         />
       </View>
     </View>

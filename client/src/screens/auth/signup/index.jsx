@@ -2,13 +2,11 @@ import { View, Text, StyleSheet } from "react-native";
 import { ButtonForm, InputForm, PageForm } from "../../../components/form";
 import Feather from "react-native-vector-icons/Feather";
 import { Colors } from "../../../constants";
-import { useCallback, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useFocusEffect } from "@react-navigation/native";
-import { register } from "../../../store/auth.slice";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { storeData } from "../../../utils/asyncStorage";
 
 const SignUpScreen = ({ navigation }) => {
-  const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
   const [isShowPassword, setIsShowPassword] = useState();
 
@@ -18,7 +16,6 @@ const SignUpScreen = ({ navigation }) => {
   });
   const [formError, setFormError] = useState("");
   const [isDisableState, setDisableState] = useState(true);
-  const [isCorrectPassword, setCorrectPassword] = useState(false);
 
   useEffect(() => {
     const { name, password } = formState;
@@ -62,39 +59,22 @@ const SignUpScreen = ({ navigation }) => {
 
     if (password.length > 0) {
       if (!message) {
-        setCorrectPassword(true);
         setFormError("Mật khẩu của bạn hợp lệ và mạnh");
       } else {
         setFormError(message);
       }
     }
+    formState.name.length > 3 && !Boolean(checkPasswordValidity(password))
+      ? setDisableState(false)
+      : setDisableState(true);
   }, [formState]);
 
   const handleRegister = () => {
     const { name, password } = formState;
-    console.log(isCorrectPassword);
-    if (isCorrectPassword) {
-      navigation.navigate("inputphonenumber");
-      console.log(formState);
-      // dispatch(register({ name, password }));
-    }
+    storeData("register_name", name);
+    storeData("register_password", password);
+    navigation.navigate("registerlocation");
   };
-
-  useFocusEffect(
-    useCallback(() => {
-      setFormError("");
-      setFormState({
-        name: "",
-        password: "",
-      });
-    }, [])
-  );
-
-  useEffect(() => {
-    formState.name.length > 5 && formState.password.length > 5
-      ? setDisableState(false)
-      : setDisableState(true);
-  }, [formState]);
 
   return (
     <PageForm>

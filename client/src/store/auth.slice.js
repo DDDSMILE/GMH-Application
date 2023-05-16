@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { deleteData, getData, storeData } from "../utils/asyncStorage";
 import {
-  getUser,
   login as loginService,
   register as registerService,
 } from "../services/auth";
@@ -40,6 +39,18 @@ const authSlice = createSlice({
         state.error = action.payload;
         state.loading = false;
       }),
+      builder.addCase(register.pending, (state) => {
+        state.loading = true;
+      }),
+      builder.addCase(register.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.loading = false;
+        state.error = null;
+      }),
+      builder.addCase(register.rejected, (state, action) => {
+        state.error = action.payload;
+        state.loading = false;
+      }),
       builder.addCase(loadUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
       });
@@ -61,9 +72,14 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
   "auth/register",
-  async ({ name, password }, thunkAPI) => {
+  async ({ name, password, address, phone_number }, thunkAPI) => {
     try {
-      const user = await registerService({ name, password });
+      const user = await registerService({
+        name,
+        password,
+        address,
+        phone_number,
+      });
       storeData("user", user);
       return { user };
     } catch (error) {

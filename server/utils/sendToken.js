@@ -13,8 +13,6 @@ export const sendToken = (res, user, statusCode, message) => {
     address: user.address,
     phone_number: user.phone_number,
     email: user.email,
-    lat: user.lat,
-    long: user.long,
     orders: user.orders,
     verified: user.verified,
   };
@@ -22,5 +20,5 @@ export const sendToken = (res, user, statusCode, message) => {
   res
     .status(statusCode)
     .cookie("token", token, options)
-    .json({ success: true, message, user: userData });
+    .json({ success: true, message, data: userData });
 };

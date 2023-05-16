@@ -16,10 +16,21 @@ import colors from "../../../constants/colors";
 import { Colors } from "react-native/Libraries/NewAppScreen";
 import { Display } from "../../../utils";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { getData } from "../../../utils/asyncStorage";
+import { useDispatch } from "react-redux";
+import { register } from "../../../store/auth.slice";
 
 const getDropdownStyle = (y) => ({ ...styles.countryDropdown, top: y + 60 });
 
 const InputPhoneScreen = ({ navigation }) => {
+  const dispatch = useDispatch();
+  const [formState, setFormState] = useState({
+    name: "",
+    password: "",
+    address: "",
+    phone_number: "",
+  });
+
   const [selectedCountry, setSelectedCountry] = useState(
     countrycode.find((country) => country.name === "Viet Nam")
   );
@@ -30,28 +41,47 @@ const InputPhoneScreen = ({ navigation }) => {
 
   const [isDisableState, setDisableState] = useState(true);
   const [formError, setFormError] = useState("");
-  const [isCorrectPhoneNumber, setIsCorrectPhoneNumber] = useState(false);
+
   useEffect(() => {
     const checkPhoneNumberValidity = (value) => {
       const isPhoneNumber = /(84|0[3|5|7|8|9])+([0-9]{8})\b/g;
       if (!isPhoneNumber.test(value)) {
-        return "Hãy điền số điện thoại của bạn";
+        return "Số điện thoại không hợp lệ";
       }
     };
+
     const message = checkPhoneNumberValidity(phoneNumber);
-    if (!message) {
-      setIsCorrectPhoneNumber(true);
-      setFormError("");
-    } else {
-      setFormError(message);
+    if (phoneNumber > 0) {
+      if (!message) {
+        setFormError("Số điện thoại hợp lệ");
+      } else {
+        setFormError(message);
+      }
     }
-    phoneNumber.length > 11 ? setDisableState(false) : setDisableState(true);
+
+    !Boolean(checkPhoneNumberValidity(phoneNumber))
+      ? setDisableState(false)
+      : setDisableState(true);
   }, [phoneNumber]);
 
-  const handleRegister = async () => {
-    if (isCorrectPhoneNumber) {
-      console.log(phoneNumber);
-    }
+  useEffect(() => {
+    const fetchLocalStorage = async () => {
+      const name = await getData("register_name");
+      const password = await getData("register_password");
+      const address = await getData("register_address");
+      setFormState({
+        name: name,
+        password: password,
+        address: address,
+        phone_number: phoneNumber,
+      });
+    };
+    fetchLocalStorage();
+  }, [phoneNumber]);
+
+  const handleRegister = () => {
+    dispatch(register(formState));
+    navigation.navigate("otp");
   };
 
   const closeDropdown = (pageX, pageY) => {
@@ -145,10 +175,7 @@ const InputPhoneScreen = ({ navigation }) => {
       <View style={{ alignItems: "center", justifyContent: "center" }}>
         <ButtonForm
           disable={isDisableState}
-          onPress={() => {
-            handleRegister();
-            navigation.navigate("otp");
-          }}
+          onPress={handleRegister}
           text={"Tiếp theo"}
           width={80}
         />

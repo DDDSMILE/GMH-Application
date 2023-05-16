@@ -2,6 +2,8 @@ import { View, Text, TextInput, StyleSheet } from "react-native";
 import { BackButton, ButtonForm, HeaderPage } from "../../../components/form";
 import { useEffect, useRef, useState } from "react";
 import colors from "../../../constants/colors";
+import { verifyOtp } from "../../../services/auth";
+import { getData } from "../../../utils/asyncStorage";
 
 const OTPScreen = ({ navigation }) => {
   const firstInput = useRef();
@@ -10,6 +12,7 @@ const OTPScreen = ({ navigation }) => {
   const fourthInput = useRef();
   const [otp, setOtp] = useState({ 1: "", 2: "", 3: "", 4: "" });
   const [verityOtp, setVerityOtp] = useState("");
+  const [user, setUser] = useState({});
 
   const [isDisableState, setDisableState] = useState(true);
 
@@ -20,8 +23,16 @@ const OTPScreen = ({ navigation }) => {
     setVerityOtp(vOtp);
   }, [otp]);
 
+  useEffect(() => {
+    const fetchLocalStorage = async () => {
+      const user = await getData("user");
+      setUser(user);
+    };
+    fetchLocalStorage();
+  }, []);
+
   const handleRegister = () => {
-    console.log(verityOtp);
+    verifyOtp(verityOtp, user);
   };
 
   return (
@@ -92,10 +103,7 @@ const OTPScreen = ({ navigation }) => {
         <View style={{ marginTop: 50 }}>
           <ButtonForm
             disable={isDisableState}
-            onPress={() => {
-              handleRegister();
-              navigation.navigate("registerlocation");
-            }}
+            onPress={handleRegister}
             width={80}
             text={"Tiếp theo"}
           />

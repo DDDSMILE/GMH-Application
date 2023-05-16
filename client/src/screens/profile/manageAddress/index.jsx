@@ -8,9 +8,11 @@ import {
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { BackButton, HeaderPage } from "../../../components/form";
+import { useSelector } from "react-redux";
 
 const ManageAddress = ({ navigation }) => {
-  const address = "Sơn Trà 2832, Đà Nẵng";
+  const auth = useSelector((state) => state.auth);
+  const address = auth.user.user.address;
 
   return (
     <View style={styles.container}>
