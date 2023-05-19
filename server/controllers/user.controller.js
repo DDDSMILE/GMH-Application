@@ -1,5 +1,6 @@
 import { DishesModel } from "../models/dishes.model.js";
 import { UserModel } from "../models/user.model.js";
+import { commonFoods } from "../utils/constants.js";
 import { sendChatGPT } from "../utils/sendChatGPT.js";
 import { sendSMS } from "../utils/sendSMS.js";
 import { sendToken } from "../utils/sendToken.js";
@@ -259,62 +260,34 @@ export const answerChatGPT = async (req, res) => {
   try {
     const message = req.body.question;
 
-    const data = await DishesModel.distinct("name");
+    const answer = await sendChatGPT(message);
 
-    const answer = await sendChatGPT({ message });
-
-    // const lowStr = answer.toLowerCase();
-    // const lowArr = data.map((item) => item.toLowerCase());
-    // const keywordFilter = lowStr
-    //   .split(" ")
-    //   .filter((word) => lowArr.some((item) => item.includes(word)));
-
-    // Sử dụng split() để tách chuỗi thành mảng các từ
-    const string = answer.replace(/\n/g, "");
-    const wordsA = string.split(" ");
-
-    // Chia nhỏ mảng thành các phần tử có 2 từ
-    const arrayA = wordsA.reduce((result, word, index) => {
-      if (index % 2 === 0) {
-        result.push(wordsA.slice(index, index + 2).join(" "));
-      }
-      return result;
-    }, []);
-
-    const matchingKeywords = arrayA.filter((keywordA) => {
-      const wordsA = keywordA.split(" ");
-      return data.some((keywordB) => {
-        const wordsB = keywordB.split(" ");
-        const commonWords = wordsA.filter((wordA) => {
-          return wordsB.some((wordB) => {
-            return wordA.toLowerCase() === wordB.toLowerCase();
-          });
-        });
-        return commonWords.length >= 2;
-      });
+    const matchingKeywords = commonFoods.filter((food) => {
+      const regex = new RegExp(
+        food.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&"),
+        "i"
+      );
+      return answer.match(regex);
     });
 
     const results = [];
-    const searchKeywords = async () => {
-      for (let k in matchingKeywords) {
-        try {
-          const result = await DishesModel.findOne({
-            name: { $regex: k, $options: "i" },
-          }).exec();
-          if (result) {
-            results.push(result);
-          }
-        } catch (error) {
-          throw new Error();
-        }
-      }
-    };
 
-    await searchKeywords();
+    for (let k of matchingKeywords) {
+      try {
+        const result = await DishesModel.findOne({
+          name: { $regex: k, $options: "i" },
+        }).exec();
+        if (result) {
+          results.push(result);
+        }
+      } catch (error) {
+        throw new Error();
+      }
+    }
 
     res.status(201).json({
       success: true,
-      data: string,
+      data: answer,
       matchingKeywords: matchingKeywords,
       productFilter: results,
     });
