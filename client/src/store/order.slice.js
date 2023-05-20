@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   total: 0,
   items: [],
+  addresses: [],
 };
 
 const isItemInOrder = (items, item) =>
@@ -23,6 +24,7 @@ const orderSlice = createSlice({
       } else {
         state.items.push({ item: action.payload.item, qty: 1 });
       }
+      state.addresses.push(action.payload.address);
       state.total = state.total + action.payload.item.price;
     },
     removeItem: (state, action) => {
@@ -32,6 +34,10 @@ const orderSlice = createSlice({
 
       state.items = state.items.filter(
         (item) => item.item.name !== action.payload.item.name
+      );
+
+      state.addresses = state.addresses.filter(
+        (item) => item.name !== action.payload.name
       );
 
       state.total = state.total - itemToRemove.item.price * itemToRemove.qty;

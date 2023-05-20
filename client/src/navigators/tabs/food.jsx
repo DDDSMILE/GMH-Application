@@ -8,6 +8,8 @@ import {
   DetailScreen,
   OrderScreen,
   CheckoutScreen,
+  PaymentScreen,
+  AddressesScreen,
 } from "../../screens/food";
 
 const Stack = createNativeStackNavigator();
@@ -26,6 +28,8 @@ const FoodNavigator = () => {
       <Stack.Screen name="detail" component={DetailScreen} />
       <Stack.Screen name="order" component={OrderScreen} />
       <Stack.Screen name="checkout" component={CheckoutScreen} />
+      <Stack.Screen name="payment" component={PaymentScreen} />
+      <Stack.Screen name="addresses" component={AddressesScreen} />
     </Stack.Navigator>
   );
 };

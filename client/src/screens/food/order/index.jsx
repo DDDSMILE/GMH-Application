@@ -18,7 +18,7 @@ import { OrderResumeCTA } from "../../../components/food";
 import { BackButton, HeaderPage } from "../../../components/form";
 
 const OrderScreen = ({ navigation }) => {
-  const { items, total } = useSelector((state) => state.order);
+  const { items, total, addresses } = useSelector((state) => state.order);
 
   useEffect(() => {
     if (items.length === 0) navigation.goBack();
@@ -46,7 +46,7 @@ const OrderScreen = ({ navigation }) => {
       />
 
       <OrderResumeCTA
-        text="Số lượng sản phẩm"
+        text="Sản phẩm đã thêm"
         total={total}
         navigateTo="checkout"
         itemsLength={items.length}
@@ -65,7 +65,6 @@ const OrderItem = ({ item }) => {
         resizeMode="cover"
         source={{ uri: item.item.photo }}
       />
-
       <View style={styles.orderItemData}>
         <View style={styles.orderItemDataHeading}>
           <Text style={styles.orderItemDataHeadingText}>
@@ -81,7 +80,13 @@ const OrderItem = ({ item }) => {
         <View style={styles.orderItemDataActions}>
           <View style={styles.orderItemIncDec}>
             <TouchableOpacity
-              onPress={() => dispatch(decreaseItem({ item: item.item }))}
+              onPress={() =>
+                dispatch(
+                  decreaseItem({
+                    item: item.item,
+                  })
+                )
+              }
             >
               <View style={styles.orderItemDecBtn}>
                 <Text style={styles.orderItemDecText}>-</Text>
@@ -97,7 +102,14 @@ const OrderItem = ({ item }) => {
             </TouchableOpacity>
           </View>
           <TouchableOpacity
-            onPress={() => dispatch(removeItem({ item: item.item }))}
+            onPress={() =>
+              dispatch(
+                removeItem({
+                  item: item.item,
+                  name: item.item.name,
+                })
+              )
+            }
           >
             <MaterialCommunityIcons
               name="trash-can-outline"

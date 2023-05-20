@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeScreen } from "../../screens/order";
+import { HomeScreen, DetailScreen } from "../../screens/orders";
 
 const Stack = createNativeStackNavigator();
 
@@ -12,6 +12,7 @@ const OrdersNavigator = () => {
       }}
     >
       <Stack.Screen name="home" component={HomeScreen} />
+      <Stack.Screen name="detail" component={DetailScreen} />
     </Stack.Navigator>
   );
 };

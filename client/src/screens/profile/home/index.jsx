@@ -13,7 +13,7 @@ import { useState } from "react";
 
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth.user);
+  const { user } = useSelector((state) => state.auth);
   const [notifications, setNotifications] = useState(true);
 
   const handleLogout = () => {

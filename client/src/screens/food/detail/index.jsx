@@ -19,7 +19,15 @@ const DetailScreen = ({ route, navigation }) => {
   }, []);
 
   const handleAddToOrder = () => {
-    dispatch(addItem({ item }));
+    const { address } = restaurant;
+    const createOrder = {
+      item: item,
+      address: {
+        name: item.name,
+        address: address,
+      },
+    };
+    dispatch(addItem(createOrder));
     navigation.goBack();
   };
 

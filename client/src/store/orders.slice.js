@@ -11,9 +11,8 @@ export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
   async ({ userId }, thunkAPI) => {
     try {
-      const orders = await getOrdersFromUser(userId);
-      // const sortedOrders = orders.sort((a, b) => new Date(b.date) - new Date(a.date))
-      return orders;
+      const { data } = await getOrdersFromUser(userId);
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

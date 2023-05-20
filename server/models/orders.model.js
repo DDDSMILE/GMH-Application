@@ -15,7 +15,15 @@ const OrdersSchema = new mongoose.Schema(
       type: Number,
     },
     addresses: {
-      type: Array,
+      user_address: {
+        type: String,
+      },
+      shipper_address: {
+        type: String,
+      },
+      suppliers_address: {
+        type: Array,
+      },
     },
     status: {
       type: String,

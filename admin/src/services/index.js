@@ -40,7 +40,6 @@ export const useGetAllShipper = () => {
   useEffect(() => {
     const fetchShippers = async () => {
       const { data } = await gmh.getAllShippers();
-      console.log(data);
       let shipper = [];
       shipper = data.map((d) => ({
         id: d._id,

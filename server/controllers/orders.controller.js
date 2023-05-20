@@ -19,7 +19,9 @@ export const addOrders = async (req, res) => {
 export const getOrdersByUserId = async (req, res) => {
   try {
     const userId = req.params.userId;
-    const orders = await OrdersModel.find({ userId: userId });
+    const orders = await OrdersModel.find({ userId: userId }).sort({
+      date: -1,
+    });
     res.status(200).json({ success: true, data: orders });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });

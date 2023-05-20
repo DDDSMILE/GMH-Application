@@ -1,61 +1,70 @@
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { OrderResumeCTA } from "../../../components/food";
 import { BackButton, HeaderPage } from "../../../components/form";
-import { useSelector } from "react-redux";
 
-const ManageAddress = ({ navigation }) => {
+const AddressesScreen = ({ navigation }) => {
   const { address } = useSelector((state) => state.auth.user);
-
+  const { total, items } = useSelector((state) => state.order);
   return (
     <View style={styles.container}>
       <HeaderPage>
         <BackButton onPress={() => navigation.goBack()} />
         <View style={{ alignItems: "center", marginTop: 45 }}>
           <Text style={{ fontSize: 18, fontFamily: "inter_medium" }}>
-            Địa chỉ giao hàng
+            Thông tin sản phẩm
           </Text>
         </View>
       </HeaderPage>
 
-      <ScrollView>
+      <View>
         <View>
-          <View>
-            <View style={styles.addressItem}>
-              <View style={styles.addressData}>
-                <View style={styles.addressDataTop}>
-                  <Text style={styles.addressDataTopTitle}>Địa chỉ đã lưu</Text>
-                </View>
-                <Text style={styles.addressDataStreet}>{address}</Text>
+          <View style={styles.addressItem}>
+            <View style={styles.addressData}>
+              <View style={styles.addressDataTop}>
+                <Text style={styles.addressDataTopTitle}>Địa chỉ đã lưu</Text>
               </View>
-
-              <MaterialCommunityIcons
-                name="dots-vertical"
-                size={24}
-                color="#000"
-              />
+              <Text style={styles.addressDataStreet}>{address}</Text>
             </View>
+
+            <MaterialCommunityIcons
+              name="dots-vertical"
+              size={24}
+              color="#000"
+            />
           </View>
-
-          <View style={styles.separatorBar}></View>
-
-          <TouchableOpacity onPress={() => navigation.navigate("addresses")}>
-            <View style={styles.addAddressBtn}>
-              <Text style={styles.addAddressBtnIcon}>+</Text>
-              <Text style={styles.addAddressBtnText}>Thay đổi địa chỉ</Text>
-            </View>
-          </TouchableOpacity>
         </View>
-      </ScrollView>
+
+        <View style={styles.separatorBar}></View>
+
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("profile", { screen: "addresses" })
+          }
+        >
+          <View style={styles.addAddressBtn}>
+            <Text style={styles.addAddressBtnIcon}>+</Text>
+            <Text style={styles.addAddressBtnText}>Thay đổi địa chỉ</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
+
+      <OrderResumeCTA
+        text="Sản phẩm đã thêm"
+        total={total}
+        navigateTo="checkout"
+        itemsLength={items.length}
+      />
     </View>
   );
 };
+
+export default AddressesScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -93,7 +102,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: "inter_medium",
     color: "#000",
-    maxWidth: 280,
   },
   separatorBar: {
     width: "100%",
@@ -125,5 +133,3 @@ const styles = StyleSheet.create({
     fontFamily: "inter_medium",
   },
 });
-
-export default ManageAddress;

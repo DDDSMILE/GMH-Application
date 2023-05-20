@@ -10,3 +10,5 @@ export { default as TypeProduct } from "./typeproduct";
 export { default as DetailScreen } from "./detail";
 export { default as OrderScreen } from "./order";
 export { default as CheckoutScreen } from "./checkout";
+export { default as PaymentScreen } from "./payment";
+export { default as AddressesScreen } from "./addresses";

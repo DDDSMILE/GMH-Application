@@ -11,7 +11,7 @@ const AppNavigator = () => {
 
   useEffect(() => {
     dispatch(loadUser());
-  }, []);
+  }, [user]);
 
   return (
     <NavigationContainer>
