@@ -13,7 +13,6 @@ const ChatScreen = ({ route, navigation }) => {
   const [messages, setMessages] = useState([]);
   const dispatch = useDispatch();
   const { total, items } = useSelector((state) => state.order);
-  console.log(items);
 
   const { question, answer } = SuggestionAnswers.find(
     (item) => item.name === type
@@ -105,10 +104,12 @@ const ChatScreen = ({ route, navigation }) => {
           address: p.address.address,
         },
       };
-      console.log(createOrder);
       dispatch(addItem(createOrder));
     }
-    addNewMessage(answer);
+
+    setTimeout(() => {
+      addNewMessage(answer);
+    }, 1000);
   };
 
   const addNewMessage = (data) => {

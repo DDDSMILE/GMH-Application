@@ -27,6 +27,8 @@ const SearchBar = ({ navigation }) => {
         placeholder="Tìm kiếm sản phẩm..."
         keyboardType="default"
         width={"80%"}
+        autoCorrect={false}
+        autoCapitalize="none"
       />
     </View>
   );

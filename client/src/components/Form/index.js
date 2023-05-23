@@ -93,6 +93,8 @@ const InputForm = ({
           secureTextEntry={isShowPassword ? false : true}
           onChangeText={onChangeText}
           value={value}
+          autoCorrect={false}
+          autoCapitalize="none"
         />
       ) : (
         <TextInput
@@ -101,6 +103,8 @@ const InputForm = ({
           style={{ flex: 1, paddingVertical: 0 }}
           onChangeText={onChangeText}
           value={value}
+          autoCorrect={false}
+          autoCapitalize="none"
         />
       )}
       {lastIcon}
