@@ -4,6 +4,7 @@ import { commonFoods } from "../utils/constants.js";
 import { sendChatGPT } from "../utils/sendChatGPT.js";
 import { sendSMS } from "../utils/sendSMS.js";
 import { sendToken } from "../utils/sendToken.js";
+import { SuppliersModel } from "../models/suppliers.model.js";
 import cloudinary from "cloudinary";
 import fs from "fs";
 
@@ -278,18 +279,27 @@ export const answerChatGPT = async (req, res) => {
           name: { $regex: k, $options: "i" },
         }).exec();
         if (result) {
-          results.push(result);
+          const { name, address } = await SuppliersModel.findOne({
+            name: { $regex: result.name_supplier, $options: "i" },
+          }).exec();
+          const createOrder = {
+            item: result,
+            address: {
+              name: name,
+              address: address,
+            },
+          };
+          results.push(createOrder);
         }
       } catch (error) {
-        throw new Error();
+        console.log(error);
       }
     }
 
     res.status(201).json({
       success: true,
-      data: answer,
-      matchingKeywords: matchingKeywords,
-      productFilter: results,
+      answer: answer,
+      products: results,
     });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });

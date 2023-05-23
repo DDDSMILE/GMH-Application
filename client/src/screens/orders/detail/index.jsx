@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { BackButton, HeaderPage } from "../../../components/form";
+import { VNDCurrencyFormatting } from "../../../utils";
 
 const DetailScreen = ({ navigation, route }) => {
   const { order } = route.params;
@@ -59,10 +60,7 @@ const DetailScreen = ({ navigation, route }) => {
               <View style={styles.paymentRight}>
                 <Text style={styles.paymentRightText}>Tổng tiền</Text>
                 <Text style={styles.paymentRightFee}>
-                  {order.total.toLocaleString("vi", {
-                    style: "currency",
-                    currency: "VND",
-                  })}
+                  {VNDCurrencyFormatting(order.total)}
                 </Text>
                 <TouchableOpacity
                   onPress={() => navigation.navigate("payment")}

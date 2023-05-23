@@ -1,6 +1,6 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import colors from "../../../constants/colors";
-import { Display } from "../../../utils";
+import { Display, VNDCurrencyFormatting } from "../../../utils";
 import { Button } from "react-native-elements";
 import { Colors } from "../../../constants";
 
@@ -33,10 +33,7 @@ const ProductItem = ({ navigation, item }) => {
             paddingBottom: 10,
           }}
         >
-          {item.price.toLocaleString("vi", {
-            style: "currency",
-            currency: "VND",
-          })}
+          {VNDCurrencyFormatting(item.price)}
         </Text>
 
         <Button

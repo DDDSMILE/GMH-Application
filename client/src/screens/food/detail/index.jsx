@@ -4,6 +4,7 @@ import { getSupplier } from "../../../services/suppliers";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../store/order.slice";
+import { VNDCurrencyFormatting } from "../../../utils";
 
 const DetailScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
@@ -54,12 +55,7 @@ const DetailScreen = ({ route, navigation }) => {
           <Text>{item.type}</Text>
           <Text>{item.name}</Text>
           <Text>{item.name_supplier}</Text>
-          <Text>
-            {item.price.toLocaleString("vi", {
-              style: "currency",
-              currency: "VND",
-            })}
-          </Text>
+          <Text>{VNDCurrencyFormatting(item.price)}</Text>
         </View>
         <View>
           <Image

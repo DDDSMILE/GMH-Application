@@ -11,36 +11,12 @@ import { OrderResumeCTA } from "../../../components/food";
 import { useDispatch, useSelector } from "react-redux";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { addOrder } from "../../../store/orders.slice";
+import { VNDFormattedDate } from "../../../utils";
 
 const CheckoutScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const { items, total, addresses } = useSelector((state) => state.order);
   const { address, _id } = useSelector((state) => state.auth.user);
-
-  const formattedDate = () => {
-    const currentDate = new Date();
-    const day = currentDate.getDate();
-    const month = currentDate.getMonth() + 1; // Tháng bắt đầu từ 0
-    const year = currentDate.getFullYear();
-    const hours = currentDate.getHours();
-    const minutes = currentDate.getMinutes();
-    const seconds = currentDate.getSeconds();
-
-    // Xây dựng chuỗi định dạng "dd/mm/yyyy"
-    return (
-      day +
-      "/" +
-      month +
-      "/" +
-      year +
-      " " +
-      hours +
-      ":" +
-      minutes +
-      ":" +
-      seconds
-    );
-  };
 
   const handlePlaceOrder = () => {
     const multiDirection = addresses.map((i) => i.address);
@@ -123,7 +99,7 @@ const CheckoutScreen = ({ navigation }) => {
           </View> */}
           <View style={styles.orderDataItem}>
             <Text style={styles.orderDataItemText}>Ngày xuất hóa đơn</Text>
-            <Text style={styles.orderDataItemText}>{formattedDate()}</Text>
+            <Text style={styles.orderDataItemText}>{VNDFormattedDate()}</Text>
           </View>
         </View>
 
@@ -173,7 +149,7 @@ const CheckoutScreen = ({ navigation }) => {
       <OrderResumeCTA
         text="Sản phẩm đã thêm"
         total={total}
-        navigateTo="Home"
+        navigateTo="home"
         handlePlaceOrder={handlePlaceOrder}
         itemsLength={items.length}
       />

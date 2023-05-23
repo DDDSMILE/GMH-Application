@@ -1,5 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { VNDCurrencyFormatting } from "../../../utils";
 
 const OrderResumeCTA = ({
   text,
@@ -23,10 +24,7 @@ const OrderResumeCTA = ({
       <View style={styles.orderResumePrice}>
         <Text style={styles.orderResumePriceText}>Thanh toán:</Text>
         <Text style={styles.orderResumePriceAmount}>
-          {total.toLocaleString("vi", {
-            style: "currency",
-            currency: "VND",
-          })}
+          {VNDCurrencyFormatting(total)}
         </Text>
       </View>
       <TouchableOpacity onPress={handlePress}>

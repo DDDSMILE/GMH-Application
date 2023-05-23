@@ -16,6 +16,7 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { OrderResumeCTA } from "../../../components/food";
 import { BackButton, HeaderPage } from "../../../components/form";
+import { VNDCurrencyFormatting } from "../../../utils";
 
 const OrderScreen = ({ navigation }) => {
   const { items, total, addresses } = useSelector((state) => state.order);
@@ -71,10 +72,7 @@ const OrderItem = ({ item }) => {
             {item.qty} x {item.item.name}
           </Text>
           <Text style={styles.orderItemDataHeadingPrice}>
-            {item.item.price.toLocaleString("vi", {
-              style: "currency",
-              currency: "VND",
-            })}
+            {VNDCurrencyFormatting(item.item.price)}
           </Text>
         </View>
         <View style={styles.orderItemDataActions}>

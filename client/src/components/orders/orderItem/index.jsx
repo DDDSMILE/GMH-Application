@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
+import { VNDCurrencyFormatting } from "../../../utils";
 
 const OrderItem = ({ order, index }) => {
   const navigation = useNavigation();
@@ -18,10 +19,7 @@ const OrderItem = ({ order, index }) => {
             <View style={styles.orderDataTop}>
               <Text style={styles.orderDataTopTitle}>Đơn hàng</Text>
               <Text style={styles.orderDataTopSubtitle}>
-                {order.total.toLocaleString("vi", {
-                  style: "currency",
-                  currency: "VND",
-                })}
+                {VNDCurrencyFormatting(order.total)}
               </Text>
             </View>
             <View style={styles.orderDataBottom}>

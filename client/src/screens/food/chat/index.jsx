@@ -4,10 +4,16 @@ import { useCallback, useEffect, useState } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
 import SuggestionAnswers from "../../../assets/data/suggestions";
 import { chatgpt } from "../../../services/user";
+import { useDispatch, useSelector } from "react-redux";
+import { addItem } from "../../../store/order.slice";
+import { OrderResumeCTA } from "../../../components/food";
 
 const ChatScreen = ({ route, navigation }) => {
   const { type } = route.params;
   const [messages, setMessages] = useState([]);
+  const dispatch = useDispatch();
+  const { total, items } = useSelector((state) => state.order);
+  console.log(items);
 
   const { question, answer } = SuggestionAnswers.find(
     (item) => item.name === type
@@ -90,8 +96,19 @@ const ChatScreen = ({ route, navigation }) => {
   }, []);
 
   const fetchApi = async ({ question }) => {
-    const { data } = await chatgpt({ question });
-    addNewMessage(data);
+    const { answer, products } = await chatgpt({ question });
+    for (let p of products) {
+      const createOrder = {
+        item: p.item,
+        address: {
+          name: p.address.name,
+          address: p.address.address,
+        },
+      };
+      console.log(createOrder);
+      dispatch(addItem(createOrder));
+    }
+    addNewMessage(answer);
   };
 
   const addNewMessage = (data) => {
@@ -139,6 +156,14 @@ const ChatScreen = ({ route, navigation }) => {
           _id: 1,
         }}
       />
+      {items.length > 0 && (
+        <OrderResumeCTA
+          text="Sản phẩm đã thêm"
+          total={total}
+          navigateTo="order"
+          itemsLength={items.length}
+        />
+      )}
     </>
   );
 };

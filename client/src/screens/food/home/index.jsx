@@ -10,6 +10,7 @@ import { TypeItem, InfinityScroll, SearchBar } from "../../../components/food";
 import { useSelector } from "react-redux";
 import { Fontisto } from "@expo/vector-icons";
 import colors from "../../../constants/colors";
+import { VNDCurrencyFormatting } from "../../../utils";
 
 const typeItems = [
   {
@@ -81,10 +82,7 @@ const HomeScreen = ({ navigation }) => {
               color={colors.GREEN_LOGO_TWO}
             />
             <Text style={styles.placeOrderPriceText}>
-              {orderTotal.toLocaleString("vi", {
-                style: "currency",
-                currency: "VND",
-              })}
+              {VNDCurrencyFormatting(orderTotal)}
             </Text>
           </View>
           <TouchableOpacity onPress={handlePlaceOrder}>
