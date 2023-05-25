@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { logout } from "../../../store/auth.slice";
 import { useState } from "react";
+import colors from "../../../constants/colors";
 
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -45,13 +46,17 @@ const HomeScreen = ({ navigation }) => {
           >
             <View style={styles.sectionItem}>
               <View style={styles.sectionItemLeft}>
-                <MaterialIcons name="location-on" size={24} color="#000" />
+                <MaterialIcons
+                  name="location-on"
+                  size={24}
+                  color={colors.GREEN_LOGO_TWO}
+                />
                 <Text style={styles.sectionItemText}>Địa chỉ</Text>
               </View>
               <MaterialIcons
                 name="keyboard-arrow-right"
                 size={24}
-                color="#000"
+                color={colors.GREEN_LOGO_TWO}
               />
             </View>
           </TouchableOpacity>
@@ -62,14 +67,14 @@ const HomeScreen = ({ navigation }) => {
                 <MaterialCommunityIcons
                   name="key-variant"
                   size={24}
-                  color="#000"
+                  color={colors.GREEN_LOGO_TWO}
                 />
                 <Text style={styles.sectionItemText}>Mật khẩu</Text>
               </View>
               <MaterialIcons
                 name="keyboard-arrow-right"
                 size={24}
-                color="#000"
+                color={colors.GREEN_LOGO_TWO}
               />
             </View>
           </TouchableOpacity>
@@ -77,13 +82,17 @@ const HomeScreen = ({ navigation }) => {
           <TouchableOpacity onPress={() => navigation.navigate("information")}>
             <View style={styles.sectionItem}>
               <View style={styles.sectionItemLeft}>
-                <MaterialIcons name="info" size={24} color="#000" />
+                <MaterialIcons
+                  name="info"
+                  size={24}
+                  color={colors.GREEN_LOGO_TWO}
+                />
                 <Text style={styles.sectionItemText}>Thông tin chung</Text>
               </View>
               <MaterialIcons
                 name="keyboard-arrow-right"
                 size={24}
-                color="#000"
+                color={colors.GREEN_LOGO_TWO}
               />
             </View>
           </TouchableOpacity>
@@ -94,7 +103,11 @@ const HomeScreen = ({ navigation }) => {
 
           <View style={styles.sectionItem}>
             <View style={styles.sectionItemLeft}>
-              <MaterialIcons name="notifications" size={24} color="#000" />
+              <MaterialIcons
+                name="notifications"
+                size={24}
+                color={colors.GREEN_LOGO_TWO}
+              />
               <Text style={styles.sectionItemText}>Bật thông báo</Text>
             </View>
             <TouchableOpacity onPress={() => setNotifications((prev) => !prev)}>
@@ -104,7 +117,7 @@ const HomeScreen = ({ navigation }) => {
                   notifications
                     ? {}
                     : {
-                        backgroundColor: "#000",
+                        backgroundColor: "#c8c8c8",
                         alignItems: "flex-start",
                       },
                 ]}
@@ -156,15 +169,15 @@ const styles = StyleSheet.create({
   headerEmail: {
     fontSize: 12,
     fontFamily: "inter_medium",
-    color: "#000",
+    color: colors.GRAY_VARIANT,
   },
   section: {
     marginBottom: 28,
   },
   sectionTitle: {
-    fontSize: 14,
-    fontFamily: "inter_medium",
-    color: "#000",
+    fontSize: 16,
+    fontFamily: "inter_semi_bold",
+    color: "#868889",
     marginBottom: 28,
   },
   sectionItem: {
@@ -193,7 +206,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     paddingVertical: 16,
-    backgroundColor: "#000",
+    backgroundColor: colors.GREEN_LOGO_TWO,
     borderRadius: 4,
   },
   logoutText: {
@@ -204,7 +217,7 @@ const styles = StyleSheet.create({
   notificationsBtn: {
     width: 50,
     height: 25,
-    backgroundColor: "#000",
+    backgroundColor: colors.GREEN_LOGO_TWO,
     justifyContent: "center",
     alignItems: "flex-end",
     padding: 3,
@@ -214,7 +227,7 @@ const styles = StyleSheet.create({
     width: 20,
     height: 20,
     borderRadius: 50,
-    backgroundColor: "#fff",
+    backgroundColor: colors.WHITE_VARIANT,
   },
 });
 

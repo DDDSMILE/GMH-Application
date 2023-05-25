@@ -59,7 +59,7 @@ const ButtonForm = ({ text, width, onPress, disable }) => {
         </LinearGradient>
       ) : (
         <LinearGradient
-          colors={[Colors.GREEN_TEXT_ONE, Colors.GREEN_TEXT_TWO]}
+          colors={[Colors.GREEN_LOGO_ONE, Colors.GREEN_LOGO_TWO]}
           style={styles.btn}
           width={width && Display.setWidth(width)}
         >
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: "#fff",
-    fontFamily: "inter_bold",
+    fontFamily: "inter_medium",
     fontSize: 16,
   },
   /* Input Form */

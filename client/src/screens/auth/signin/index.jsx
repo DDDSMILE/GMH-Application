@@ -62,7 +62,7 @@ const SignInScreen = ({ navigation }) => {
           <Feather
             name="user"
             size={20}
-            color={Colors.GREEN_TEXT_TWO}
+            color={Colors.GREEN_LOGO_TWO}
             style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
           />
         }
@@ -77,7 +77,7 @@ const SignInScreen = ({ navigation }) => {
           <Feather
             name="lock"
             size={20}
-            color={Colors.GREEN_TEXT_TWO}
+            color={Colors.GREEN_LOGO_TWO}
             style={{ marginLeft: 3, marginRight: 20, marginTop: 3 }}
           />
         }

@@ -39,13 +39,13 @@ const ProductItem = ({ navigation, item }) => {
         <Button
           size="md"
           buttonStyle={{
-            borderColor: colors.GREEN_TEXT_ONE,
+            borderColor: colors.GREEN_LOGO_TWO,
             borderWidth: 2,
             width: Display.setWidth(30),
           }}
           titleStyle={{
             fontFamily: "inter_medium",
-            color: colors.GREEN_TEXT_TWO,
+            color: colors.GREEN_LOGO_TWO,
             fontSize: 13,
           }}
           title="Xem chi tiết"

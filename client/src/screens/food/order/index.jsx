@@ -17,9 +17,10 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { OrderResumeCTA } from "../../../components/food";
 import { BackButton, HeaderPage } from "../../../components/form";
 import { VNDCurrencyFormatting } from "../../../utils";
+import colors from "../../../constants/colors";
 
 const OrderScreen = ({ navigation }) => {
-  const { items, total} = useSelector((state) => state.order);
+  const { items, total } = useSelector((state) => state.order);
 
   useEffect(() => {
     if (items.length === 0) navigation.goBack();
@@ -40,7 +41,7 @@ const OrderScreen = ({ navigation }) => {
         renderItem={({ item }) => <OrderItem item={item} />}
         keyExtractor={(item) => item.item.name}
         ListEmptyComponent={() => (
-          <Text style={styles.emptyText}>Your order is empty</Text>
+          <Text style={styles.emptyText}>Giỏ hàng trống</Text>
         )}
         showsVerticalScrollIndicator={false}
         style={styles.orderList}
@@ -111,8 +112,8 @@ const OrderItem = ({ item }) => {
           >
             <MaterialCommunityIcons
               name="trash-can-outline"
-              size={22}
-              color="#000"
+              size={28}
+              color={colors.GREEN_TEXT_TWO}
             />
           </TouchableOpacity>
         </View>
@@ -174,7 +175,7 @@ const styles = StyleSheet.create({
   orderItemDecBtn: {
     alignItems: "center",
     justifyContent: "center",
-    borderColor: "#000",
+    borderColor: colors.GREEN_TEXT_TWO,
     borderWidth: 1,
     width: 24,
     height: 24,
@@ -182,7 +183,7 @@ const styles = StyleSheet.create({
   orderItemDecText: {
     fontSize: 18,
     fontFamily: "inter_medium",
-    color: "#000",
+    color: colors.GREEN_TEXT_TWO,
   },
   orderItemIncDecQty: {
     fontSize: 16,
@@ -193,8 +194,8 @@ const styles = StyleSheet.create({
   orderItemIncBtn: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#000",
-    borderColor: "#000",
+    backgroundColor: colors.GREEN_TEXT_TWO,
+    borderColor: colors.GREEN_TEXT_TWO,
     borderWidth: 1,
     width: 24,
     height: 24,

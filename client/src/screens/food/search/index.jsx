@@ -66,7 +66,9 @@ const SearchScreen = ({ route, navigation }) => {
         }}
       >
         <TouchableOpacity onPress={toggleCollapsible}>
-          <Text>Lọc sản phẩm</Text>
+          <Text style={{ fontFamily: "inter_medium", fontSize: 16 }}>
+            Lọc sản phẩm
+          </Text>
         </TouchableOpacity>
         <Collapsible collapsed={collapsed}>
           <View
@@ -83,7 +85,13 @@ const SearchScreen = ({ route, navigation }) => {
                   alignItems: "center",
                 }}
               >
-                <Text style={{ textTransform: "uppercase" }}>
+                <Text
+                  style={{
+                    textTransform: "uppercase",
+                    fontFamily: "inter_medium",
+                    fontSize: 13,
+                  }}
+                >
                   {option.label}
                 </Text>
                 <RadioButton
@@ -97,7 +105,9 @@ const SearchScreen = ({ route, navigation }) => {
             ))}
           </View>
           <View style={{ marginHorizontal: 10 }}>
-            <Text>Lọc theo giá sản phẩm</Text>
+            <Text style={{ fontFamily: "inter_medium", fontSize: 16 }}>
+              Lọc theo giá sản phẩm
+            </Text>
             <View style={{ flexDirection: "row" }}>
               <TextInput
                 mode="outlined"
@@ -120,7 +130,13 @@ const SearchScreen = ({ route, navigation }) => {
             </View>
           </View>
           <View style={{ flexDirection: "row", margin: 10 }}>
-            <Text style={{ marginRight: 5 }}>
+            <Text
+              style={{
+                marginRight: 5,
+                fontFamily: "inter_medium",
+                fontSize: 16,
+              }}
+            >
               Lọc theo giá trị tăng / giảm dần:
             </Text>
             <TouchableOpacity onPress={handleSort}>

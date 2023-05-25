@@ -103,7 +103,7 @@ const HomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   title: {
-    fontFamily: "inter_bold",
+    fontFamily: "inter_semi_bold",
     fontSize: 18,
     paddingBottom: 20,
   },

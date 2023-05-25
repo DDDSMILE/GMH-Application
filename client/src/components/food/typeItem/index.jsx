@@ -1,4 +1,5 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
+import colors from "../../../constants/colors";
 
 const TypeItem = ({ text, pathImage, color, navigation }) => {
   return (
@@ -19,7 +20,15 @@ const TypeItem = ({ text, pathImage, color, navigation }) => {
       >
         {pathImage && <Image source={pathImage} />}
       </TouchableOpacity>
-      <Text style={{ fontFamily: "inter_medium", color: "#868889" }}>
+      <Text
+        style={{
+          fontFamily: "inter_medium",
+          fontSize: 12,
+          color: colors.GRAY_VARIANT,
+          textTransform: "uppercase",
+          textAlign: "center",
+        }}
+      >
         {text}
       </Text>
     </View>

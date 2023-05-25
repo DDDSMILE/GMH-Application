@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { VNDCurrencyFormatting } from "../../../utils";
+import colors from "../../../constants/colors";
 
 const OrderResumeCTA = ({
   text,
@@ -45,9 +46,9 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "#fff",
+    backgroundColor: colors.WHITE_VARIANT,
     padding: 16,
-    shadowColor: "#000000",
+    shadowColor: colors.GRAY_VARIANT,
     shadowOffset: {
       width: 0,
       height: -1,
@@ -76,20 +77,20 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#000",
+    backgroundColor: colors.GREEN_LOGO_TWO,
     paddingVertical: 12,
     borderRadius: 8,
   },
   orderResumeCTAText: {
-    fontSize: 14,
-    fontFamily: "inter_medium",
+    fontSize: 16,
+    fontFamily: "inter_semi_bold",
     color: "#fff",
     marginRight: 12,
   },
   orderResumeCTAQty: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#000",
+    backgroundColor: colors.GREEN_LOGO_ONE,
     padding: 1,
     width: 20,
     height: 20,
@@ -97,7 +98,7 @@ const styles = StyleSheet.create({
   },
   orderResumeCTAQtyText: {
     fontSize: 12,
-    fontFamily: "inter_medium",
+    fontFamily: "inter_semi_bold",
     color: "#fff",
   },
 });

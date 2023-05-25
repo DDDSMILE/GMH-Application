@@ -66,7 +66,6 @@ const InfinityScroll = (props) => {
       style={{
         justifyContent: "center",
         alignItems: "center",
-        paddingBottom: 50,
         height: 600,
       }}
     >
