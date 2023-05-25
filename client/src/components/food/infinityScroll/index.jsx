@@ -67,6 +67,7 @@ const InfinityScroll = (props) => {
         justifyContent: "center",
         alignItems: "center",
         paddingBottom: 50,
+        height: 600,
       }}
     >
       {dishes ? (

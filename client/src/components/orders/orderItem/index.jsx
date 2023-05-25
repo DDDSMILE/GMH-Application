@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
-import { VNDCurrencyFormatting } from "../../../utils";
+import { VNDCurrencyFormatting, VNDFormattedDate } from "../../../utils";
 
 const OrderItem = ({ order, index }) => {
   const navigation = useNavigation();
@@ -27,7 +27,7 @@ const OrderItem = ({ order, index }) => {
                 Trạng thái: {order.status}
               </Text>
               <Text style={styles.orderDataBottomPayment}>
-                {new Date(order.updatedAt).toLocaleString()}
+                {VNDFormattedDate(order.createdAt)}
               </Text>
             </View>
           </View>

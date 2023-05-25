@@ -12,26 +12,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { addOrder } from "../../../store/orders.slice";
 import { VNDFormattedDate } from "../../../utils";
+import { clearOrder } from "../../../store/order.slice";
 
 const CheckoutScreen = ({ navigation }) => {
   const dispatch = useDispatch();
-  const { items, total, addresses } = useSelector((state) => state.order);
+  const { items, total } = useSelector((state) => state.order);
   const { address, _id } = useSelector((state) => state.auth.user);
 
   const handlePlaceOrder = () => {
-    const multiDirection = addresses.map((i) => i.address);
+    const products = [];
 
+    items.forEach((item) => {
+      const { addressItem, name } = item.item;
+      const existingAddress = products.find(
+        (product) => product.addressItem.name_address === addressItem
+      );
+
+      if (existingAddress) {
+        existingAddress.addressItem.goods.push({
+          item: { addressItem, name },
+          qty: item.qty,
+        });
+      } else {
+        products.push({
+          addressItem: {
+            name_address: addressItem,
+            goods: [{ item: { addressItem, name }, qty: item.qty }],
+          },
+        });
+      }
+    });
     const newOrder = {
       userId: _id,
       items: items,
       total: total,
-      addresses: {
-        user_address: address,
-        suppliers_address: multiDirection,
-      },
+      products: products,
     };
     dispatch(addOrder({ order: newOrder }));
-    navigation.navigate("home");
+    dispatch(clearOrder());
     Alert.alert(
       "Đặt hàng thành công!",
       "Đơn hàng của bạn đang được chuẩn bị, bạn có muốn kiếm tra lại?",

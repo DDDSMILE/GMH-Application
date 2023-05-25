@@ -24,7 +24,6 @@ const orderSlice = createSlice({
       } else {
         state.items.push({ item: action.payload.item, qty: 1 });
       }
-      state.addresses.push(action.payload.address);
       state.total = state.total + action.payload.item.price;
     },
     removeItem: (state, action) => {
@@ -34,10 +33,6 @@ const orderSlice = createSlice({
 
       state.items = state.items.filter(
         (item) => item.item.name !== action.payload.item.name
-      );
-
-      state.addresses = state.addresses.filter(
-        (item) => item.name !== action.payload.name
       );
 
       state.total = state.total - itemToRemove.item.price * itemToRemove.qty;
@@ -73,12 +68,9 @@ const orderSlice = createSlice({
       state.total = state.total + itemToIncrease.item.price;
     },
     clearOrder: (state) => {
-      state.restaurant = null;
       state.items = [];
       state.total = 0;
-      state.address = null;
-      state.paymentType = "";
-      state.card = null;
+      state.addresses = [];
     },
   },
 });

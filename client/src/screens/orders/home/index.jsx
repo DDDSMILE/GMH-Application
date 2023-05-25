@@ -13,7 +13,7 @@ import { OrderItem } from "../../../components/orders";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { _id } = useSelector((state) => state.auth.user);
   const {
     items: orders,
     loading,
@@ -21,8 +21,8 @@ const HomeScreen = () => {
   } = useSelector((state) => state.orders);
 
   useEffect(() => {
-    dispatch(fetchOrders({ userId: user._id }));
-  }, [dispatch, user._id]);
+    dispatch(fetchOrders({ userId: _id }));
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -37,9 +37,7 @@ const HomeScreen = () => {
       ) : orders.length > 0 ? (
         <FlatList
           data={orders}
-          renderItem={({ item, index }) => (
-            <OrderItem order={item} />
-          )}
+          renderItem={({ item, index }) => <OrderItem order={item} />}
           keyExtractor={(item, id) => id}
           showsVerticalScrollIndicator={false}
         />
@@ -47,7 +45,7 @@ const HomeScreen = () => {
         <View style={styles.loadingErrorContainer}>
           <Ionicons name="ios-warning-outline" size={28} color="#000" />
           <Text style={styles.loadingErrorText}>
-            {error || "You don't have any orders yet"}
+            {error || "Không có đơn hàng nào đang chuẩn bị"}
           </Text>
         </View>
       )}

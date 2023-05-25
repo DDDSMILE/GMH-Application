@@ -279,15 +279,11 @@ export const answerChatGPT = async (req, res) => {
           name: { $regex: k, $options: "i" },
         }).exec();
         if (result) {
-          const { name, address } = await SuppliersModel.findOne({
+          const { address } = await SuppliersModel.findOne({
             name: { $regex: result.name_supplier, $options: "i" },
           }).exec();
           const createOrder = {
-            item: result,
-            address: {
-              name: name,
-              address: address,
-            },
+            item: { ...result._doc, addressItem: address },
           };
           results.push(createOrder);
         }

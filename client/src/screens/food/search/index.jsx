@@ -5,7 +5,8 @@ import Collapsible from "react-native-collapsible";
 import { RadioButton, TextInput } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../../constants";
-import { InfinityScroll } from "../../../components/food";
+import { InfinityScroll, OrderResumeCTA } from "../../../components/food";
+import { useSelector } from "react-redux";
 
 const typeItems = [
   {
@@ -37,6 +38,7 @@ const SearchScreen = ({ route, navigation }) => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [sortOrder, setSortOrder] = useState("asc");
+  const { items, total } = useSelector((state) => state.order);
 
   const toggleCollapsible = () => {
     setCollapsed(!collapsed);
@@ -139,6 +141,14 @@ const SearchScreen = ({ route, navigation }) => {
         sortOrder={sortOrder}
         navigation={navigation}
       />
+      {items.length > 0 && (
+        <OrderResumeCTA
+          text="Sản phẩm đã thêm"
+          total={total}
+          navigateTo="checkout"
+          itemsLength={items.length}
+        />
+      )}
     </View>
   );
 };

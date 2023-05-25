@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, KeyboardAvoidingView } from "react-native";
 import { BackButton, HeaderPage } from "../../../components/form";
 import { useCallback, useEffect, useState } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
@@ -14,27 +14,14 @@ const ChatScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const { total, items } = useSelector((state) => state.order);
 
-  const { question, answer } = SuggestionAnswers.find(
-    (item) => item.name === type
-  );
+  const { question } = SuggestionAnswers.find((item) => item.name === type);
 
   useEffect(() => {
     let default_text = [];
-    if (question && answer) {
+    if (question) {
       default_text = [
         {
           _id: 1,
-          text: answer,
-          createdAt: new Date(),
-          user: {
-            _id: 2,
-            name: "GMH",
-            avatar:
-              "https://res.cloudinary.com/du93troxt/image/upload/v1682910574/chatbot_ndm7dj.png",
-          },
-        },
-        {
-          _id: 3,
           text: question,
           createdAt: new Date(),
           user: {
@@ -45,6 +32,7 @@ const ChatScreen = ({ route, navigation }) => {
           },
         },
       ];
+      fetchApi({ question });
     } else {
       default_text = [
         {
@@ -56,20 +44,20 @@ const ChatScreen = ({ route, navigation }) => {
             keepIt: true,
             values: [
               {
-                title: "😋Vịt om bầu",
-                value: "Vịt om bầu",
+                title: "Bún đậu mắm tôm",
+                value: "Bún đậu mắm tôm",
               },
               {
-                title: "Cá bơn nướng",
-                value: "Cá bơn nướng",
+                title: "Canh cà chua",
+                value: "Canh cà chua",
               },
               {
                 title: "Đá bào",
                 value: "Đá bào",
               },
               {
-                title: "Cơm chiên chân châu",
-                value: "Cơm chiên chân châu",
+                title: "Chè đậu xanh",
+                value: "Chè đậu xanh",
               },
             ],
           },
@@ -96,20 +84,10 @@ const ChatScreen = ({ route, navigation }) => {
 
   const fetchApi = async ({ question }) => {
     const { answer, products } = await chatgpt({ question });
-    for (let p of products) {
-      const createOrder = {
-        item: p.item,
-        address: {
-          name: p.address.name,
-          address: p.address.address,
-        },
-      };
-      dispatch(addItem(createOrder));
+    for (let product of products) {
+      dispatch(addItem(product));
     }
-
-    setTimeout(() => {
-      addNewMessage(answer);
-    }, 1000);
+    addNewMessage(answer);
   };
 
   const addNewMessage = (data) => {
@@ -132,6 +110,7 @@ const ChatScreen = ({ route, navigation }) => {
 
   const onQuickReply = (quickReply) => {
     const question = quickReply[0].value;
+    addNewMessage(question);
     fetchApi({ question });
   };
 
@@ -145,18 +124,20 @@ const ChatScreen = ({ route, navigation }) => {
           </Text>
         </View>
       </HeaderPage>
-      <GiftedChat
-        messagesContainerStyle={{
-          backgroundColor: "#f8f1eb",
-        }}
-        placeholder="Hôm nay bạn muốn ăn món gì?"
-        messages={messages}
-        onSend={(messages) => onSend(messages)}
-        onQuickReply={(quickReplies) => onQuickReply(quickReplies)}
-        user={{
-          _id: 1,
-        }}
-      />
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+        <GiftedChat
+          messagesContainerStyle={{
+            backgroundColor: "#f8f1eb",
+          }}
+          placeholder="Hôm nay bạn muốn ăn món gì?"
+          messages={messages}
+          onSend={(messages) => onSend(messages)}
+          onQuickReply={(quickReplies) => onQuickReply(quickReplies)}
+          user={{
+            _id: 1,
+          }}
+        />
+      </KeyboardAvoidingView>
       {items.length > 0 && (
         <OrderResumeCTA
           text="Sản phẩm đã thêm"

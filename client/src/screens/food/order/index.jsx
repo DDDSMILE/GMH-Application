@@ -19,7 +19,7 @@ import { BackButton, HeaderPage } from "../../../components/form";
 import { VNDCurrencyFormatting } from "../../../utils";
 
 const OrderScreen = ({ navigation }) => {
-  const { items, total, addresses } = useSelector((state) => state.order);
+  const { items, total} = useSelector((state) => state.order);
 
   useEffect(() => {
     if (items.length === 0) navigation.goBack();

@@ -22,11 +22,7 @@ const DetailScreen = ({ route, navigation }) => {
   const handleAddToOrder = () => {
     const { address } = restaurant;
     const createOrder = {
-      item: item,
-      address: {
-        name: item.name,
-        address: address,
-      },
+      item: { ...item, addressItem: address },
     };
     dispatch(addItem(createOrder));
     navigation.goBack();

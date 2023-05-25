@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import { useFonts } from "expo-font";
 import { Fonts } from "./src/constants";
@@ -13,8 +12,8 @@ const customFonts = {
   inter_medium: Fonts.INTER_MEDIUM,
   inter_regular: Fonts.INTER_REGULAR,
   inter_semi_bold: Fonts.INTER_SEMI_BOLD,
-  viga_regular: Fonts.VIGA_REGULAR,
   inter_thin: Fonts.INTER_THIN,
+  viga_regular: Fonts.VIGA_REGULAR,
 };
 
 const Main = () => {

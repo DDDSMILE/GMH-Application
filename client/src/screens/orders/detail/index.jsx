@@ -7,10 +7,13 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { BackButton, HeaderPage } from "../../../components/form";
-import { VNDCurrencyFormatting } from "../../../utils";
+import { VNDCurrencyFormatting, VNDFormattedDate } from "../../../utils";
 
 const DetailScreen = ({ navigation, route }) => {
   const { order } = route.params;
+  const addresses = Array.from(
+    new Set(order.items.map((item) => item.item.addressItem))
+  );
 
   return (
     <View style={styles.container}>
@@ -29,7 +32,7 @@ const DetailScreen = ({ navigation, route }) => {
 
           <View style={styles.addressSelected}>
             <View style={styles.addressSelectedData}>
-              {order.addresses.suppliers_address.map((adr, index) => (
+              {addresses.map((adr, index) => (
                 <View key={index}>
                   <View style={styles.addressSelectedRight}>
                     <View style={styles.addressSelectedTag}>
@@ -91,7 +94,7 @@ const DetailScreen = ({ navigation, route }) => {
           <View style={styles.orderDataItem}>
             <Text style={styles.orderDataItemText}>Thời gian đặt hàng</Text>
             <Text style={styles.orderDataItemText}>
-              {new Date(order.updatedAt).toLocaleString()}
+              {VNDFormattedDate(order.updatedAt)}
             </Text>
           </View>
         </View>

@@ -25,6 +25,9 @@ const OrdersSchema = new mongoose.Schema(
         type: Array,
       },
     },
+    products: {
+      type: Array,
+    },
     status: {
       type: String,
       enum: ["Đang chờ", "Đang ship", "Thành công", "Bị hủy"],
