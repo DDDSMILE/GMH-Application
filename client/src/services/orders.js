@@ -3,7 +3,7 @@ const API_URL = "http://10.0.2.2:3001/api/v1/orders";
 
 export const getOrdersFromUser = async (userId) => {
   try {
-    const { data } = await axios.get(`${API_URL}/${userId}`);
+    const { data } = await axios.get(`${API_URL}/user/${userId}`);
     return data;
   } catch (error) {
     throw new Error(error.message);

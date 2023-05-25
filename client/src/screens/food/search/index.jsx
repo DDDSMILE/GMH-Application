@@ -7,6 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../../constants";
 import { InfinityScroll, OrderResumeCTA } from "../../../components/food";
 import { useSelector } from "react-redux";
+import colors from "../../../constants/colors";
 
 const typeItems = [
   {
@@ -66,9 +67,28 @@ const SearchScreen = ({ route, navigation }) => {
         }}
       >
         <TouchableOpacity onPress={toggleCollapsible}>
-          <Text style={{ fontFamily: "inter_medium", fontSize: 16 }}>
-            Lọc sản phẩm
-          </Text>
+          <View
+            style={{
+              alignItems: "center",
+              justifyContent: "center",
+              borderColor: colors.GREEN_LOGO_TWO,
+              borderWidth: 1,
+              width: 120,
+              height: 30,
+              borderRadius: 5,
+              margin: 10,
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 14,
+                fontFamily: "inter_medium",
+                color: colors.GREEN_LOGO_TWO,
+              }}
+            >
+              Lọc sản phẩm
+            </Text>
+          </View>
         </TouchableOpacity>
         <Collapsible collapsed={collapsed}>
           <View

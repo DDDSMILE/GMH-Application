@@ -1,10 +1,18 @@
-import { View, Text, StyleSheet, ScrollView, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import { HeaderPage, BackButton, ButtonForm } from "../../../components/form";
 import { getSupplier } from "../../../services/suppliers";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { addItem } from "../../../store/order.slice";
 import { VNDCurrencyFormatting } from "../../../utils";
+import colors from "../../../constants/colors";
 
 const DetailScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
@@ -39,32 +47,52 @@ const DetailScreen = ({ route, navigation }) => {
         </View>
       </HeaderPage>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 15 }}>
+        <View style={styles.foodItem}>
           <Image
-            style={{ width: 120, aspectRatio: 1 }}
+            style={styles.foodItemImg}
             resizeMode="cover"
             source={{ uri: item.photo }}
           />
         </View>
-        <View>
-          <Text>{item.type}</Text>
-          <Text>{item.name}</Text>
-          <Text>{item.name_supplier}</Text>
-          <Text>{VNDCurrencyFormatting(item.price)}</Text>
+        <View style={styles.foodItemData}>
+          <Text style={styles.foodItemDataHeadingText}>{item.name}</Text>
+          <Text style={styles.foodItemDataHeadingPrice}>
+            Giá: {VNDCurrencyFormatting(item.price)}
+          </Text>
         </View>
-        <View>
-          <Image
-            style={{ width: 120, aspectRatio: 1 }}
-            resizeMode="cover"
-            source={{ uri: restaurant.photo }}
-          />
-          <Text>{restaurant.name}</Text>
-          <Text>{restaurant.address}</Text>
-          <Text>{restaurant.open_time}</Text>
+        <View style={styles.supplierItemContainer}>
+          <View>
+            <Text style={styles.supplierItemName}>Thông tin chi tiết: </Text>
+          </View>
+          <View style={styles.supplierItem}>
+            <Image
+              style={styles.foodItemImg}
+              resizeMode="cover"
+              source={{ uri: restaurant.photo }}
+            />
+            <View style={styles.supplierItemData}>
+              <View style={styles.supplierItemList}>
+                <Text style={styles.supplierItemDetail}>Tên nhà cung cấp</Text>
+                <Text>{restaurant.name}</Text>
+              </View>
+              <View style={styles.supplierItemList}>
+                <Text style={styles.supplierItemDetail}>Địa chỉ</Text>
+                <Text>{restaurant.address}</Text>
+              </View>
+              <View style={styles.supplierItemList}>
+                <Text style={styles.supplierItemDetail}>Thời gian mở cửa</Text>
+                <Text>{restaurant.open_time}</Text>
+              </View>
+            </View>
+          </View>
         </View>
-        <View>
-          <ButtonForm text={"Thêm vào giỏ"} onPress={handleAddToOrder} />
+        <View style={styles.logoutContainer}>
+          <TouchableOpacity onPress={handleAddToOrder}>
+            <View style={styles.logoutBtn}>
+              <Text style={styles.logoutText}>Thêm vào giỏ</Text>
+            </View>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
@@ -72,13 +100,77 @@ const DetailScreen = ({ route, navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
+  foodItem: {
     margin: 3,
-    marginBottom: 15,
     display: "flex",
     flexDirection: "row",
     justifyContent: "center",
-    padding: 15,
+  },
+  foodItemImg: {
+    width: 150,
+    height: 150,
+    borderRadius: 8,
+  },
+  foodItemData: {
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 24,
+  },
+  foodItemDataHeadingText: {
+    fontSize: 16,
+    fontFamily: "inter_semi_bold",
+    color: "#000",
+  },
+  foodItemDataHeadingPrice: {
+    fontSize: 14,
+    fontFamily: "inter_medium",
+    color: colors.GRAY_VARIANT,
+  },
+  supplierItemContainer: {
+    paddingTop: 12,
+    borderTopWidth: 3,
+    borderTopColor: colors.GRAY,
+    display: "flex",
+    justifyContent: "center",
+  },
+  supplierItem: {
+    margin: 3,
+    flexDirection: "row",
+    flex: 5,
+  },
+  supplierItemData: {
+    paddingLeft: 20,
+    display: "flex",
+    flex: 5,
+  },
+  supplierItemName: {
+    fontSize: 16,
+    fontFamily: "inter_semi_bold",
+    color: "#000",
+  },
+  supplierItemDetail: {
+    fontSize: 14,
+    fontFamily: "inter_semi_bold",
+    color: colors.GRAY_VARIANT,
+  },
+  supplierItemList: {
+    marginBottom: 5,
+  },
+  logoutContainer: {
+    paddingTop: 15,
+  },
+  logoutBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    paddingVertical: 16,
+    backgroundColor: colors.GREEN_LOGO_TWO,
+    borderRadius: 4,
+  },
+  logoutText: {
+    fontSize: 14,
+    fontFamily: "inter_medium",
+    color: "#fff",
   },
 });
 

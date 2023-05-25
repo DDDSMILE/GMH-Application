@@ -1,7 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import colors from "../../constants/colors";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import FoodNavigator from "./food";
 import OrdersNavigator from "./orders";
@@ -49,9 +49,9 @@ const TabsNavigator = () => {
         options={{
           tabBarLabel: "Tôi",
           tabBarIcon: ({ focused }) => (
-            <AntDesign
+            <FontAwesome
               size={28}
-              name={focused ? "meho" : "meh"}
+              name={focused ? "user-circle" : "user-circle-o"}
               color={colors.GREEN_LOGO_TWO}
             />
           ),

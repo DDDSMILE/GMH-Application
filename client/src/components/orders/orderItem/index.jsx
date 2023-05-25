@@ -2,6 +2,7 @@ import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { VNDCurrencyFormatting, VNDFormattedDate } from "../../../utils";
+import colors from "../../../constants/colors";
 
 const OrderItem = ({ order, index }) => {
   const navigation = useNavigation();
@@ -23,12 +24,23 @@ const OrderItem = ({ order, index }) => {
               </Text>
             </View>
             <View style={styles.orderDataBottom}>
-              <Text style={styles.orderDataBottomPrice}>
-                Trạng thái: {order.status}
-              </Text>
-              <Text style={styles.orderDataBottomPayment}>
-                {VNDFormattedDate(order.createdAt)}
-              </Text>
+              <View style={{ display: "flex", flexDirection: "row" }}>
+                <Text
+                  style={{
+                    fontFamily: "inter_semi_bold",
+                    fontSize: 14,
+                    paddingRight: 5,
+                  }}
+                >
+                  Trạng thái
+                </Text>
+                <Text style={styles.orderDataBottomPrice}>{order.status}</Text>
+              </View>
+              <View>
+                <Text style={styles.orderDataBottomPayment}>
+                  {VNDFormattedDate(order.createdAt)}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -51,8 +63,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   orderDataImg: {
-    width: 45,
-    height: 45,
+    width: 80,
+    height: 80,
     borderRadius: 8,
     marginRight: 16,
   },
@@ -65,7 +77,7 @@ const styles = StyleSheet.create({
     maxWidth: 148,
   },
   orderDataTopTitle: {
-    fontSize: 15,
+    fontSize: 13,
     fontFamily: "inter_medium",
     color: "#000",
     marginRight: 8,
@@ -73,22 +85,28 @@ const styles = StyleSheet.create({
   orderDataTopSubtitle: {
     fontSize: 12,
     fontFamily: "inter_medium",
-    color: "#000",
+    color: "#fff",
+    backgroundColor: colors.GREEN_LOGO_TWO,
+    padding: 2,
+    borderRadius: 2,
   },
   orderDataBottom: {
     flexDirection: "column",
     alignItems: "flex-end",
   },
   orderDataBottomPrice: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: "inter_medium",
     color: "#000",
     marginRight: 8,
+    backgroundColor: "#fce42d",
+    padding: 3,
+    borderRadius: 5,
   },
   orderDataBottomPayment: {
     fontSize: 12,
     fontFamily: "inter_medium",
-    color: "#000",
+    color: colors.GRAY_VARIANT,
   },
 });
 

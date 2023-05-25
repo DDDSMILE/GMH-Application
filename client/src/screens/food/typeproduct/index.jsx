@@ -24,7 +24,7 @@ const TypeProduct = ({ route, navigation }) => {
         <OrderResumeCTA
           text="Sản phẩm đã thêm"
           total={total}
-          navigateTo="checkout"
+          navigateTo="order"
           itemsLength={items.length}
         />
       )}

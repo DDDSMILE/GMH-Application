@@ -14,26 +14,11 @@ const ChatScreen = ({ route, navigation }) => {
   const dispatch = useDispatch();
   const { total, items } = useSelector((state) => state.order);
 
-  const { question } = SuggestionAnswers.find((item) => item.name === type);
+  const { dish_suggest } = SuggestionAnswers.find((item) => item.name === type);
 
   useEffect(() => {
     let default_text = [];
-    if (question) {
-      default_text = [
-        {
-          _id: 1,
-          text: question,
-          createdAt: new Date(),
-          user: {
-            _id: 4,
-            name: "GMH",
-            avatar:
-              "https://res.cloudinary.com/du93troxt/image/upload/v1682910574/chatbot_ndm7dj.png",
-          },
-        },
-      ];
-      fetchApi({ question });
-    } else {
+    if (dish_suggest) {
       default_text = [
         {
           _id: 1,
@@ -44,20 +29,20 @@ const ChatScreen = ({ route, navigation }) => {
             keepIt: true,
             values: [
               {
-                title: "Bún đậu mắm tôm",
-                value: "Bún đậu mắm tôm",
+                title: dish_suggest[0],
+                value: dish_suggest[0],
               },
               {
-                title: "Canh cà chua",
-                value: "Canh cà chua",
+                title: dish_suggest[1],
+                value: dish_suggest[1],
               },
               {
-                title: "Đá bào",
-                value: "Đá bào",
+                title: dish_suggest[2],
+                value: dish_suggest[2],
               },
               {
-                title: "Chè đậu xanh",
-                value: "Chè đậu xanh",
+                title: dish_suggest[3],
+                value: dish_suggest[3],
               },
             ],
           },

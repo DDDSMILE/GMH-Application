@@ -10,6 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders } from "../../../store/orders.slice";
 import { OrderItem } from "../../../components/orders";
+import colors from "../../../constants/colors";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -65,14 +66,14 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   headerSubtitle: {
-    fontSize: 14,
-    fontFamily: "inter_medium",
+    fontSize: 18,
+    fontFamily: "inter_semi_bold",
     color: "#000",
   },
   headerTitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: "inter_medium",
-    color: "#000",
+    color: colors.GRAY_VARIANT,
   },
   loadingErrorContainer: {
     flex: 0.85,

@@ -213,7 +213,7 @@ const styles = StyleSheet.create({
     width: Display.setWidth(40),
     height: Display.setHeight(7),
     marginTop: "auto",
-    borderRadius: 15,
+    borderRadius: 10,
     marginBottom: 20,
   },
   btnText: {

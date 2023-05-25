@@ -49,6 +49,10 @@ const orderSlice = createSlice({
           }
           return item;
         });
+      } else {
+        state.items = state.items.filter(
+          (item) => item.item.name !== itemToDecrease.item.name
+        );
       }
 
       state.total = state.total - itemToDecrease.item.price;

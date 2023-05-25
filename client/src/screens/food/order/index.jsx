@@ -113,7 +113,7 @@ const OrderItem = ({ item }) => {
             <MaterialCommunityIcons
               name="trash-can-outline"
               size={28}
-              color={colors.GREEN_TEXT_TWO}
+              color={colors.GREEN_LOGO_TWO}
             />
           </TouchableOpacity>
         </View>
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   orderItemDecBtn: {
     alignItems: "center",
     justifyContent: "center",
-    borderColor: colors.GREEN_TEXT_TWO,
+    borderColor: colors.GREEN_LOGO_TWO,
     borderWidth: 1,
     width: 24,
     height: 24,
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
   orderItemDecText: {
     fontSize: 18,
     fontFamily: "inter_medium",
-    color: colors.GREEN_TEXT_TWO,
+    color: colors.GREEN_LOGO_TWO,
   },
   orderItemIncDecQty: {
     fontSize: 16,
@@ -194,8 +194,8 @@ const styles = StyleSheet.create({
   orderItemIncBtn: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.GREEN_TEXT_TWO,
-    borderColor: colors.GREEN_TEXT_TWO,
+    backgroundColor: colors.GREEN_LOGO_TWO,
+    borderColor: colors.GREEN_LOGO_TWO,
     borderWidth: 1,
     width: 24,
     height: 24,

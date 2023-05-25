@@ -2,17 +2,16 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image,
   ScrollView,
-  Alert,
   ActivityIndicator,
   StyleSheet,
 } from "react-native";
-import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { BackButton, HeaderPage } from "../../../components/form";
 import { DismissKeyboardView, Input } from "../../../components/common";
+import colors from "../../../constants/colors";
 
 const ManageInformationScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -22,6 +21,7 @@ const ManageInformationScreen = ({ navigation }) => {
     name: user.name,
     phone_number: user.phone_number,
   });
+
   const [formError, setFormError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -37,73 +37,43 @@ const ManageInformationScreen = ({ navigation }) => {
       </HeaderPage>
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.avatarItem}>
-          <Text style={styles.itemTitle}>Ảnh đại diện</Text>
-          <View style={styles.itemContent}>
-            {/* <Image
-              style={styles.previewImg}
-              resizeMode="contain"
-              source={{ uri: pickedUrl ? pickedUrl : user.imgUrl }}
-            /> */}
-            <View style={styles.changeImgOptions}>
-              <TouchableOpacity>
-                <View style={styles.changeImgOption}>
-                  <MaterialIcons name="image" size={16} color="#000" />
-                  <Text style={styles.changeImgText}>
-                    Chọn trong thư viện của bạn
-                  </Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity>
-                <View style={styles.changeImgOption}>
-                  <MaterialIcons name="camera-alt" size={16} color="#000" />
-                  <Text style={styles.changeImgText}>Chụp ảnh</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-
         <View style={styles.item}>
           <Input
             label="Tên người dùng"
-            value={formState.fullName}
+            value={formState.name}
             onChangeText={(text) =>
-              setFormState((prev) => ({ ...prev, fullName: text }))
+              setFormState((prev) => ({ ...prev, name: text }))
             }
             placeholder="Nhập tên người dùng..."
-            placeholderTextColor="#000"
+            placeholderTextColor={colors.GRAY_VARIANT}
             autoCapitalize="words"
             autoComplete="name"
             autoCorrect={false}
           />
-          <MaterialIcons name="person-outline" size={24} color="#000" />
+          <MaterialIcons
+            name="person-outline"
+            size={24}
+            color={colors.GREEN_LOGO_TWO}
+          />
         </View>
-
-        <View style={styles.item}>
-          <View style={styles.itemLeft}>
-            <Text style={styles.itemLeftLabel}>Email</Text>
-            <Text style={styles.itemLeftText}>{user.phone_number}</Text>
-          </View>
-          <MaterialCommunityIcons name="email-outline" size={24} color="#000" />
-        </View>
-
         <View style={styles.item}>
           <Input
             label="Số điện thoại"
-            value={formState.phone}
+            value={formState.phone_number}
             onChangeText={(text) =>
-              setFormState((prev) => ({ ...prev, phone: text }))
+              setFormState((prev) => ({ ...prev, phone_number: text }))
             }
             placeholder="Nhập số điện thoại..."
-            placeholderTextColor="#000"
+            placeholderTextColor={colors.GRAY_VARIANT}
             keyboardType="number-pad"
             autoCapitalize="none"
-            autoComplete="name"
             autoCorrect={false}
           />
-          <MaterialIcons name="phone-iphone" size={24} color="#000" />
+          <MaterialIcons
+            name="phone-iphone"
+            size={24}
+            color={colors.GREEN_LOGO_TWO}
+          />
         </View>
 
         {formError !== "" && (
@@ -145,7 +115,7 @@ const styles = StyleSheet.create({
   },
   itemTitle: {
     fontSize: 12,
-    fontFamily: "inter_extra_bold",
+    fontFamily: "inter_regular",
     textTransform: "uppercase",
     color: "#000",
     marginBottom: 14,
@@ -201,11 +171,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: 16,
     borderRadius: 4,
-    backgroundColor: "#000",
+    backgroundColor: colors.GREEN_LOGO_TWO,
   },
   saveBtnText: {
     fontSize: 14,
-    fontFamily: "inter_extra_bold",
+    fontFamily: "inter_semi_bold",
     color: "#fff",
   },
   errorContainer: {
@@ -217,7 +187,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 12,
-    fontFamily: "inter_extra_bold",
+    fontFamily: "inter_medium",
     color: "red",
     marginLeft: 8,
   },

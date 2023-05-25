@@ -8,6 +8,7 @@ import {
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { BackButton, HeaderPage } from "../../../components/form";
 import { VNDCurrencyFormatting, VNDFormattedDate } from "../../../utils";
+import colors from "../../../constants/colors";
 
 const DetailScreen = ({ navigation, route }) => {
   const { order } = route.params;
@@ -33,7 +34,7 @@ const DetailScreen = ({ navigation, route }) => {
           <View style={styles.addressSelected}>
             <View style={styles.addressSelectedData}>
               {addresses.map((adr, index) => (
-                <View key={index}>
+                <View key={index} style={{ paddingBottom: 4 }}>
                   <View style={styles.addressSelectedRight}>
                     <View style={styles.addressSelectedTag}>
                       <Text style={styles.addressSelectedTagText}>
@@ -56,7 +57,7 @@ const DetailScreen = ({ navigation, route }) => {
                 <MaterialCommunityIcons
                   name="credit-card-outline"
                   size={24}
-                  color="#000"
+                  color={colors.GREEN_LOGO_TWO}
                 />
                 <Text style={styles.paymentOptionText}>Thanh toán online:</Text>
               </View>
@@ -85,12 +86,7 @@ const DetailScreen = ({ navigation, route }) => {
         {/* Order Data & Details */}
         <View style={styles.orderData}>
           <Text style={styles.orderDataTitle}>Chi tiết đơn hàng</Text>
-          <View style={styles.orderDataItem}>
-            {/* <Text style={styles.orderDataItemText}>Restaurant Name</Text> */}
-            {/* <Text style={styles.orderDataItemText}>
-              {order.restaurantData.name}
-            </Text> */}
-          </View>
+          <View style={styles.orderDataItem}></View>
           <View style={styles.orderDataItem}>
             <Text style={styles.orderDataItemText}>Thời gian đặt hàng</Text>
             <Text style={styles.orderDataItemText}>
@@ -126,8 +122,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   addressTitle: {
-    fontSize: 12,
-    fontFamily: "inter_medium",
+    fontSize: 14,
+    fontFamily: "inter_semi_bold",
     textTransform: "uppercase",
     color: "#000",
     marginBottom: 12,
@@ -148,19 +144,19 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: "inter_medium",
     color: "#000",
-    maxWidth: 280,
+    maxWidth: 320,
   },
   addressSelectedRight: {},
   addressSelectedTag: {
     marginRight: 4,
-    backgroundColor: "#000",
+    backgroundColor: colors.GREEN_LOGO_TWO,
     paddingHorizontal: 8,
     paddingVertical: 4,
     borderRadius: 4,
   },
   addressSelectedTagText: {
-    fontSize: 12,
-    fontFamily: "inter_medium",
+    fontSize: 13,
+    fontFamily: "inter_semi_bold",
     color: "#fff",
   },
   paymentContainer: {
@@ -174,7 +170,7 @@ const styles = StyleSheet.create({
   },
   paymentOptionText: {
     fontSize: 14,
-    fontFamily: "inter_medium",
+    fontFamily: "inter_semi_bold",
     color: "#000",
     marginLeft: 8,
   },
@@ -216,8 +212,8 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   orderDataTitle: {
-    fontSize: 12,
-    fontFamily: "inter_medium",
+    fontSize: 13,
+    fontFamily: "inter_bold",
     textTransform: "uppercase",
     color: "#000",
     marginBottom: 12,

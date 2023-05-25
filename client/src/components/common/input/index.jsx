@@ -1,4 +1,5 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
+import colors from "../../../constants/colors";
 
 const Input = ({ label, placeholder, value, onChangeText, ...props }) => {
   return (
@@ -20,17 +21,17 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   label: {
-    fontSize: 12,
-    fontFamily: "inter_medium",
+    fontSize: 13,
+    fontFamily: "inter_semi_bold",
     textTransform: "uppercase",
-    color: "#c6c6c6",
+    color: colors.DEFAULT_BLACK,
     marginBottom: 8,
   },
   input: {
     width: "100%",
     fontSize: 14,
-    fontFamily: "inter_extra_bold",
-    color: "#000",
+    fontFamily: "inter_medium",
+    color: colors.GRAY_VARIANT,
   },
 });
 
