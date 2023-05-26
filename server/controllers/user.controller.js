@@ -277,6 +277,7 @@ export const answerChatGPT = async (req, res) => {
       try {
         const result = await DishesModel.findOne({
           name: { $regex: k, $options: "i" },
+          type: { $ne: "khác" },
         }).exec();
         if (result) {
           const { address } = await SuppliersModel.findOne({

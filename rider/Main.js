@@ -1,6 +1,7 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { useFonts } from "expo-font";
 import { Fonts } from "./src/constants";
+import Navigators from "./src/navigators";
 
 const customFonts = {
   inter_black: Fonts.INTER_BLACK,
@@ -21,7 +22,7 @@ const Main = () => {
 
   return (
     <View style={{ flex: 1, padding: 0, margin: 0 }}>
-      <Text>Main</Text>
+      <Navigators />
     </View>
   );
 };
