@@ -1,0 +1,521 @@
+[
+  {
+    "addresses": {
+      "suppliers_address": []
+    },
+    "_id": "646cd2803e7466d9640e513d",
+    "userId": "646349668389f8777464b411",
+    "items": [
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf35eed",
+          "name": "Đường phèn",
+          "photo": "https://images.foody.vn/res/g100006/1000051319/s120x120/d12f2ddc-955d-4544-bb10-3c6a4c7a-c328edba-221121125254.jpeg",
+          "price": 20000,
+          "type": "thực phẩm",
+          "name_supplier": "Quầy Củ Quả - Gia Vị - Đường Nguyễn Nhàn",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.645Z",
+          "updatedAt": "2023-05-08T15:20:29.645Z",
+          "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng"
+        },
+        "qty": 1
+      },
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf361cc",
+          "name": "Bột Ngọt A-one",
+          "photo": "https://images.foody.vn/res/g88/878359/s120x120/afbfbf72-200d-4cbe-9dde-8ae4a021a6d9.jpeg",
+          "price": 33000,
+          "type": "thực phẩm",
+          "name_supplier": "Shop Rau Quả Yến - Tiểu La",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.677Z",
+          "updatedAt": "2023-05-08T15:20:29.677Z",
+          "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng"
+        },
+        "qty": 2
+      },
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf361e8",
+          "name": "Đậu Xanh Cà Vỏ",
+          "photo": "https://images.foody.vn/res/g88/878359/s120x120/b81d13bb-ed8d-4f2b-92cf-13ad15aa-a1ca07e5-210706072937.jpeg",
+          "price": 17000,
+          "type": "khác",
+          "name_supplier": "Shop Rau Quả Yến - Tiểu La",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.678Z",
+          "updatedAt": "2023-05-08T15:20:29.678Z",
+          "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng"
+        },
+        "qty": 1
+      },
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf361eb",
+          "name": "Đậu Đen Xanh Lòng 1 Lon",
+          "photo": "https://images.foody.vn/res/g88/878359/s120x120/721de648-cd81-4111-9261-ac29b2da-657c9318-201106111819.jpeg",
+          "price": 17000,
+          "type": "khác",
+          "name_supplier": "Shop Rau Quả Yến - Tiểu La",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.678Z",
+          "updatedAt": "2023-05-08T15:20:29.678Z",
+          "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng"
+        },
+        "qty": 1
+      },
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf35e34",
+          "name": "Set rìa chấm ớt rim mật ong",
+          "photo": "https://images.foody.vn/res/g100004/1000039212/s120x120/380b8d97-ce8b-4eda-8596-277342b4-36814bbb-221225211550.jpeg",
+          "price": 60000,
+          "type": "khác",
+          "name_supplier": "Tiệm Ăn Vặt Nhà Đậu - Đồ Ăn Vặt Nhập Khẩu - Nguyễn Hữu Tiến",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.637Z",
+          "updatedAt": "2023-05-08T15:20:29.637Z",
+          "addressItem": "Chung Cư 11CT05 (Gần Vinmart+), Nguyễn Hữu Tiến, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng"
+        },
+        "qty": 1
+      }
+    ],
+    "total": 180000,
+    "products": [
+      {
+        "addressItem": {
+          "name_address": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+          "goods": [
+            {
+              "item": {
+                "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+                "name": "Đường phèn"
+              },
+              "qty": 1
+            }
+          ]
+        }
+      },
+      {
+        "addressItem": {
+          "name_address": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng",
+          "goods": [
+            {
+              "item": {
+                "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng",
+                "name": "Bột Ngọt A-one"
+              },
+              "qty": 2
+            },
+            {
+              "item": {
+                "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng",
+                "name": "Đậu Xanh Cà Vỏ"
+              },
+              "qty": 1
+            },
+            {
+              "item": {
+                "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng",
+                "name": "Đậu Đen Xanh Lòng 1 Lon"
+              },
+              "qty": 1
+            }
+          ]
+        }
+      },
+      {
+        "addressItem": {
+          "name_address": "Chung Cư 11CT05 (Gần Vinmart+), Nguyễn Hữu Tiến, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+          "goods": [
+            {
+              "item": {
+                "addressItem": "Chung Cư 11CT05 (Gần Vinmart+), Nguyễn Hữu Tiến, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+                "name": "Set rìa chấm ớt rim mật ong"
+              },
+              "qty": 1
+            }
+          ]
+        }
+      }
+    ],
+    "status": "Thành công",
+    "createdAt": "2023-05-23T14:49:36.930Z",
+    "updatedAt": "2023-05-26T09:47:35.751Z",
+    "__v": 0,
+    "shipperId": "644771f05018d95a433b5600"
+  },
+  {
+    "addresses": {
+      "suppliers_address": []
+    },
+    "_id": "646cd9263e7466d9640e5192",
+    "userId": "646349668389f8777464b411",
+    "items": [
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf35ea0",
+          "name": "Cà rốt",
+          "photo": "https://images.foody.vn/res/g100006/1000051319/s120x120/1ec332a0-6597-4af7-b889-13579951-c199d33a-220501162943.jpeg",
+          "price": 20000,
+          "type": "rau củ",
+          "name_supplier": "Quầy Củ Quả - Gia Vị - Đường Nguyễn Nhàn",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.642Z",
+          "updatedAt": "2023-05-08T15:20:29.642Z",
+          "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng"
+        },
+        "qty": 1
+      },
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf35ea5",
+          "name": "Hành Lá",
+          "photo": "https://images.foody.vn/res/g100006/1000051319/s120x120/bf634491-ad7c-4f61-a0d0-5e16577d-8dd0689d-220427110418.jpeg",
+          "price": 5000,
+          "type": "khác",
+          "name_supplier": "Quầy Củ Quả - Gia Vị - Đường Nguyễn Nhàn",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.642Z",
+          "updatedAt": "2023-05-08T15:20:29.642Z",
+          "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng"
+        },
+        "qty": 1
+      },
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf35eda",
+          "name": "Dầu ăn Neptune",
+          "photo": "https://images.foody.vn/res/g100006/1000051319/s120x120/4b3ad861-dbce-4d08-8c88-ed66eed2-a5f05d4a-221121125209.jpeg",
+          "price": 65000,
+          "type": "thực phẩm",
+          "name_supplier": "Quầy Củ Quả - Gia Vị - Đường Nguyễn Nhàn",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.644Z",
+          "updatedAt": "2023-05-08T15:20:29.644Z",
+          "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng"
+        },
+        "qty": 1
+      },
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf35edc",
+          "name": "Nước tương Tam Thái Tử ( nhất ca)",
+          "photo": "https://images.foody.vn/res/g100006/1000051319/s120x120/9cfd0e74-d77b-49ae-8426-675edd99-b817d3a9-221121194635.jpeg",
+          "price": 40000,
+          "type": "thực phẩm",
+          "name_supplier": "Quầy Củ Quả - Gia Vị - Đường Nguyễn Nhàn",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.645Z",
+          "updatedAt": "2023-05-08T15:20:29.645Z",
+          "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng"
+        },
+        "qty": 1
+      },
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf35eed",
+          "name": "Đường phèn",
+          "photo": "https://images.foody.vn/res/g100006/1000051319/s120x120/d12f2ddc-955d-4544-bb10-3c6a4c7a-c328edba-221121125254.jpeg",
+          "price": 20000,
+          "type": "thực phẩm",
+          "name_supplier": "Quầy Củ Quả - Gia Vị - Đường Nguyễn Nhàn",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.645Z",
+          "updatedAt": "2023-05-08T15:20:29.645Z",
+          "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng"
+        },
+        "qty": 1
+      },
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf3620d",
+          "name": "Đậu Đỏ Hạt Nhỏ 1 Lon",
+          "photo": "https://images.foody.vn/res/g88/878359/s120x120/d5a90812-1b09-4df2-ae62-912c2409-ae1b9671-201106111934.jpeg",
+          "price": 16000,
+          "type": "thực phẩm",
+          "name_supplier": "Shop Rau Quả Yến - Tiểu La",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.679Z",
+          "updatedAt": "2023-05-08T15:20:29.679Z",
+          "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng"
+        },
+        "qty": 1
+      },
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf3663f",
+          "name": "Mì tôm Kokomi chua cay gói 90g _ combo 5 gói",
+          "photo": "https://images.foody.vn/res/g104/1035062/s120x120/dda8f9f9-54f3-4f8f-8397-31e71d82-b604fbdb-220613115811.jpeg",
+          "price": 25000,
+          "type": "thực phẩm",
+          "name_supplier": "Laban Mart - Châu Thị Vĩnh Tế",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.707Z",
+          "updatedAt": "2023-05-08T15:20:29.707Z",
+          "addressItem": "37 Châu Thị Vĩnh Tế, P. Bắc Mỹ Phú, Quận Ngũ Hành Sơn, Đà Nẵng"
+        },
+        "qty": 1
+      }
+    ],
+    "total": 191000,
+    "products": [
+      {
+        "addressItem": {
+          "name_address": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+          "goods": [
+            {
+              "item": {
+                "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+                "name": "Cà rốt"
+              },
+              "qty": 1
+            },
+            {
+              "item": {
+                "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+                "name": "Hành Lá"
+              },
+              "qty": 1
+            },
+            {
+              "item": {
+                "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+                "name": "Dầu ăn Neptune"
+              },
+              "qty": 1
+            },
+            {
+              "item": {
+                "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+                "name": "Nước tương Tam Thái Tử ( nhất ca)"
+              },
+              "qty": 1
+            },
+            {
+              "item": {
+                "addressItem": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+                "name": "Đường phèn"
+              },
+              "qty": 1
+            }
+          ]
+        }
+      },
+      {
+        "addressItem": {
+          "name_address": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng",
+          "goods": [
+            {
+              "item": {
+                "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng",
+                "name": "Đậu Đỏ Hạt Nhỏ 1 Lon"
+              },
+              "qty": 1
+            }
+          ]
+        }
+      },
+      {
+        "addressItem": {
+          "name_address": "37 Châu Thị Vĩnh Tế, P. Bắc Mỹ Phú, Quận Ngũ Hành Sơn, Đà Nẵng",
+          "goods": [
+            {
+              "item": {
+                "addressItem": "37 Châu Thị Vĩnh Tế, P. Bắc Mỹ Phú, Quận Ngũ Hành Sơn, Đà Nẵng",
+                "name": "Mì tôm Kokomi chua cay gói 90g _ combo 5 gói"
+              },
+              "qty": 1
+            }
+          ]
+        }
+      }
+    ],
+    "status": "Đang chờ",
+    "createdAt": "2023-05-23T15:17:58.805Z",
+    "updatedAt": "2023-05-23T15:17:58.805Z",
+    "__v": 0
+  },
+  {
+    "addresses": {
+      "suppliers_address": []
+    },
+    "_id": "646f790f011b880af22b9df9",
+    "userId": "646349668389f8777464b411",
+    "items": [
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf360b5",
+          "name": "Hành Lá (Thêm)",
+          "photo": "https://images.foody.vn/res/g88/878359/s120x120/94913b2a-1b84-4e2c-98c4-6db1b4d0-91b83886-200812231455.jpeg",
+          "price": 1000,
+          "type": "khác",
+          "name_supplier": "Shop Rau Quả Yến - Tiểu La",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.666Z",
+          "updatedAt": "2023-05-08T15:20:29.666Z",
+          "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng"
+        },
+        "qty": 1
+      }
+    ],
+    "total": 1000,
+    "products": [
+      {
+        "addressItem": {
+          "name_address": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng",
+          "goods": [
+            {
+              "item": {
+                "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng",
+                "name": "Hành Lá (Thêm)"
+              },
+              "qty": 1
+            }
+          ]
+        }
+      }
+    ],
+    "status": "Đang chờ",
+    "createdAt": "2023-05-25T15:04:47.435Z",
+    "updatedAt": "2023-05-25T15:04:47.435Z",
+    "__v": 0
+  },
+  {
+    "addresses": {
+      "suppliers_address": []
+    },
+    "_id": "646f7bb5011b880af22b9e0a",
+    "userId": "646349668389f8777464b411",
+    "items": [
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf36f60",
+          "name": "Nước khoáng th.nhien Lavie 500ml - 3004739",
+          "photo": "https://images.foody.vn/res/g65/641598/s120x120/99e1afc8-bfb1-4fb9-a853-be86096a318a.jpeg",
+          "price": 5000,
+          "type": "đồ uống",
+          "name_supplier": "Siêu Thị Co.op Mart Đà Nẵng",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.763Z",
+          "updatedAt": "2023-05-08T15:20:29.763Z",
+          "addressItem": "478 Điện Biên Phủ, P. Thanh Khê Đông, Quận Thanh Khê, Đà Nẵng"
+        },
+        "qty": 1
+      }
+    ],
+    "total": 5000,
+    "products": [
+      {
+        "addressItem": {
+          "name_address": "478 Điện Biên Phủ, P. Thanh Khê Đông, Quận Thanh Khê, Đà Nẵng",
+          "goods": [
+            {
+              "item": {
+                "addressItem": "478 Điện Biên Phủ, P. Thanh Khê Đông, Quận Thanh Khê, Đà Nẵng",
+                "name": "Nước khoáng th.nhien Lavie 500ml - 3004739"
+              },
+              "qty": 1
+            }
+          ]
+        }
+      }
+    ],
+    "status": "Đang chờ",
+    "createdAt": "2023-05-25T15:16:05.829Z",
+    "updatedAt": "2023-05-25T15:16:05.829Z",
+    "__v": 0
+  },
+  {
+    "addresses": {
+      "suppliers_address": []
+    },
+    "_id": "646f7c8c011b880af22b9e12",
+    "userId": "646349668389f8777464b411",
+    "items": [
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf36cd0",
+          "name": "Nước khoáng thạch bích (500ml)",
+          "photo": "https://images.foody.vn/res/g105/1041990/s120x120/da4b1e67-6635-4aa2-98b6-5c0b14ea-e509a537-210720124501.jpeg",
+          "price": 7000,
+          "type": "đồ uống",
+          "name_supplier": "Danh - Tạp Hóa Tiêu Dùng",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.750Z",
+          "updatedAt": "2023-05-08T15:20:29.750Z",
+          "addressItem": "168 Vũ Quỳnh, Quận Thanh Khê, Đà Nẵng"
+        },
+        "qty": 1
+      }
+    ],
+    "total": 7000,
+    "products": [
+      {
+        "addressItem": {
+          "name_address": "168 Vũ Quỳnh, Quận Thanh Khê, Đà Nẵng",
+          "goods": [
+            {
+              "item": {
+                "addressItem": "168 Vũ Quỳnh, Quận Thanh Khê, Đà Nẵng",
+                "name": "Nước khoáng thạch bích (500ml)"
+              },
+              "qty": 1
+            }
+          ]
+        }
+      }
+    ],
+    "status": "Đang chờ",
+    "createdAt": "2023-05-25T15:19:40.248Z",
+    "updatedAt": "2023-05-25T15:19:40.248Z",
+    "__v": 0
+  },
+  {
+    "addresses": {
+      "suppliers_address": []
+    },
+    "_id": "646f7cc2011b880af22b9e17",
+    "userId": "646349668389f8777464b411",
+    "items": [
+      {
+        "item": {
+          "_id": "6459133dd101ec3c6cf360b5",
+          "name": "Hành Lá (Thêm)",
+          "photo": "https://images.foody.vn/res/g88/878359/s120x120/94913b2a-1b84-4e2c-98c4-6db1b4d0-91b83886-200812231455.jpeg",
+          "price": 1000,
+          "type": "khác",
+          "name_supplier": "Shop Rau Quả Yến - Tiểu La",
+          "__v": 0,
+          "createdAt": "2023-05-08T15:20:29.666Z",
+          "updatedAt": "2023-05-08T15:20:29.666Z",
+          "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng"
+        },
+        "qty": 1
+      }
+    ],
+    "total": 1000,
+    "products": [
+      {
+        "addressItem": {
+          "name_address": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng",
+          "goods": [
+            {
+              "item": {
+                "addressItem": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng",
+                "name": "Hành Lá (Thêm)"
+              },
+              "qty": 1
+            }
+          ]
+        }
+      }
+    ],
+    "status": "Đang chờ",
+    "createdAt": "2023-05-25T15:20:34.039Z",
+    "updatedAt": "2023-05-25T15:20:34.039Z",
+    "__v": 0
+  }
+]

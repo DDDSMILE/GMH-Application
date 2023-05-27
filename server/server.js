@@ -2,6 +2,8 @@ import { app } from "./app.js";
 import { config } from "dotenv";
 import { connectDatabase } from "./config/database.js";
 import cloudinary from "cloudinary";
+import fs from "fs";
+import path from "path";
 
 import cron from "node-cron";
 import puppeteer from "puppeteer";
@@ -14,6 +16,7 @@ import {
   vegetablesWords,
 } from "./utils/crapeData.js";
 import { SuppliersModel } from "./models/suppliers.model.js";
+import mongoose from "mongoose";
 
 config({
   path: "./config/config.env",
@@ -155,10 +158,37 @@ const updatedSuppliers = async () => {
   }
 };
 
+const backupCollections = async () => {
+  const collectionNames = [
+    "Admin",
+    "Shipper",
+    "User",
+    "Dishes",
+    "Orders",
+    "Suppliers",
+  ];
+  const backupFolder = "D:/project/GMH/backup";
+  for (const collectionName of collectionNames) {
+    const Model = mongoose.model(collectionName);
+    try {
+      const data = await Model.find({});
+      const jsonData = JSON.stringify(data, null, 2);
+      const filePath = path.join(backupFolder, `${collectionName}.json`);
+      fs.writeFileSync(filePath, jsonData);
+      console.log(
+        `Đã backup collection "${collectionName}" vào file ${collectionName}.json`
+      );
+    } catch (error) {
+      console.error(`Lỗi backup collection "${collectionName}":`, error);
+    }
+  }
+};
+
 cron.schedule("0 1 * * *", () => {
   console.log("Start crape data at 1:00 AM");
   // updatedDishes();
   // updatedSuppliers();
+  // backupCollections();
 });
 
 app.listen(process.env.PORT, () => {

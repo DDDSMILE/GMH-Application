@@ -1,0 +1,16 @@
+[
+  {
+    "avatar": {
+      "public_id": "shipper/aveqfofhd6pjvnqnqyrt",
+      "url": "https://res.cloudinary.com/du93troxt/image/upload/v1682403822/shipper/aveqfofhd6pjvnqnqyrt.jpg"
+    },
+    "_id": "644771f05018d95a433b5600",
+    "name": "shipperhaveavatar",
+    "password": "$2b$10$p3WXX2MQ8YXmdDG6j7jbxOilSQS9dDFZ7yt8xwaNpu4hhc63VutqO",
+    "phone_number": "01676314578",
+    "orders": [],
+    "createdAt": "2023-04-25T06:23:44.384Z",
+    "updatedAt": "2023-04-25T06:23:44.384Z",
+    "__v": 0
+  }
+]

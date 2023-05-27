@@ -1,0 +1,212 @@
+[
+  {
+    "_id": "6459d3ac96465533ce930207",
+    "name": "Tiệm Ăn Vặt Nhà Đậu - Đồ Ăn Vặt Nhập Khẩu - Nguyễn Hữu Tiến",
+    "address": "Chung Cư 11CT05 (Gần Vinmart+), Nguyễn Hữu Tiến, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g100004/1000039212/prof/s640x400/file_restaurant_photo_j3ix_16401-ab72bce3-211222151504.jpg",
+    "open_time": "07:30 - 22:30",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.073Z",
+    "updatedAt": "2023-05-09T05:01:32.073Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce93020c",
+    "name": "Shop Rau Quả Yến - Tiểu La",
+    "address": "45 Tiểu La, P. Hòa Cường Bắc, Quận Hải Châu, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g88/878359/prof/s640x400/foody-upload-api-foody-mobile-rau-qua-190109084121.jpg",
+    "open_time": "06:00 - 20:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.073Z",
+    "updatedAt": "2023-05-09T05:01:32.073Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930214",
+    "name": "Andros - Trái Cây Tươi Đông Lạnh - Lý Nhật Quang",
+    "address": "18 Lý Nhật Quang, P. Nại Hiên Đông, Quận Sơn Trà, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g112/1116663/prof/s640x400/foody-upload-api-foody-mobile-ba-aeb4fee7-211116090648.jpeg",
+    "open_time": "09:00 - 17:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.074Z",
+    "updatedAt": "2023-05-09T05:01:32.074Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce93021a",
+    "name": "Pate Loan Nguyễn - Pate & Cà Phê Pha Sẵn - Shop Online",
+    "address": "143 Phạm Hùng, X. Hoà Châu, Hòa Vang, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g111/1100309/prof/s640x400/foody-upload-api-foody-mobile-pa-6e0c01b5-210905130748.jpeg",
+    "open_time": "10:00 - 20:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.075Z",
+    "updatedAt": "2023-05-09T05:01:32.075Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce93020e",
+    "name": "Tiệm Ăn Ah CÁ - Set Trà Sữa & Đồ Ăn Vặt - Đặng Tất",
+    "address": "5 Đặng Tất, P. Hòa Khánh Nam, Quận Liên Chiểu, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g110/1097300/prof/s640x400/foody-upload-api-foody-mobile-co-63d87840-210820195316.jpeg",
+    "open_time": "08:00 - 23:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.073Z",
+    "updatedAt": "2023-05-09T05:01:32.073Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930210",
+    "name": "Laban Mart - Châu Thị Vĩnh Tế",
+    "address": "37 Châu Thị Vĩnh Tế, P. Bắc Mỹ Phú, Quận Ngũ Hành Sơn, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g104/1035062/prof/s640x400/foody-upload-api-foody-mobile-z3-acfdeec8-221219135701.jpeg",
+    "open_time": "07:15 - 19:55",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.074Z",
+    "updatedAt": "2023-05-09T05:01:32.074Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930216",
+    "name": "Danh - Tạp Hóa Tiêu Dùng",
+    "address": "168 Vũ Quỳnh, Quận Thanh Khê, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g105/1041990/prof/s640x400/foody-upload-api-foody-mobile-46351804_83649532340-200813133940.jpg",
+    "open_time": "07:00 - 22:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.074Z",
+    "updatedAt": "2023-05-09T05:01:32.074Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930217",
+    "name": "Siêu Thị Co.op Mart Đà Nẵng",
+    "address": "478 Điện Biên Phủ, P. Thanh Khê Đông, Quận Thanh Khê, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g65/641598/prof/s640x400/foody-mobile-m-mat-jpg-939-636245845441837676.jpg",
+    "open_time": "08:00 - 21:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.074Z",
+    "updatedAt": "2023-05-09T05:01:32.074Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930219",
+    "name": "Cô Tấm - Chả Bò & Chả Heo - Nguyễn Khả Trạc",
+    "address": "69 Nguyễn Khả Trạc, Hòa Vang, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g105/1044838/prof/s640x400/foody-upload-api-foody-mobile-1-200831155801.jpg",
+    "open_time": "08:00 - 21:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.074Z",
+    "updatedAt": "2023-05-09T05:01:32.074Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce93020a",
+    "name": "Bách Hoá Làm Bánh Anton - Bầu Tràm 3",
+    "address": "07 Bầu Tràm 3, P. Khuê Trung, Quận Cẩm Lệ, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g111/1105472/prof/s640x400/file_restaurant_photo_lq6q_16375-3c19886c-211122225428.jpg",
+    "open_time": "06:00 - 23:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.073Z",
+    "updatedAt": "2023-05-09T05:01:32.073Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930206",
+    "name": "Khô Gà Lá Chanh - Shop Online",
+    "address": "9 Phạm Thế Hiển, P. Khuê Trung, Quận Cẩm Lệ, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g95/949019/prof/s640x400/foody-upload-api-foody-mobile-recipe-cover-r23601-190819103331.jpg",
+    "open_time": "07:00 - 22:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.072Z",
+    "updatedAt": "2023-05-09T05:01:32.072Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930211",
+    "name": "Kim Liên - Minimart",
+    "address": "26 Lê Quang Đạo, P. Mỹ An, Quận Ngũ Hành Sơn, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g105/1044380/prof/s640x400/foody-upload-api-foody-mobile-taphoaffhfg-200827152027.jpg",
+    "open_time": "07:00 - 22:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.074Z",
+    "updatedAt": "2023-05-09T05:01:32.074Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930213",
+    "name": "Kim Chi Hàn Quốc - Nhà Rốt",
+    "address": "111 Nguyễn Văn Thoại, P. An Hải Đông, Quận Sơn Trà, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g111/1105449/prof/s640x400/foody-upload-api-foody-mobile-cv-73cc12bc-210921180040.jpeg",
+    "open_time": "07:00 - 21:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.074Z",
+    "updatedAt": "2023-05-09T05:01:32.074Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930215",
+    "name": "Vân Mart - Thực Phẩm Đông Lạnh - 57 Đông Giang",
+    "address": "57 Đông Giang, P. An Hải Tây, Quận Sơn Trà, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g110/1094727/prof/s640x400/foody-upload-api-foody-mobile-ma-8fd7bf16-210814114231.jpeg",
+    "open_time": "06:00 - 22:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.074Z",
+    "updatedAt": "2023-05-09T05:01:32.074Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930218",
+    "name": "Shop Mẹ Sóc - Thực Phẩm & Sữa",
+    "address": "Trung Sơn, Xã Hòa Liên, Hòa Vang, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g105/1041789/prof/s640x400/foody-upload-api-foody-mobile-suahanhnhanhdf-200812140545.jpg",
+    "open_time": "09:00 - 21:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.074Z",
+    "updatedAt": "2023-05-09T05:01:32.074Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930208",
+    "name": "Quầy Củ Quả - Gia Vị - Đường Nguyễn Nhàn",
+    "address": "Chợ Hòa Cầm Nguyễn Nhàn, P. Hòa Thọ Đông, Quận Cẩm Lệ, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g100006/1000051319/prof/s640x400/file_a1ca39ab-5d1a-49d8-a20c-f59-99f449e0-220413123836.jpeg",
+    "open_time": "05:00 - 20:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.073Z",
+    "updatedAt": "2023-05-09T05:01:32.073Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930209",
+    "name": "Thực Phẩm Sạch Hoàng Linh Food - Gà Ủ Muối - Mẹ Thứ",
+    "address": "161 Mẹ Thứ, P. Hoà Xuân, Quận Cẩm Lệ, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g111/1103925/prof/s640x400/foody-upload-api-foody-mobile-ga-098f4132-210916212026.jpeg",
+    "open_time": "07:00 - 22:45",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.073Z",
+    "updatedAt": "2023-05-09T05:01:32.073Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce93020b",
+    "name": "Chinn's Food - Nguyên Liệu Tokkbokki",
+    "address": "K15/11 Phan Chu Trinh, P. Hải Châu 1, Quận Hải Châu, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g105/1044715/prof/s640x400/foody-upload-api-foody-mobile-tokbokkijgfdghf-200831094956.jpg",
+    "open_time": "07:00 - 22:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.073Z",
+    "updatedAt": "2023-05-09T05:01:32.073Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce93020d",
+    "name": "Đặc Sản 3 Miền - Hoàng Diệu",
+    "address": "280/17 Hoàng Diệu, P. Bình Hiên, Quận Hải Châu, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g75/742888/prof/s640x400/foody-upload-api-foody-mobile-mien-jpg-180521115126.jpg",
+    "open_time": "00:00 - 23:59",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.073Z",
+    "updatedAt": "2023-05-09T05:01:32.073Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce93020f",
+    "name": "Mèo - Khô Gà Lá Chanh - Shop Online",
+    "address": "302 Hồ Tùng Mậu, P. Hòa Minh, Quận Liên Chiểu, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g86/852715/prof/s640x400/foody-upload-api-foody-mobile-meo-jpg-181128111731.jpg",
+    "open_time": "08:00 - 22:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.073Z",
+    "updatedAt": "2023-05-09T05:01:32.073Z"
+  },
+  {
+    "_id": "6459d3ac96465533ce930212",
+    "name": "A Năm - Chuyên Gà Tươi Sống",
+    "address": "198 Châu Thị Vĩnh Tế, Quận Ngũ Hành Sơn, Đà Nẵng",
+    "photo": "https://images.foody.vn/res/g110/1096692/prof/s640x400/foody-upload-api-foody-mobile-co-75528f76-210819141639.jpeg",
+    "open_time": "07:00 - 20:00",
+    "__v": 0,
+    "createdAt": "2023-05-09T05:01:32.074Z",
+    "updatedAt": "2023-05-09T05:01:32.074Z"
+  }
+]

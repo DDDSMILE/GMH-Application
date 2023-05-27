@@ -1,0 +1,13 @@
+[
+  {
+    "_id": "64424ca67cdee20ada46519b",
+    "name": "admin",
+    "password": "$2b$10$YA82z8OZRzioYInNbMiX/u85kKZoo1A0kMp.NgEVIL2D2Lu0/D88.",
+    "email": "thaigiui2016@gmail.com",
+    "createdAt": "2023-04-21T08:43:18.798Z",
+    "updatedAt": "2023-04-21T13:38:04.048Z",
+    "__v": 0,
+    "resetPasswordOtp": null,
+    "resetPasswordOtpExpiry": null
+  }
+]
