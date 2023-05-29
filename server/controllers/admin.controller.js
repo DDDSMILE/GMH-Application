@@ -177,9 +177,9 @@ export const deleteShipper = async (req, res) => {
 
 export const createShipper = async (req, res) => {
   try {
-    const { name, username, phone_number, address, email, password } = req.body;
-
-    const avatar = req.files.avatar.tempFilePath;
+    const { name, username, phone_number, address, password, lat, lng } =
+      req.body;
+    const avatar = req.file.path;
 
     let shipper = await ShipperModel.findOne({ name });
     if (shipper) {
@@ -200,11 +200,12 @@ export const createShipper = async (req, res) => {
       password,
       phone_number,
       address,
-      email,
       avatar: {
         public_id: mycloud.public_id,
         url: mycloud.secure_url,
       },
+      lat,
+      lng,
     });
 
     res.status(200).json({ message: "ok" });
@@ -215,13 +216,13 @@ export const createShipper = async (req, res) => {
 
 export const updateProfileShipper = async (req, res) => {
   try {
-    const shipper = await ShipperModel.findById(req.shipper._id);
+    const { name, username, phone_number, password, address } = req.body;
+    const avatar = req.file.path;
 
-    const { name, user_name, phone_number, password, address } = req.body;
-    const avatar = req.files.avatar.tempFilePath;
+    const shipper = await ShipperModel.findById(req.params.id);
 
     if (name) shipper.name = name;
-    if (user_name) shipper.user_name = user_name;
+    if (username) shipper.username = username;
     if (phone_number) shipper.phone_number = phone_number;
     if (password) shipper.password = password;
     if (address) shipper.address = address;

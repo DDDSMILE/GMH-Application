@@ -8,7 +8,9 @@ import Shippers from "./pages/shippers/Shippers";
 import Profile from "./components/Profile/Profile";
 import Create from "./components/Create/Create";
 import { userInputs } from "./utils/forminputs";
+import "react-toastify/dist/ReactToastify.css";
 import "./app.scss";
+import Updated from "./components/Updated/Updated";
 
 function App() {
   const { darkMode } = useContext(AppContext);
@@ -28,6 +30,7 @@ function App() {
             <Route path="shippers">
               <Route index element={<Shippers />} />
               <Route path=":shipperId" element={<Profile />} />
+              <Route path=":shipperId/updated" element={<Updated />} />
               <Route
                 path="create"
                 element={<Create inputs={userInputs} />}

@@ -30,7 +30,7 @@ const shipperSchema = new mongoose.Schema(
     lat: {
       type: Number,
     },
-    long: {
+    lng: {
       type: Number,
     },
     orders: [

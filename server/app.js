@@ -6,7 +6,6 @@ import suppliersRoute from "./routes/suppliers.route.js";
 import adminRoute from "./routes/admin.route.js";
 import ordersRoute from "./routes/orders.route.js";
 import cookieParser from "cookie-parser";
-import fileUpload from "express-fileupload";
 import cors from "cors";
 
 export const app = express();
@@ -14,12 +13,6 @@ export const app = express();
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(
-  fileUpload({
-    limits: { fileSize: 50 * 1024 * 1024 },
-    useTempFiles: true,
-  })
-);
 
 app.use(cors());
 

@@ -27,9 +27,13 @@ class GMH_API {
     return data;
   }
 
-  async createShipper({ body }) {
-    const { data } = await axios.post(`${API_URL}/admin/create_shipper`, body);
-    return data;
+  async createShipper(formData) {
+    console.log(formData);
+    await axios.post(`${API_URL}/admin/create_shipper`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   }
 
   async deleteShipperById({ shipperId }) {

@@ -311,7 +311,7 @@ const shortedDistance = () => {
   );
 };
 
-shortedDistance();
+// shortedDistance();
 
 cron.schedule("0 1 * * *", () => {
   console.log("Start crape data at 1:00 AM");

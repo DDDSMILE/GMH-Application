@@ -31,18 +31,12 @@ const Profile = () => {
                 <div className="details">
                   <h1 className="itemTitle">{shipper.name}</h1>
                   <div className="detailItem">
-                    <span className="itemKey">Email:</span>
-                    <span className="itemValue">janedoe@gmail.com</span>
-                  </div>
-                  <div className="detailItem">
                     <span className="itemKey">Số điện thoại:</span>
                     <span className="itemValue">{shipper.phone_number}</span>
                   </div>
                   <div className="detailItem">
                     <span className="itemKey">Địa chỉ:</span>
-                    <span className="itemValue">
-                      Elton St. 234 Garden Yd. NewYork
-                    </span>
+                    <span className="itemValue">{shipper.address}</span>
                   </div>
                 </div>
               </div>

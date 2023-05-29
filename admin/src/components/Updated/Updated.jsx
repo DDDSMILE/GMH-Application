@@ -1,12 +1,14 @@
 import Sidebar from "../sidebar/Sidebar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useDropzone } from "react-dropzone";
-import "./create.scss";
 import styled from "@emotion/styled";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import "./updated.scss";
+import { useParams } from "react-router-dom";
+import gmh from "../../gmh";
 
 // Styled components
 const StyledForm = styled(Form)`
@@ -76,16 +78,26 @@ const convertAddressToCoordinates = async (address) => {
   }
 };
 
-const Create = ({ inputs, title }) => {
-  const initialValues = {
-    name: "",
-    username: "",
-    password: "",
-    phone_number: "",
-    avatar: "",
-    address: "",
-  };
+const Updated = () => {
+  const { shipperId } = useParams();
+  const [shipper, setShipper] = useState({});
+  const [isDataFetched, setIsDataFetched] = useState(false);
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await gmh.getShipperById({ shipperId });
+      setShipper(data[0]);
+      setIsDataFetched(true);
+    };
+    fetchData();
+  }, [shipperId]);
 
+  const initialValues = {
+    name: shipper.name || "",
+    username: shipper.username || "",
+    password: "",
+    phone_number: shipper.phone_number?.slice(3) || "",
+    address: shipper.address || "",
+  };
   const [selectedImage, setSelectedImage] = useState(null);
   const [imageAvatar, setImageAvatar] = useState(null);
 
@@ -140,10 +152,9 @@ const Create = ({ inputs, title }) => {
     Object.entries(updatedValues).forEach(([key, value]) => {
       formData.append(key, value);
     });
-
     try {
       await axios.post(
-        `http://localhost:3001/api/v1/admin/create_shipper`,
+        `http://localhost:3001/api/v1/admin/updated_shipper/${shipperId}`,
         formData,
         {
           headers: {
@@ -151,14 +162,16 @@ const Create = ({ inputs, title }) => {
           },
         }
       );
-      toast.success("Thêm thành công");
-      setSelectedImage(null);
-      resetForm();
+      toast.success("Sửa thành công");
     } catch (error) {
       toast.error("Tên người dùng trùng");
       throw new Error(error.message);
     }
   };
+
+  if (!isDataFetched) {
+    return <div>Loading...</div>; // Hiển thị loading khi đang lấy dữ liệu
+  }
 
   return (
     <div className="new">
@@ -166,7 +179,7 @@ const Create = ({ inputs, title }) => {
       <Sidebar />
       <div className="newContainer">
         <div className="top">
-          <h1>{title}</h1>
+          <h1>Chỉnh sửa</h1>
         </div>
         <div className="bottom">
           <Formik
@@ -192,9 +205,11 @@ const Create = ({ inputs, title }) => {
                         style={{ maxWidth: "100%", maxHeight: "100%" }}
                       />
                     ) : (
-                      <p style={{ fontSize: "16px" }}>
-                        Kéo và thả hình ảnh hoặc nhấp để chọn
-                      </p>
+                      <img
+                        src={shipper.avatar.url}
+                        alt="cloud-img"
+                        style={{ maxWidth: "100%", maxHeight: "100%" }}
+                      />
                     )}
                   </DropzoneContainer>
                   <ErrorText name="avatar" component="div" />
@@ -232,7 +247,7 @@ const Create = ({ inputs, title }) => {
                 </div>
               </div>
 
-              <SubmitButton type="submit">Tạo mới</SubmitButton>
+              <SubmitButton type="submit">Thay đổi</SubmitButton>
             </StyledForm>
           </Formik>
         </div>
@@ -241,4 +256,4 @@ const Create = ({ inputs, title }) => {
   );
 };
 
-export default Create;
+export default Updated;
