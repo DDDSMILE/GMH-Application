@@ -96,7 +96,9 @@ const SignInScreen = ({ navigation }) => {
       />
       {(error || formError !== "") && (
         <View>
-          <Text>{error ? error : formError}</Text>
+          <Text>
+            {error ? "Tài khoản hoặc mật khẩu không chính xác" : formError}
+          </Text>
         </View>
       )}
       <Text

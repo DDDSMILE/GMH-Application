@@ -68,12 +68,15 @@ const InputPhoneScreen = ({ navigation }) => {
     const fetchLocalStorage = async () => {
       const name = await getData("register_name");
       const password = await getData("register_password");
-      const address = await getData("register_address");
+      const { lat, lng, address } = await getData("register_address");
       setFormState({
         name: name,
         password: password,
         address: address,
         phone_number: phoneNumber,
+        lat: lat,
+        lng: lng,
+        address: address,
       });
     };
     fetchLocalStorage();

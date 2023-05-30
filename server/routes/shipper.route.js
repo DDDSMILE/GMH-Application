@@ -2,6 +2,7 @@ import express from "express";
 import {
   forgetPassword,
   getMyProfile,
+  getUser,
   login,
   logout,
   resetPassword,
@@ -17,6 +18,8 @@ router.route("/login").post(login);
 router.route("/logout").get(logout);
 
 router.route("/me").get(isAuthenticated, getMyProfile);
+
+router.route("/get_user/:id").get(getUser);
 
 router.route("/updateprofile").put(isAuthenticated, updateProfile);
 

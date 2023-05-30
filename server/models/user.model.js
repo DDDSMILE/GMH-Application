@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema(
     lat: {
       type: Number,
     },
-    long: {
+    lng: {
       type: Number,
     },
     orders: [
@@ -37,9 +37,7 @@ const userSchema = new mongoose.Schema(
         ref: "Order",
       },
     ],
-
     verified: { type: Boolean, default: false },
-
     otp: {
       type: Number,
     },

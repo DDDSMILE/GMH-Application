@@ -1,4 +1,9 @@
-import { View, Text, KeyboardAvoidingView } from "react-native";
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  ActivityIndicator,
+} from "react-native";
 import { BackButton, HeaderPage } from "../../../components/form";
 import { useCallback, useEffect, useState } from "react";
 import { GiftedChat } from "react-native-gifted-chat";
@@ -11,10 +16,15 @@ import { OrderResumeCTA } from "../../../components/food";
 const ChatScreen = ({ route, navigation }) => {
   const { type } = route.params;
   const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const { total, items } = useSelector((state) => state.order);
 
   const { dish_suggest } = SuggestionAnswers.find((item) => item.name === type);
+  const valueSuggestions = dish_suggest.map((dish) => ({
+    title: dish,
+    value: dish,
+  }));
 
   useEffect(() => {
     let default_text = [];
@@ -27,24 +37,7 @@ const ChatScreen = ({ route, navigation }) => {
           quickReplies: {
             type: "radio",
             keepIt: true,
-            values: [
-              {
-                title: dish_suggest[0],
-                value: dish_suggest[0],
-              },
-              {
-                title: dish_suggest[1],
-                value: dish_suggest[1],
-              },
-              {
-                title: dish_suggest[2],
-                value: dish_suggest[2],
-              },
-              {
-                title: dish_suggest[3],
-                value: dish_suggest[3],
-              },
-            ],
+            values: valueSuggestions,
           },
           user: {
             _id: 2,
@@ -76,6 +69,7 @@ const ChatScreen = ({ route, navigation }) => {
   };
 
   const addNewMessage = (data) => {
+    setIsLoading(false);
     const value = {
       _id: Math.random(999999999999),
       text: data,
@@ -122,15 +116,17 @@ const ChatScreen = ({ route, navigation }) => {
             _id: 1,
           }}
         />
+        {items.length > 0 && (
+          <View style={{ paddingTop: 100 }}>
+            <OrderResumeCTA
+              text="Sản phẩm đã thêm"
+              total={total}
+              navigateTo="order"
+              itemsLength={items.length}
+            />
+          </View>
+        )}
       </KeyboardAvoidingView>
-      {items.length > 0 && (
-        <OrderResumeCTA
-          text="Sản phẩm đã thêm"
-          total={total}
-          navigateTo="order"
-          itemsLength={items.length}
-        />
-      )}
     </>
   );
 };

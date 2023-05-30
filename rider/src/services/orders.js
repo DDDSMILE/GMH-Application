@@ -33,7 +33,6 @@ export const acceptOrder = async ({ shipperId, orderId }) => {
 
 export const doneOrder = async ({ orderId }) => {
   try {
-    console.log({ orderId });
     const { data } = await axios.post(`${API_URL}/shipper/done_order`, {
       orderId,
     });

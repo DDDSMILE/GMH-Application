@@ -30,8 +30,8 @@ const RegisterLocation = ({ navigation }) => {
   const handleGetLocation = async () => {
     // DEFAULT LOCATION
     const DEFAULT_LOCATION = {
-      latitude: 16.049372951103447,
-      longitude: 108.16047413865257,
+      latitude: 16.059918402224724,
+      longitude: 108.20964027606065,
     };
 
     const loc = {
@@ -48,8 +48,30 @@ const RegisterLocation = ({ navigation }) => {
     setAddress(address);
   };
 
+  const convertAddressToCoordinates = async (address) => {
+    try {
+      const response = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+          address
+        )}.json?access_token=pk.eyJ1IjoidGhhaXJ5byIsImEiOiJjbGk2dmt6bmczZzNiM2VudGRkc2xhY2dxIn0.j5FbXoxE7wJOwi9STKSLBw&limit=1`
+      );
+      const data = await response.json();
+      if (data.features.length > 0) {
+        const { center } = data.features[0];
+        return { lat: center[1], lng: center[0] };
+      }
+      return null;
+    } catch (error) {
+      console.error("Error converting address to coordinates:", error);
+      return null;
+    }
+  };
+
   const handleRegister = async () => {
-    storeData("register_address", address);
+    const { lat, lng } = await convertAddressToCoordinates(address);
+    const newAddress = { address: address, lat: lat, lng: lng };
+    navigation.navigate("inputphonenumber");
+    storeData("register_address", newAddress);
   };
 
   return (
@@ -101,10 +123,7 @@ const RegisterLocation = ({ navigation }) => {
       >
         <ButtonForm
           disable={isDisableState}
-          onPress={() => {
-            handleRegister();
-            navigation.navigate("inputphonenumber");
-          }}
+          onPress={handleRegister}
           text={"Tiếp theo"}
         />
       </View>

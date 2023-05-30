@@ -12,6 +12,7 @@ import { DismissKeyboardView, Input } from "../../../components/common";
 import { useSelector } from "react-redux";
 import * as Location from "expo-location";
 import colors from "../../../constants/colors";
+import { changeAddress } from "../../../services/user";
 
 const Addresses = ({ navigation }) => {
   const { user } = useSelector((state) => state.auth);
@@ -19,6 +20,25 @@ const Addresses = ({ navigation }) => {
   const [newAddress, setNewAddress] = useState({
     new_address: user.address,
   });
+
+  const convertAddressToCoordinates = async (address) => {
+    try {
+      const response = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+          address
+        )}.json?access_token=pk.eyJ1IjoidGhhaXJ5byIsImEiOiJjbGk2dmt6bmczZzNiM2VudGRkc2xhY2dxIn0.j5FbXoxE7wJOwi9STKSLBw&limit=1`
+      );
+      const data = await response.json();
+      if (data.features.length > 0) {
+        const { center } = data.features[0];
+        return { lat: center[1], lng: center[0] };
+      }
+      return null;
+    } catch (error) {
+      console.error("Error converting address to coordinates:", error);
+      return null;
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -42,7 +62,13 @@ const Addresses = ({ navigation }) => {
     const address = `${
       name || streetNumber
     }, ${street}, ${subregion}, ${region}`;
-    setNewAddress({ new_address: address });
+    setNewAddress(address);
+  };
+
+  const handleChange = async () => {
+    const { new_address } = newAddress;
+    const { lat, lng } = await convertAddressToCoordinates(new_address);
+    await changeAddress({ address: new_address, lat: lat, lng: lng });
   };
 
   return (
@@ -83,7 +109,7 @@ const Addresses = ({ navigation }) => {
 
         <View style={styles.separatorBar}></View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleChange}>
           <View style={styles.saveBtn}>
             <Text style={styles.saveBtnText}>Lưu thay đổi</Text>
           </View>

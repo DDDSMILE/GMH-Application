@@ -19,20 +19,12 @@ const OTPScreen = ({ navigation }) => {
   useEffect(() => {
     const flatten = (obj) => Object.values(obj).flat();
     const vOtp = Number(flatten(otp).join(""));
-    vOtp.toString().length > 3 ? setDisableState(false) : setDisableState(true);
+    vOtp.toString().length > 2 ? setDisableState(false) : setDisableState(true);
     setVerityOtp(vOtp);
   }, [otp]);
 
-  useEffect(() => {
-    const fetchLocalStorage = async () => {
-      const user = await getData("user");
-      setUser(user);
-    };
-    fetchLocalStorage();
-  }, []);
-
   const handleRegister = () => {
-    verifyOtp(verityOtp, user);
+    verifyOtp(verityOtp);
   };
 
   return (

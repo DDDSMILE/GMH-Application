@@ -28,7 +28,6 @@ class GMH_API {
   }
 
   async createShipper(formData) {
-    console.log(formData);
     await axios.post(`${API_URL}/admin/create_shipper`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",

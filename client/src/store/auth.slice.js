@@ -31,7 +31,7 @@ const authSlice = createSlice({
       state.loading = true;
     }),
       builder.addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload.data;
         state.loading = false;
         state.error = null;
       }),
@@ -43,7 +43,7 @@ const authSlice = createSlice({
         state.loading = true;
       }),
       builder.addCase(register.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.data;
         state.loading = false;
         state.error = null;
       }),
@@ -72,16 +72,18 @@ export const login = createAsyncThunk(
 
 export const register = createAsyncThunk(
   "auth/register",
-  async ({ name, password, address, phone_number }, thunkAPI) => {
+  async ({ name, password, address, phone_number, lat, lng }, thunkAPI) => {
     try {
-      const user = await registerService({
+      const { data } = await registerService({
         name,
         password,
         address,
         phone_number,
+        lat,
+        lng,
       });
-      storeData("user", user);
-      return { user };
+      storeData("user", data);
+      return { data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

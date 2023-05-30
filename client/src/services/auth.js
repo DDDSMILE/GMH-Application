@@ -19,13 +19,22 @@ export const login = async ({ name, password }) => {
   }
 };
 
-export const register = async ({ name, password, phone_number, address }) => {
+export const register = async ({
+  name,
+  password,
+  phone_number,
+  address,
+  lng,
+  lat,
+}) => {
   try {
     const { data } = await axios.post(`${API_URL}/register`, {
       name,
       password,
       phone_number,
       address,
+      lat,
+      lng,
     });
     return data;
   } catch (error) {
@@ -33,13 +42,13 @@ export const register = async ({ name, password, phone_number, address }) => {
   }
 };
 
-export const verifyOtp = async (otp, { user }) => {
+export const verifyOtp = async (otp) => {
   try {
-    const { data } = await axios.post(`${API_URL}/verify`, { otp, user });
-    storeData("user", data);
-    return data;
+    const { data } = await axios.post(`${API_URL}/verify`, { otp });
+    storeData("user", data.data);
+    return data.data;
   } catch (error) {
-    console.log(error.message);
+    console.log("error", error.message);
   }
 };
 

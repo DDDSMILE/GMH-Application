@@ -52,13 +52,10 @@ const InfinityScroll = (props) => {
   }, [currentPage]);
 
   useEffect(() => {
-    const timeoutId = setTimeout(() => {
+    setTimeout(() => {
       setDishes([]);
       getDishesPerPage();
-    }, 1000);
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    }, 2000);
   }, [minPrice, maxPrice, sortOrder, typeProduct]);
 
   return (

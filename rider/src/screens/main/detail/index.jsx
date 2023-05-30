@@ -12,11 +12,22 @@ import { VNDCurrencyFormatting, VNDFormattedDate } from "../../../utils";
 import colors from "../../../constants/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { acceptOrder } from "../../../services/orders";
+import { useEffect, useState } from "react";
+import { getUser } from "../../../services/user";
 
 const DetailScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { order } = route.params;
+  const [client, setClient] = useState("");
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data } = await getUser(order.userId);
+      setClient(data);
+    };
+    fetchUser();
+  }, []);
 
   const handleAcceptOrder = async () => {
     const newOrder = {
@@ -37,6 +48,36 @@ const DetailScreen = ({ navigation, route }) => {
       { userInterfaceStyle: "light" }
     );
   };
+
+  // Chuyển đổi từ độ sang radian
+  const toRad = (value) => {
+    return (value * Math.PI) / 180;
+  };
+
+  const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const earthRadius = 6371; // Đường kính trái đất (đơn vị: km)
+
+    const dLat = toRad(lat2 - lat1);
+    const dLon = toRad(lon2 - lon1);
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    const distance = earthRadius * c;
+    return distance;
+  };
+  const distancePersonAToPersonB = calculateDistance(
+    client.lat,
+    client.lng,
+    user.lat,
+    user.lng
+  );
 
   return (
     <View style={styles.container}>
@@ -93,7 +134,7 @@ const DetailScreen = ({ navigation, route }) => {
                   size={24}
                   color={colors.GREEN_LOGO_TWO}
                 />
-                <Text style={styles.paymentOptionText}>Thanh toán online:</Text>
+                <Text style={styles.paymentOptionText}>Hóa đơn:</Text>
               </View>
               <View style={styles.paymentRight}>
                 <Text style={styles.paymentRightText}>Tổng tiền</Text>
@@ -130,6 +171,25 @@ const DetailScreen = ({ navigation, route }) => {
             ))}
           </View>
         </View>
+        {/* Order Data & Details */}
+        <View style={styles.orderData}>
+          <Text style={styles.orderDataTitle}>Người đặt hàng</Text>
+          <View style={styles.orderDataItem}>
+            <Text style={styles.orderDataItemText}>Tên khách hàng</Text>
+            <Text style={styles.orderDataItemText}>{client.name}</Text>
+          </View>
+          <View style={styles.orderDataItem}>
+            <Text style={styles.orderDataItemText}>Địa chỉ</Text>
+            <Text style={styles.orderDataItemText}>{client.address}</Text>
+          </View>
+          <View style={styles.orderDataItem}>
+            <Text style={styles.orderDataItemText}>Khách hàng cách xa bạn</Text>
+            <Text style={styles.orderDataItemText}>
+              {distancePersonAToPersonB}
+            </Text>
+          </View>
+        </View>
+
         <View style={styles.logoutContainer}>
           <TouchableOpacity onPress={handleAcceptOrder}>
             <View style={styles.logoutBtn}>

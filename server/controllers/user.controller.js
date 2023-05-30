@@ -11,9 +11,7 @@ import fs from "fs";
 /* REGISTER */
 export const register = async (req, res) => {
   try {
-    const { name, phone_number, address, password } = req.body;
-
-    // const avatar = req.files.avatar.tempFilePath;
+    const { name, phone_number, address, password, lat, lng } = req.body;
 
     let user = await UserModel.findOne({ name });
     if (user) {
@@ -29,6 +27,8 @@ export const register = async (req, res) => {
       phone_number,
       password,
       address,
+      lat,
+      lng,
       otp,
       otp_expiry: new Date(Date.now() + process.env.OTP_EXPIRY * 60 * 1000),
     });
@@ -50,9 +50,7 @@ export const register = async (req, res) => {
 export const verify = async (req, res) => {
   try {
     const otp = Number(req.body.otp);
-    console.log(otp);
-    const user = await UserModel.findById(req.body.user._id);
-    console.log(user);
+    const user = await UserModel.findById(req.user.id);
 
     if (user.otp !== otp || user.otp_expiry < Date.now()) {
       return res
@@ -136,24 +134,8 @@ export const updateProfile = async (req, res) => {
     const user = await UserModel.findById(req.user._id);
 
     const { name } = req.body;
-    const avatar = req.files.avatar.tempFilePath;
 
     if (name) user.name = name;
-    if (avatar) {
-      await cloudinary.v2.uploader.destroy(user.avatar.public_id);
-
-      const mycloud = await cloudinary.v2.uploader.upload(avatar, {
-        folder: "users",
-      });
-
-      fs.rmSync("./tmp", { recursive: true });
-
-      user.avatar = {
-        public_id: mycloud.public_id,
-        url: mycloud.secure_url,
-      };
-    }
-
     await user.save();
 
     res
@@ -298,6 +280,25 @@ export const answerChatGPT = async (req, res) => {
       answer: answer,
       products: results,
     });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const changeAddress = async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.user.id);
+    const { address, lat, lng } = req.body;
+
+    if (address) user.address = address;
+    if (lat) user.lat = lat;
+    if (lng) user.lng = lng;
+
+    await user.save();
+
+    res
+      .status(200)
+      .json({ success: true, message: "Profile Updated successfully" });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }

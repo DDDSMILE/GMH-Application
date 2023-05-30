@@ -22,7 +22,6 @@ const DetailScreen = ({ navigation, route }) => {
     const newOrder = {
       orderId: order._id,
     };
-    console.log(newOrder);
     await doneOrder(newOrder);
     Alert.alert(
       "Đặt hàng thành công!",

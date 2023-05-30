@@ -1,6 +1,7 @@
 import express from "express";
 import {
   answerChatGPT,
+  changeAddress,
   forgetPassword,
   getMyProfile,
   login,
@@ -17,17 +18,19 @@ const router = express.Router();
 
 router.route("/register").post(register);
 
-router.route("/verify").post(verify);
+router.route("/verify").post(isAuthenticated, verify);
 
 router.route("/login").post(login);
+
+router.route("/change_address").post(isAuthenticated, changeAddress);
 
 router.route("/logout").get(logout);
 
 router.route("/me").get(isAuthenticated, getMyProfile);
 
-router.route("/updateprofile").put(isAuthenticated, updateProfile);
+router.route("/updateprofile").put(updateProfile);
 
-router.route("/updatepassword").put(isAuthenticated, updatePassword);
+router.route("/updatepassword").put(updatePassword);
 
 router.route("/forgetpassword").post(forgetPassword);
 

@@ -11,3 +11,14 @@ export const chatgpt = async ({ question }) => {
     throw new Error(error.message);
   }
 };
+
+export const changeAddress = async (address) => {
+  try {
+    const { data } = await axios.post(`${API_URL}/change_address`, {
+      address,
+    });
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

@@ -23,7 +23,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     dispatch(fetchOrders({ userId: _id }));
-  }, []);
+  }, [dispatch]);
 
   return (
     <View style={styles.container}>

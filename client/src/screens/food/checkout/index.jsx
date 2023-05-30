@@ -21,6 +21,7 @@ const CheckoutScreen = ({ navigation }) => {
 
   const handlePlaceOrder = () => {
     const products = [];
+    const addressesItems = [];
 
     items.forEach((item) => {
       const { addressItem, name } = item.item;
@@ -40,16 +41,21 @@ const CheckoutScreen = ({ navigation }) => {
             goods: [{ item: { addressItem, name }, qty: item.qty }],
           },
         });
+        addressesItems.push(addressItem);
       }
     });
+
     const newOrder = {
       userId: _id,
       items: items,
       total: total,
       products: products,
+      addresses: {
+        user_address: address,
+        suppliers_address: addressesItems,
+      },
     };
     dispatch(addOrder({ order: newOrder }));
-    dispatch(clearOrder());
     Alert.alert(
       "Đặt hàng thành công!",
       "Đơn hàng của bạn đang được chuẩn bị, bạn có muốn kiếm tra lại?",

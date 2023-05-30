@@ -15,7 +15,7 @@ const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-      {!user ? <AuthNavigator /> : <TabsNavigator />}
+      {user?.verified ? <TabsNavigator /> : <AuthNavigator />}
     </NavigationContainer>
   );
 };

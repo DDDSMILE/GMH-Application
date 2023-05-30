@@ -11,13 +11,14 @@ export const getAllOrder = async (req, res) => {
 
 export const addOrders = async (req, res) => {
   try {
-    const { userId, items, total, products } = req.body;
+    const { userId, items, total, products, addresses } = req.body;
 
     const data = await OrdersModel.create({
       userId,
       items,
       total,
       products,
+      addresses,
     });
     res.status(200).json({ success: true, message: data });
   } catch (error) {

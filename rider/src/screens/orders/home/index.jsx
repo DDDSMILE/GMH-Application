@@ -16,6 +16,7 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const [orders, setOrders] = useState();
+
   useEffect(() => {
     const fetchOrders = async () => {
       const { data } = await getOrdersFromShipper(user._id);
