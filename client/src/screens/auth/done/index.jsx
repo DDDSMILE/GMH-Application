@@ -7,7 +7,7 @@ import colors from "../../../constants/colors";
 import images from "../../../constants/images";
 import { ButtonForm } from "../../../components/form";
 
-const DoneScreen = () => {
+const DoneScreen = ({ navigation }) => {
   return (
     <View style={styles.page}>
       <Image style={styles.pattern} source={Images.PATTERNBG} />
@@ -31,7 +31,10 @@ const DoneScreen = () => {
         <Text style={styles.subtitle}>Hãy đặt hàng từ hôm nay</Text>
       </View>
       <View style={{ marginVertical: Display.setWidth(80) }}>
-        <ButtonForm text={"Đặt hàng"} />
+        <ButtonForm
+          onPress={() => navigation.navigate("signin")}
+          text={"Đặt hàng"}
+        />
       </View>
     </View>
   );

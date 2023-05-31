@@ -3,7 +3,6 @@ import fs from "fs";
 import { ShipperModel } from "../models/shipper.model.js";
 import { sendToken } from "../utils/sendToken.js";
 import { sendSMS } from "../utils/sendSMS.js";
-import { UserModel } from "../models/user.model.js";
 
 /* LOGIN */
 export const login = async (req, res) => {
@@ -186,16 +185,6 @@ export const resetPassword = async (req, res) => {
     res
       .status(200)
       .json({ success: true, message: `Password Changed Successfully` });
-  } catch (error) {
-    return res.status(500).json({ success: false, message: error.message });
-  }
-};
-
-/* GET USER */
-export const getUser = async (req, res) => {
-  try {
-    const user = await UserModel.findById(req.params.id);
-    res.status(200).json({ success: true, data: user });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }

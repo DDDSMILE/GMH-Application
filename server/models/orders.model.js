@@ -8,6 +8,12 @@ const OrdersSchema = new mongoose.Schema(
     shipperId: {
       type: String,
     },
+    user: {
+      type: Object,
+    },
+    shipper: {
+      type: Object,
+    },
     items: {
       type: Array,
     },

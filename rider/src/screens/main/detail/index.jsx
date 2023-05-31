@@ -12,28 +12,24 @@ import { VNDCurrencyFormatting, VNDFormattedDate } from "../../../utils";
 import colors from "../../../constants/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { acceptOrder } from "../../../services/orders";
-import { useEffect, useState } from "react";
-import { getUser } from "../../../services/user";
+import CalculateDistance from "../../../utils/distance";
 
 const DetailScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { order } = route.params;
-  const [client, setClient] = useState("");
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const { data } = await getUser(order.userId);
-      setClient(data);
-    };
-    fetchUser();
-  }, []);
+  const client = route.params.order.user;
 
   const handleAcceptOrder = async () => {
     const newOrder = {
-      shipperId: user._id,
-      orderId: order._id,
+      order: {
+        ...order,
+        shipper: user,
+        shipperId: user._id,
+        addresses: { ...order.addresses, shipper_address: user.address },
+      },
     };
+
     await acceptOrder(newOrder);
     Alert.alert(
       "Đặt hàng thành công!",
@@ -49,30 +45,7 @@ const DetailScreen = ({ navigation, route }) => {
     );
   };
 
-  // Chuyển đổi từ độ sang radian
-  const toRad = (value) => {
-    return (value * Math.PI) / 180;
-  };
-
-  const calculateDistance = (lat1, lon1, lat2, lon2) => {
-    const earthRadius = 6371; // Đường kính trái đất (đơn vị: km)
-
-    const dLat = toRad(lat2 - lat1);
-    const dLon = toRad(lon2 - lon1);
-
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRad(lat1)) *
-        Math.cos(toRad(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-    const distance = earthRadius * c;
-    return distance;
-  };
-  const distancePersonAToPersonB = calculateDistance(
+  const { distance, time } = CalculateDistance(
     client.lat,
     client.lng,
     user.lat,
@@ -185,7 +158,7 @@ const DetailScreen = ({ navigation, route }) => {
           <View style={styles.orderDataItem}>
             <Text style={styles.orderDataItemText}>Khách hàng cách xa bạn</Text>
             <Text style={styles.orderDataItemText}>
-              {distancePersonAToPersonB}
+              {distance} trong {time}
             </Text>
           </View>
         </View>

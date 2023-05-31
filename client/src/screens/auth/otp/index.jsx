@@ -25,6 +25,7 @@ const OTPScreen = ({ navigation }) => {
 
   const handleRegister = () => {
     verifyOtp(verityOtp);
+    navigation.navigate("done");
   };
 
   return (

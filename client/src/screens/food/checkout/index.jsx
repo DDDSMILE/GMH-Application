@@ -56,6 +56,7 @@ const CheckoutScreen = ({ navigation }) => {
       },
     };
     dispatch(addOrder({ order: newOrder }));
+    navigation.navigate("home");
     Alert.alert(
       "Đặt hàng thành công!",
       "Đơn hàng của bạn đang được chuẩn bị, bạn có muốn kiếm tra lại?",

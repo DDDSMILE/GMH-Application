@@ -45,7 +45,6 @@ export const register = async ({
 export const verifyOtp = async (otp) => {
   try {
     const { data } = await axios.post(`${API_URL}/verify`, { otp });
-    storeData("user", data.data);
     return data.data;
   } catch (error) {
     console.log("error", error.message);

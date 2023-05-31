@@ -19,12 +19,9 @@ export const getOrdersFromShipper = async (shipper_id) => {
   }
 };
 
-export const acceptOrder = async ({ shipperId, orderId }) => {
+export const acceptOrder = async (order) => {
   try {
-    const { data } = await axios.post(`${API_URL}/shipper/accept_order`, {
-      shipperId,
-      orderId,
-    });
+    const { data } = await axios.post(`${API_URL}/shipper/accept_order`, order);
     return data;
   } catch (error) {
     throw new Error(error.message);

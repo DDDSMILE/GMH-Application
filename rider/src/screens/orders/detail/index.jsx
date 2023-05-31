@@ -12,11 +12,77 @@ import { VNDCurrencyFormatting, VNDFormattedDate } from "../../../utils";
 import colors from "../../../constants/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { acceptOrder, doneOrder } from "../../../services/orders";
+import GeocodeAddress from "../../../utils/geocodeAddress";
+import ShortDistance from "../../../utils/shortDistance";
+import FlattenObject from "../../../utils/flattenObject";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const DetailScreen = ({ navigation, route }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const { order } = route.params;
+  const { addresses } = route.params.order;
+  const [totalDistanceAndTime, setTotalDistanceAndTime] = useState({});
+
+  const name_address = FlattenObject(addresses);
+
+  async function calculateTotalDistanceAndTime() {
+    const speed = 40; // Vận tốc (km/h)
+    const personALocation = await GeocodeAddress(addresses.user_address);
+    const personBLocation = await GeocodeAddress(addresses.shipper_address);
+
+    const supplierLocations = [];
+    for (let i = 0; i < addresses.suppliers_address.length; i++) {
+      const supplierLocation = await GeocodeAddress(
+        addresses.suppliers_address[i]
+      );
+      supplierLocations.push(supplierLocation);
+    }
+    const sortedAddresses = [
+      personALocation,
+      ...supplierLocations,
+      personBLocation,
+    ];
+
+    const distances = [];
+    const times = [];
+
+    for (let i = 0; i < sortedAddresses.length - 1; i++) {
+      const distance = ShortDistance(
+        sortedAddresses[i].lat,
+        sortedAddresses[i].lng,
+        sortedAddresses[i + 1].lat,
+        sortedAddresses[i + 1].lng
+      );
+      distances.push(distance);
+
+      const time = Math.round((distance / speed) * 60);
+      times.push(time);
+    }
+
+    const totalDistance = distances.reduce((acc, curr) => acc + curr, 0);
+    const totalTime = times.reduce((acc, curr) => acc + curr, 0);
+
+    // console.log("Distances:", distances);
+    // console.log("Times:", times);
+    // console.log("Total Distance:", totalDistance);
+    // console.log("Total Time:", totalTime);
+
+    const result = {
+      name_address: name_address,
+      distances: distances,
+      times: times,
+      totalDistance: totalDistance,
+      totalTime: totalTime,
+    };
+
+    setTotalDistanceAndTime(result);
+  }
+
+  useEffect(() => {
+    calculateTotalDistanceAndTime();
+  }, []);
 
   const handleAcceptOrder = async () => {
     const newOrder = {
@@ -82,6 +148,42 @@ const DetailScreen = ({ navigation, route }) => {
           </View>
         </View>
 
+        <View style={styles.addressContainer}>
+          <Text style={styles.addressTitle}>Các chặng đường đi:</Text>
+          {Object.keys(totalDistanceAndTime).length > 0 && (
+            <View style={styles.addressSelected}>
+              <View style={styles.addressSelectedData}>
+                {totalDistanceAndTime.name_address.map((address, index) => {
+                  if (index !== totalDistanceAndTime.name_address.length - 1) {
+                    return (
+                      <View key={index} style={{ paddingBottom: 4 }}>
+                        <View style={styles.addressSelectedTag}>
+                          <Text style={styles.addressSelectedTagText}>
+                            {address} đến{" "}
+                            {totalDistanceAndTime.name_address[index + 1]}
+                          </Text>
+                        </View>
+                        <Text style={styles.addressSelectedStreet}>
+                          trong{" "}
+                          {totalDistanceAndTime.distances[index].toFixed(2)} km
+                          x {totalDistanceAndTime.times[index]} phút
+                        </Text>
+                      </View>
+                    );
+                  }
+                  return null;
+                })}
+                <View style={styles.productSelectedTag}>
+                  <Text style={styles.productSelectedTagText}>
+                    Tổng {totalDistanceAndTime.totalDistance.toFixed(2)} km x{" "}
+                    {totalDistanceAndTime.totalTime} phút
+                  </Text>
+                </View>
+              </View>
+            </View>
+          )}
+        </View>
+
         {/* Payment Method */}
         <View>
           <View>
@@ -92,12 +194,13 @@ const DetailScreen = ({ navigation, route }) => {
                   size={24}
                   color={colors.GREEN_LOGO_TWO}
                 />
-                <Text style={styles.paymentOptionText}>Thanh toán online:</Text>
+                <Text style={styles.paymentOptionText}>Tiền:</Text>
               </View>
               <View style={styles.paymentRight}>
                 <Text style={styles.paymentRightText}>Tổng tiền</Text>
                 <Text style={styles.paymentRightFee}>
-                  {VNDCurrencyFormatting(order.total)}
+                  {VNDCurrencyFormatting(order.total)} + Ship:{" "}
+                  {VNDCurrencyFormatting(30000)}
                 </Text>
               </View>
             </View>

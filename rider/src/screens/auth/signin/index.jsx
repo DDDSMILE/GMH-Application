@@ -111,23 +111,6 @@ const SignInScreen = ({ navigation }) => {
       >
         Quên mật khẩu?
       </Text>
-      <Text
-        style={{
-          color: Colors.DEFAULT_BLACK,
-          fontSize: 16,
-          paddingBottom: 20,
-          fontFamily: "inter_regular",
-        }}
-      >
-        Bạn chưa có tài khoản?, hãy
-        <Text
-          style={{ fontWeight: 700 }}
-          onPress={() => navigation.navigate("signup")}
-        >
-          {" "}
-          đăng ký
-        </Text>
-      </Text>
       {loading ? (
         <ActivityIndicator size="small" />
       ) : (

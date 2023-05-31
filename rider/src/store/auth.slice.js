@@ -28,7 +28,7 @@ const authSlice = createSlice({
       state.loading = true;
     }),
       builder.addCase(login.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload.data;
         state.loading = false;
         state.error = null;
       }),

@@ -82,7 +82,6 @@ export const register = createAsyncThunk(
         lat,
         lng,
       });
-      storeData("user", data);
       return { data };
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
