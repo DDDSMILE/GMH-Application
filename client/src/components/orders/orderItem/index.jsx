@@ -4,6 +4,33 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { VNDCurrencyFormatting, VNDFormattedDate } from "../../../utils";
 import colors from "../../../constants/colors";
 
+export const OrderItemStatus = ({ status }) => {
+  let backgroundColor = "#fce42d";
+
+  switch (status) {
+    case "Đang ship":
+      backgroundColor = "#b2d8d8"; // Màu xanh nước biển nhạt
+      break;
+    case "Thành công":
+      backgroundColor = "lightgreen"; // Màu xanh lá cây nhạt
+      break;
+    case "Đang chờ":
+      backgroundColor = "#fce42d"; // Màu vàng
+      break;
+    case "Đã hủy":
+      backgroundColor = "gray"; // Màu xám
+      break;
+    default:
+      break;
+  }
+
+  return (
+    <Text style={[styles.orderDataBottomPrice, { backgroundColor }]}>
+      {status}
+    </Text>
+  );
+};
+
 const OrderItem = ({ order, index }) => {
   const navigation = useNavigation();
 
@@ -34,7 +61,7 @@ const OrderItem = ({ order, index }) => {
                 >
                   Trạng thái
                 </Text>
-                <Text style={styles.orderDataBottomPrice}>{order.status}</Text>
+                <OrderItemStatus status={order.status} />
               </View>
               <View>
                 <Text style={styles.orderDataBottomPayment}>

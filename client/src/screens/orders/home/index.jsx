@@ -20,7 +20,6 @@ const HomeScreen = () => {
     loading,
     error,
   } = useSelector((state) => state.orders);
-  console.log(orders);
 
   useEffect(() => {
     dispatch(fetchOrders({ userId: _id }));

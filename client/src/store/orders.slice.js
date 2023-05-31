@@ -36,7 +36,6 @@ export const fetchOrders = createAsyncThunk(
   async ({ userId }, thunkAPI) => {
     try {
       const { data } = await getOrdersFromUser(userId);
-      console.log(data);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

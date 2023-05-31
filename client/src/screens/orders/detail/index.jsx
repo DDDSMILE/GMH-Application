@@ -9,12 +9,61 @@ import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 import { BackButton, HeaderPage } from "../../../components/form";
 import { VNDCurrencyFormatting, VNDFormattedDate } from "../../../utils";
 import colors from "../../../constants/colors";
+import { useEffect, useState } from "react";
+import FlattenObject from "../../../utils/flattenObject";
+import ShortDistance from "../../../utils/shortDistance";
+import GeocodeAddress from "../../../utils/geocodeAddress";
 
 const DetailScreen = ({ navigation, route }) => {
   const { order } = route.params;
   const addresses = Array.from(
     new Set(order.items.map((item) => item.item.addressItem))
   );
+  const { shipper } = route.params.order;
+  const [totalDistanceAndTime, setTotalDistanceAndTime] = useState({});
+
+  async function calculateTotalDistanceAndTime() {
+    const speed = 40; // Vận tốc (km/h)
+
+    const supplierLocations = [];
+    for (let i = 0; i < addresses.length; i++) {
+      const supplierLocation = await GeocodeAddress(addresses[i]);
+      supplierLocations.push(supplierLocation);
+    }
+    const sortedAddresses = [...supplierLocations];
+
+    const distances = [];
+    const times = [];
+
+    for (let i = 0; i < sortedAddresses.length - 1; i++) {
+      const distance = ShortDistance(
+        sortedAddresses[i].lat,
+        sortedAddresses[i].lng,
+        sortedAddresses[i + 1].lat,
+        sortedAddresses[i + 1].lng
+      );
+      distances.push(distance);
+
+      const time = Math.round((distance / speed) * 60);
+      times.push(time);
+    }
+
+    const totalDistance = distances.reduce((acc, curr) => acc + curr, 0);
+    const totalTime = times.reduce((acc, curr) => acc + curr, 0);
+
+    const result = {
+      distances: distances,
+      times: times,
+      totalDistance: totalDistance,
+      totalTime: totalTime,
+    };
+
+    setTotalDistanceAndTime(result);
+  }
+
+  useEffect(() => {
+    calculateTotalDistanceAndTime();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -45,6 +94,16 @@ const DetailScreen = ({ navigation, route }) => {
                   <Text style={styles.addressSelectedStreet}>{adr}</Text>
                 </View>
               ))}
+              {totalDistanceAndTime.totalDistance > 0 &&
+                Object.keys(totalDistanceAndTime).length > 0 && (
+                  <View style={styles.productSelectedTag}>
+                    <Text style={styles.productSelectedTagText}>
+                      Tổng {totalDistanceAndTime.totalDistance.toFixed(2)} km x{" "}
+                      {totalDistanceAndTime.totalTime} phút (có thể trễ 10-15
+                      phút vấn đề ngoại cảnh)
+                    </Text>
+                  </View>
+                )}
             </View>
           </View>
         </View>
@@ -59,12 +118,13 @@ const DetailScreen = ({ navigation, route }) => {
                   size={24}
                   color={colors.GREEN_LOGO_TWO}
                 />
-                <Text style={styles.paymentOptionText}>Thanh toán online:</Text>
+                <Text style={styles.paymentOptionText}>Thanh toán:</Text>
               </View>
               <View style={styles.paymentRight}>
                 <Text style={styles.paymentRightText}>Tổng tiền</Text>
                 <Text style={styles.paymentRightFee}>
-                  {VNDCurrencyFormatting(order.total)}
+                  {VNDCurrencyFormatting(order.total)}+ Ship:{" "}
+                  {VNDCurrencyFormatting(30000)}
                 </Text>
                 <TouchableOpacity
                   onPress={() => navigation.navigate("payment")}
@@ -106,6 +166,29 @@ const DetailScreen = ({ navigation, route }) => {
             ))}
           </View>
         </View>
+        {shipper && (
+          <View style={styles.orderDetails}>
+            <View>
+              <Text style={styles.orderDataTitle}>
+                Thông tin người giao hàng:
+              </Text>
+              <View style={styles.orderDataItem}>
+                <Text style={styles.orderDataItemText}>Tên người giao</Text>
+                <Text style={styles.orderDataItemText}>{shipper.name}</Text>
+              </View>
+              <View style={styles.orderDataItem}>
+                <Text style={styles.orderDataItemText}>Số điện thoại</Text>
+                <Text style={styles.orderDataItemText}>
+                  {shipper.phone_number}
+                </Text>
+              </View>
+              <View style={styles.orderDataItem}>
+                <Text style={styles.orderDataItemText}>Địa chỉ</Text>
+                <Text style={styles.orderDataItemText}>{shipper.address}</Text>
+              </View>
+            </View>
+          </View>
+        )}
       </ScrollView>
     </View>
   );
@@ -231,6 +314,19 @@ const styles = StyleSheet.create({
   },
   orderDetails: {
     marginBottom: 20,
+  },
+  productSelectedTag: {
+    marginRight: 4,
+    backgroundColor: colors.GREEN_TEXT_TWO,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 4,
+    maxWidth: 300,
+  },
+  productSelectedTagText: {
+    fontSize: 12,
+    fontFamily: "inter_semi_bold",
+    color: "#fff",
   },
 });
 

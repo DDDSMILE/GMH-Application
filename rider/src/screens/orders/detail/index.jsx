@@ -64,11 +64,6 @@ const DetailScreen = ({ navigation, route }) => {
     const totalDistance = distances.reduce((acc, curr) => acc + curr, 0);
     const totalTime = times.reduce((acc, curr) => acc + curr, 0);
 
-    // console.log("Distances:", distances);
-    // console.log("Times:", times);
-    // console.log("Total Distance:", totalDistance);
-    // console.log("Total Time:", totalTime);
-
     const result = {
       name_address: name_address,
       distances: distances,
