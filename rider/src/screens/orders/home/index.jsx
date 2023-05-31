@@ -25,11 +25,25 @@ const HomeScreen = () => {
     fetchOrders();
   }, []);
 
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    const fetchOrders = async () => {
+      const { data } = await getOrdersFromShipper(user._id);
+      setOrders(data);
+    };
+    fetchOrders();
+    setIsRefreshing(false);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerSubtitle}>Những đơn hàng đang chờ</Text>
-        <Text style={styles.headerTitle}>Những đơn hàng đang chuẩn bị</Text>
+        <Text style={styles.headerSubtitle}>Lịch sử đơn hàng</Text>
+        <Text style={styles.headerTitle}>
+          Những đơn hàng của bạn
+        </Text>
       </View>
       {orders ? (
         <FlatList
@@ -37,6 +51,8 @@ const HomeScreen = () => {
           renderItem={({ item, index }) => <OrderItem order={item} />}
           keyExtractor={(item, id) => id}
           showsVerticalScrollIndicator={false}
+          onRefresh={handleRefresh}
+          refreshing={isRefreshing}
         />
       ) : (
         <View style={styles.loadingErrorContainer}>

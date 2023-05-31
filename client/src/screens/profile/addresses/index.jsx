@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 import * as Location from "expo-location";
 import colors from "../../../constants/colors";
 import { changeAddress } from "../../../services/user";
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
 const Addresses = ({ navigation }) => {
   const { user } = useSelector((state) => state.auth);
@@ -53,8 +54,8 @@ const Addresses = ({ navigation }) => {
   const handleGetLocation = async () => {
     // DEFAULT LOCATION
     const DEFAULT_LOCATION = {
-      latitude: 16.049372951103447,
-      longitude: 108.16047413865257,
+      latitude: 16.059948395515388,
+      longitude: 108.20970310839263,
     };
 
     let adrs = await Location.reverseGeocodeAsync(DEFAULT_LOCATION);
@@ -62,17 +63,27 @@ const Addresses = ({ navigation }) => {
     const address = `${
       name || streetNumber
     }, ${street}, ${subregion}, ${region}`;
-    setNewAddress(address);
+    setNewAddress({ new_address: address });
+    showMessage({
+      message: "Lấy tọa độ thành công",
+      type: "success",
+    });
   };
 
   const handleChange = async () => {
     const { new_address } = newAddress;
     const { lat, lng } = await convertAddressToCoordinates(new_address);
+
     await changeAddress({ address: new_address, lat: lat, lng: lng });
+    showMessage({
+      message: "Lưu thanh đổi",
+      type: "success",
+    });
   };
 
   return (
     <DismissKeyboardView style={styles.container}>
+      <FlashMessage position="top" />
       <HeaderPage>
         <BackButton onPress={() => navigation.goBack()} />
         <View style={{ alignItems: "center", marginTop: 45 }}>

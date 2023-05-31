@@ -52,11 +52,18 @@ const InfinityScroll = (props) => {
   }, [currentPage]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setDishes([]);
-      getDishesPerPage();
-    }, 2000);
+    setDishes([]);
+    getDishesPerPage();
   }, [minPrice, maxPrice, sortOrder, typeProduct]);
+
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    setDishes([]);
+    getDishesPerPage();
+    setIsRefreshing(false);
+  };
 
   return (
     <View
@@ -76,6 +83,8 @@ const InfinityScroll = (props) => {
           ListFooterComponent={renderLoader}
           onEndReached={loadMoreItem}
           onEndReachedThreshold={0}
+          onRefresh={handleRefresh}
+          refreshing={isRefreshing}
         />
       ) : (
         <Text>Loading...</Text>

@@ -33,7 +33,7 @@ const HomeScreen = ({ navigation }) => {
         />
         <View style={styles.headerContent}>
           <Text style={styles.headerName}>{user.name}</Text>
-          <Text style={styles.headerEmail}>{user.phone_number}</Text>
+          <Text style={styles.headerEmail}>{user.phone_number.slice(3)}</Text>
         </View>
       </View>
 
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   headerEmail: {
-    fontSize: 12,
+    fontSize: 13,
     fontFamily: "inter_medium",
     color: colors.GRAY_VARIANT,
   },

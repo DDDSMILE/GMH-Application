@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllOrder } from "../../../store/orders.slice";
 import { OrderItem } from "../../../components/orders";
 import colors from "../../../constants/colors";
+import { useState } from "react";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -23,6 +24,14 @@ const HomeScreen = () => {
   useEffect(() => {
     dispatch(fetchAllOrder());
   }, []);
+
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    dispatch(fetchAllOrder());
+    setIsRefreshing(false);
+  };
 
   return (
     <View style={styles.container}>
@@ -40,6 +49,8 @@ const HomeScreen = () => {
           renderItem={({ item, index }) => <OrderItem order={item} />}
           keyExtractor={(item, id) => id}
           showsVerticalScrollIndicator={false}
+          onRefresh={handleRefresh}
+          refreshing={isRefreshing}
         />
       ) : (
         <View style={styles.loadingErrorContainer}>

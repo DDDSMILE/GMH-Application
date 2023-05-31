@@ -12,6 +12,7 @@ import { DismissKeyboardView, Input } from "../../../components/common";
 import { useSelector } from "react-redux";
 import * as Location from "expo-location";
 import colors from "../../../constants/colors";
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
 const Addresses = ({ navigation }) => {
   const { user } = useSelector((state) => state.auth);
@@ -24,7 +25,10 @@ const Addresses = ({ navigation }) => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
+        showMessage({
+          message: "Hãy bấm 'allow' để cập nhật vị trí",
+          type: "danger",
+        });
         return;
       }
     })();
@@ -45,8 +49,16 @@ const Addresses = ({ navigation }) => {
     setNewAddress({ new_address: address });
   };
 
+  const handleChange = () => {
+    showMessage({
+      message: "Thay đổi thành công",
+      type: "success",
+    });
+  };
+  
   return (
     <DismissKeyboardView style={styles.container}>
+      <FlashMessage position="top" />
       <HeaderPage>
         <BackButton onPress={() => navigation.goBack()} />
         <View style={{ alignItems: "center", marginTop: 45 }}>
@@ -83,7 +95,7 @@ const Addresses = ({ navigation }) => {
 
         <View style={styles.separatorBar}></View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleChange}>
           <View style={styles.saveBtn}>
             <Text style={styles.saveBtnText}>Lưu thay đổi</Text>
           </View>

@@ -68,7 +68,6 @@ export const getOrderById = async (req, res) => {
 
 export const acceptOrder = async (req, res) => {
   try {
-    console.log(req.body.order);
     const { _id, shipper, shipperId, addresses } = req.body.order;
     const order = await OrdersModel.findOne({ _id: _id });
 

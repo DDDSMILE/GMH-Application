@@ -12,6 +12,7 @@ import { useState } from "react";
 import { BackButton, HeaderPage } from "../../../components/form";
 import { DismissKeyboardView, Input } from "../../../components/common";
 import colors from "../../../constants/colors";
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
 const ManageInformationScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -25,8 +26,16 @@ const ManageInformationScreen = ({ navigation }) => {
   const [formError, setFormError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const handleChange = () => {
+    showMessage({
+      message: "Thay đổi thành công",
+      type: "success",
+    });
+  };
+
   return (
     <DismissKeyboardView style={styles.container}>
+      <FlashMessage position="top" />
       <HeaderPage>
         <BackButton onPress={() => navigation.goBack()} />
         <View style={{ alignItems: "center", marginTop: 45 }}>
@@ -37,19 +46,28 @@ const ManageInformationScreen = ({ navigation }) => {
       </HeaderPage>
 
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.item}>
-          <Input
-            label="Tên người dùng"
-            value={formState.name}
-            onChangeText={(text) =>
-              setFormState((prev) => ({ ...prev, name: text }))
-            }
-            placeholder="Nhập tên người dùng..."
-            placeholderTextColor={colors.GRAY_VARIANT}
-            autoCapitalize="words"
-            autoComplete="name"
-            autoCorrect={false}
-          />
+        <Text
+          style={{
+            fontSize: 13,
+            fontFamily: "inter_semi_bold",
+            textTransform: "uppercase",
+            color: colors.DEFAULT_BLACK,
+            marginBottom: 8,
+          }}
+        >
+          Tên người dùng
+        </Text>
+        <View style={{ flex: 1, flexDirection: "row", marginBottom: 8 }}>
+          <Text
+            style={{
+              flex: 4,
+              fontSize: 15,
+              fontFamily: "inter_medium",
+              color: colors.GRAY_VARIANT,
+            }}
+          >
+            {formState.name}
+          </Text>
           <MaterialIcons
             name="person-outline"
             size={24}
@@ -85,7 +103,7 @@ const ManageInformationScreen = ({ navigation }) => {
 
         <View style={styles.separatorBar}></View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleChange}>
           <View style={styles.saveBtn}>
             {loading ? (
               <ActivityIndicator size="small" color="#000" />

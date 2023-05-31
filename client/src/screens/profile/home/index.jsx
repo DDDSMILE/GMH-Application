@@ -9,7 +9,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { MaterialIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { logout } from "../../../store/auth.slice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import colors from "../../../constants/colors";
 
 const HomeScreen = ({ navigation }) => {

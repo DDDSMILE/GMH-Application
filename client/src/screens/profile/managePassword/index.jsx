@@ -12,6 +12,7 @@ import { useState } from "react";
 import { BackButton, HeaderPage } from "../../../components/form";
 import { DismissKeyboardView, Input } from "../../../components/common";
 import colors from "../../../constants/colors";
+import FlashMessage, { showMessage } from "react-native-flash-message";
 
 const ManagePasswordScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -24,8 +25,16 @@ const ManagePasswordScreen = ({ navigation }) => {
   const [formError, setFormError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const handleChange = () => {
+    showMessage({
+      message: "Thay đổi thành công",
+      type: "success",
+    });
+  };
+
   return (
     <DismissKeyboardView style={styles.container}>
+      <FlashMessage position="top" />
       <HeaderPage>
         <BackButton onPress={() => navigation.goBack()} />
         <View style={{ alignItems: "center", marginTop: 45 }}>
@@ -83,7 +92,7 @@ const ManagePasswordScreen = ({ navigation }) => {
 
         <View style={styles.separatorBar}></View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleChange}>
           <View style={styles.saveBtn}>
             {loading ? (
               <ActivityIndicator size="small" color="#000" />

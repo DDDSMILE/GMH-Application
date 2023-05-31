@@ -16,7 +16,6 @@ const ordersSlice = createSlice({
       state.loading = true;
     }),
       builder.addCase(fetchOrders.fulfilled, (state, action) => {
-        console.log(action.payload);
         state.items = action.payload;
         state.loading = false;
         state.error = null;

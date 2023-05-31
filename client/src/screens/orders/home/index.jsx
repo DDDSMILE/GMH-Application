@@ -5,7 +5,7 @@ import {
   ActivityIndicator,
   StyleSheet,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchOrders } from "../../../store/orders.slice";
@@ -25,6 +25,14 @@ const HomeScreen = () => {
     dispatch(fetchOrders({ userId: _id }));
   }, [dispatch]);
 
+  const [isRefreshing, setIsRefreshing] = useState(false);
+
+  const handleRefresh = () => {
+    setIsRefreshing(true);
+    dispatch(fetchOrders({ userId: _id }));
+    setIsRefreshing(false);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -41,6 +49,8 @@ const HomeScreen = () => {
           renderItem={({ item, index }) => <OrderItem order={item} />}
           keyExtractor={(item, id) => id}
           showsVerticalScrollIndicator={false}
+          onRefresh={handleRefresh}
+          refreshing={isRefreshing}
         />
       ) : (
         <View style={styles.loadingErrorContainer}>

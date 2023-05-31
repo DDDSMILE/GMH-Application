@@ -10,7 +10,6 @@ import { BackButton, HeaderPage } from "../../../components/form";
 import { VNDCurrencyFormatting, VNDFormattedDate } from "../../../utils";
 import colors from "../../../constants/colors";
 import { useEffect, useState } from "react";
-import FlattenObject from "../../../utils/flattenObject";
 import ShortDistance from "../../../utils/shortDistance";
 import GeocodeAddress from "../../../utils/geocodeAddress";
 
@@ -123,11 +122,13 @@ const DetailScreen = ({ navigation, route }) => {
               <View style={styles.paymentRight}>
                 <Text style={styles.paymentRightText}>Tổng tiền</Text>
                 <Text style={styles.paymentRightFee}>
-                  {VNDCurrencyFormatting(order.total)}+ Ship:{" "}
+                  {VNDCurrencyFormatting(order.total)}+Ship:
                   {VNDCurrencyFormatting(30000)}
                 </Text>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("payment")}
+                  onPress={() =>
+                    navigation.navigate("food", { screen: "payment" })
+                  }
                 >
                   <MaterialIcons
                     style={styles.paymentChangeBtn}
