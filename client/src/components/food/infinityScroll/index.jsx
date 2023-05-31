@@ -1,7 +1,8 @@
-import { ActivityIndicator, FlatList, View } from "react-native";
+import { ActivityIndicator, FlatList, View, Text } from "react-native";
 import ProductItem from "../productItem";
 import { useEffect, useState } from "react";
 import { getDishes } from "../../../services/dishes";
+import { Ionicons } from "@expo/vector-icons";
 
 const InfinityScroll = (props) => {
   const {
@@ -54,7 +55,7 @@ const InfinityScroll = (props) => {
   useEffect(() => {
     setDishes([]);
     getDishesPerPage();
-  }, [minPrice, maxPrice, sortOrder, typeProduct]);
+  }, [minPrice, maxPrice, sortOrder, typeProduct, searchText]);
 
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -73,7 +74,7 @@ const InfinityScroll = (props) => {
         height: 600,
       }}
     >
-      {dishes ? (
+      {dishes.length > 0 ? (
         <FlatList
           data={dishes}
           renderItem={({ item }) => (
@@ -87,7 +88,21 @@ const InfinityScroll = (props) => {
           refreshing={isRefreshing}
         />
       ) : (
-        <Text>Loading...</Text>
+        <View
+          style={{ flex: 0.85, justifyContent: "center", alignItems: "center" }}
+        >
+          <Ionicons name="ios-warning-outline" size={28} color="#000" />
+          <Text
+            style={{
+              fontSize: 14,
+              fontFamily: "inter_medium",
+              color: "#000",
+              marginTop: 4,
+            }}
+          >
+            Không tồn tại sản phẩm "{searchText}"
+          </Text>
+        </View>
       )}
     </View>
   );

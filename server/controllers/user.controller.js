@@ -131,11 +131,11 @@ export const getMyProfile = async (req, res) => {
 /* UPDATE PROFILE */
 export const updateProfile = async (req, res) => {
   try {
-    const user = await UserModel.findById(req.user._id);
+    const user = await UserModel.findById(req.user.id);
 
-    const { name } = req.body;
+    const { phone_number } = req.body;
 
-    if (name) user.name = name;
+    if (phone_number) user.phone_number = phone_number;
     await user.save();
 
     res
@@ -151,6 +151,7 @@ export const updatePassword = async (req, res) => {
   try {
     const user = await UserModel.findById(req.user.id).select("+password");
 
+    console.log(req.body);
     const { oldPassword, newPassword } = req.body;
 
     if (!oldPassword || !newPassword) {

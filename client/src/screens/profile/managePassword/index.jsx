@@ -13,6 +13,7 @@ import { BackButton, HeaderPage } from "../../../components/form";
 import { DismissKeyboardView, Input } from "../../../components/common";
 import colors from "../../../constants/colors";
 import FlashMessage, { showMessage } from "react-native-flash-message";
+import { changePassword } from "../../../services/user";
 
 const ManagePasswordScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -25,11 +26,29 @@ const ManagePasswordScreen = ({ navigation }) => {
   const [formError, setFormError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const [isValidPassword, setIsValidPassword] = useState(true);
+
   const handleChange = () => {
-    showMessage({
-      message: "Thay đổi thành công",
-      type: "success",
-    });
+    const passwordPattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (passwordPattern.test(formState.new_password)) {
+      setIsValidPassword(true);
+      changePassword({
+        old_password: formState.old_password,
+        new_password: formState.new_password,
+      });
+      showMessage({
+        message: "Thay đổi thành công",
+        type: "success",
+      });
+    } else {
+      setIsValidPassword(false);
+      showMessage({
+        message: "Không thành công",
+        type: "danger",
+      });
+    }
   };
 
   return (
@@ -57,6 +76,7 @@ const ManagePasswordScreen = ({ navigation }) => {
             autoCapitalize="words"
             autoCorrect={false}
           />
+
           <MaterialCommunityIcons
             name="key"
             size={24}
@@ -72,8 +92,7 @@ const ManagePasswordScreen = ({ navigation }) => {
             }
             placeholder="Nhập mật khẩu mới..."
             placeholderTextColor={colors.GRAY_VARIANT}
-            keyboardType="number-pad"
-            autoCapitalize="none"
+            autoCapitalize="words"
             autoCorrect={false}
           />
           <MaterialCommunityIcons
@@ -82,6 +101,10 @@ const ManagePasswordScreen = ({ navigation }) => {
             color={colors.GREEN_LOGO_TWO}
           />
         </View>
+
+        {!isValidPassword && (
+          <Text style={{ color: "red" }}>Mật khẩu mới không hợp lệ!</Text>
+        )}
 
         {formError !== "" && (
           <View style={styles.errorContainer}>

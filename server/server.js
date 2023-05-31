@@ -91,12 +91,28 @@ const updatedDishes = async () => {
 
     const flatDishes = updatedDishes.flat(2);
 
+    function filterSame(arr) {
+      var uniqueNames = [];
+      var uniqueNameSet = new Set();
+
+      arr.filter(function (item) {
+        if (!uniqueNameSet.has(item.name)) {
+          uniqueNames.push(item);
+          uniqueNameSet.add(item.name);
+        }
+      });
+
+      return uniqueNames;
+    }
+
+    const lastDishes = filterSame(flatDishes);
+
     // Check if jsonData is an array
-    if (!Array.isArray(flatDishes)) {
+    if (!Array.isArray(lastDishes)) {
       throw new Error("JSON data must be an array");
     }
 
-    await DishesModel.updateMany(flatDishes);
+    await DishesModel.insertMany(lastDishes);
   } catch (error) {
     console.log(error);
   }
@@ -152,7 +168,7 @@ const updatedSuppliers = async () => {
       throw new Error("JSON data must be an array");
     }
 
-    await SuppliersModel.updateMany(suppliers);
+    await SuppliersModel.insertMany(suppliers);
   } catch (error) {
     console.log(error);
   }
@@ -183,100 +199,6 @@ const backupCollections = async () => {
     }
   }
 };
-
-const shortedDistance = () => {
-  // Hàm tính khoảng cách giữa hai điểm sử dụng công thức Haversine
-  function calculateDistance(lat1, lng1, lat2, lng2) {
-    const R = 6371; // Bán kính Trái Đất trong kilômét
-    const dLat = (lat2 - lat1) * (Math.PI / 180);
-    const dLng = (lng2 - lng1) * (Math.PI / 180);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(lat1 * (Math.PI / 180)) *
-        Math.cos(lat2 * (Math.PI / 180)) *
-        Math.sin(dLng / 2) *
-        Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c;
-    return distance;
-  }
-  const speed = 40; // Vận tốc (km/h)
-
-  const mapboxApiToken =
-    "pk.eyJ1IjoidGhhaXJ5byIsImEiOiJjbGk2dmt6bmczZzNiM2VudGRkc2xhY2dxIn0.j5FbXoxE7wJOwi9STKSLBw";
-  async function getCoordinatesFromAddress(address) {
-    // Gọi Mapbox API để lấy tọa độ từ địa chỉ
-    const response = await fetch(
-      `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
-        address
-      )}.json?access_token=${mapboxApiToken}`
-    );
-    const data = await response.json();
-    const [lng, lat] = data.features[0].center;
-    return { lat, lng };
-  }
-
-  const addresses = {
-    person_a:
-      "787 Trần Cao Vân, Thanh Khê Đông, Thanh Khê, Đà Nẵng 550000, Việt Nam",
-    supplier: [
-      "Ngã Ba Huế, Hoà An, Thanh Khê, Đà Nẵng 550000, Việt Nam",
-
-      "Hòa Khê, Thanh Khê, Đà Nẵng 550000, Việt Nam",
-
-      "Trần Cao Vân, Thanh Khê Tây, Liên Chiểu, Đà Nẵng 550000, Việt Nam",
-    ],
-    person_b: "48 Xuân Đán 1, Xuân Hà, Thanh Khê, Đà Nẵng 550000, Việt Nam",
-  };
-
-  async function calculateTotalDistanceAndTime() {
-    const personALocation = await getCoordinatesFromAddress(addresses.person_a);
-    const personBLocation = await getCoordinatesFromAddress(addresses.person_b);
-
-    const supplierLocations = [];
-    for (let i = 0; i < addresses.supplier.length; i++) {
-      const supplierLocation = await getCoordinatesFromAddress(
-        addresses.supplier[i]
-      );
-      supplierLocations.push(supplierLocation);
-    }
-    const sortedAddresses = [
-      personALocation,
-      ...supplierLocations,
-      personBLocation,
-    ];
-
-    console.log(supplierLocations);
-    const distances = [];
-    const times = [];
-
-    for (let i = 0; i < sortedAddresses.length - 1; i++) {
-      const distance = calculateDistance(
-        sortedAddresses[i].lat,
-        sortedAddresses[i].lng,
-        sortedAddresses[i + 1].lat,
-        sortedAddresses[i + 1].lng
-      );
-      distances.push(distance);
-
-      const time = Math.round((distance / speed) * 60);
-      times.push(time);
-    }
-
-    const totalDistance = distances.reduce((acc, curr) => acc + curr, 0);
-    const totalTime = times.reduce((acc, curr) => acc + curr, 0);
-
-    console.log("Distances:", distances);
-    console.log("Times:", times);
-    console.log("Total Distance:", totalDistance.toFixed(2));
-    console.log("Total Time:", totalTime);
-
-    // Return totalDistance and totalTime if needed in your application
-    return { totalDistance: totalDistance.toFixed(2), totalTime };
-  }
-};
-
-// shortedDistance();
 
 cron.schedule("0 1 * * *", () => {
   console.log("Start crape data at 1:00 AM");

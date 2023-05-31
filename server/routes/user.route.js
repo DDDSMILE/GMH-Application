@@ -28,9 +28,9 @@ router.route("/logout").get(logout);
 
 router.route("/me").get(isAuthenticated, getMyProfile);
 
-router.route("/updateprofile").put(updateProfile);
+router.route("/update_profile").put(isAuthenticated, updateProfile);
 
-router.route("/updatepassword").put(updatePassword);
+router.route("/update_password").put(isAuthenticated, updatePassword);
 
 router.route("/forgetpassword").post(forgetPassword);
 

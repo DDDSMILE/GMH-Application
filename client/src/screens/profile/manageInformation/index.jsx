@@ -13,6 +13,7 @@ import { BackButton, HeaderPage } from "../../../components/form";
 import { DismissKeyboardView, Input } from "../../../components/common";
 import colors from "../../../constants/colors";
 import FlashMessage, { showMessage } from "react-native-flash-message";
+import { changePhoneNumber } from "../../../services/user";
 
 const ManageInformationScreen = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -26,11 +27,25 @@ const ManageInformationScreen = ({ navigation }) => {
   const [formError, setFormError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const [isValidPhoneNumber, setIsValidPhoneNumber] = useState(true);
+
   const handleChange = () => {
-    showMessage({
-      message: "Thay đổi thành công",
-      type: "success",
-    });
+    const phoneNumberPattern = /^(?:\+84|0)(?:\d{9}|\d{10})$/;
+
+    if (phoneNumberPattern.test(formState.phone_number)) {
+      setIsValidPhoneNumber(true);
+      changePhoneNumber({ phone_number: formState.phone_number });
+      showMessage({
+        message: "Thay đổi thành công",
+        type: "success",
+      });
+    } else {
+      setIsValidPhoneNumber(false);
+      showMessage({
+        message: "Không thành công",
+        type: "danger",
+      });
+    }
   };
 
   return (
@@ -93,7 +108,9 @@ const ManageInformationScreen = ({ navigation }) => {
             color={colors.GREEN_LOGO_TWO}
           />
         </View>
-
+        {!isValidPhoneNumber && (
+          <Text style={{ color: "red" }}>Số điện thoại không hợp lệ!</Text>
+        )}
         {formError !== "" && (
           <View style={styles.errorContainer}>
             <MaterialIcons name="error-outline" size={18} color="red" />

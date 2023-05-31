@@ -5,9 +5,14 @@ import Collapsible from "react-native-collapsible";
 import { RadioButton, TextInput } from "react-native-paper";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../../constants";
-import { InfinityScroll, OrderResumeCTA } from "../../../components/food";
+import {
+  InfinityScroll,
+  OrderResumeCTA,
+  SearchBar,
+} from "../../../components/food";
 import { useSelector } from "react-redux";
 import colors from "../../../constants/colors";
+import { AntDesign } from "@expo/vector-icons";
 
 const typeItems = [
   {
@@ -48,6 +53,8 @@ const SearchScreen = ({ route, navigation }) => {
   const handleSort = () => {
     sortOrder === "asc" ? setSortOrder("desc") : setSortOrder("asc");
   };
+  const [search, setSearch] = useState(searchText);
+  console.log(search);
 
   return (
     <View>
@@ -66,6 +73,23 @@ const SearchScreen = ({ route, navigation }) => {
           alignItems: "center",
         }}
       >
+        <View
+          style={{
+            display: "flex",
+            width: "90%",
+            backgroundColor: "#e6e6ec",
+            borderRadius: 10,
+          }}
+        >
+          <TextInput
+            value={search}
+            onChangeText={(text) => setSearch(text)}
+            placeholder="Tìm kiếm sản phẩm..."
+            keyboardType="default"
+            autoCorrect={false}
+            autoCapitalize="none"
+          />
+        </View>
         <TouchableOpacity onPress={toggleCollapsible}>
           <View
             style={{
@@ -171,7 +195,7 @@ const SearchScreen = ({ route, navigation }) => {
       </View>
       <InfinityScroll
         typeProduct={typeProduct}
-        searchText={searchText}
+        searchText={search}
         minPrice={minPrice}
         maxPrice={maxPrice}
         sortOrder={sortOrder}
