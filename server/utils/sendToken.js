@@ -17,6 +17,7 @@ export const sendToken = (res, user, statusCode, message) => {
     email: user.email,
     orders: user.orders,
     verified: user.verified,
+    avatar: user.avatar,
   };
 
   res

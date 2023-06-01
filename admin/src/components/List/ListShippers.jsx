@@ -40,13 +40,13 @@ const ListShippers = () => {
               to={`/shippers/${params.row.id}`}
               style={{ textDecoration: "none" }}
             >
-              <div className="viewButton">View</div>
+              <div className="viewButton">Xem thông tin</div>
             </Link>
             <div
               className="deleteButton"
               onClick={() => handleDelete(params.row.id)}
             >
-              Delete
+              Xóa
             </div>
           </div>
         );
@@ -56,7 +56,7 @@ const ListShippers = () => {
   return (
     <div className="datatable">
       <ToastContainer />
-      <div className="datatableTitle">Danh sách sản phẩm</div>
+      <div className="datatableTitle">Danh sách người giao hàng</div>
       <Link to="create" style={{ textDecoration: "none" }}>
         <div className="editButton">Thêm nhân viên</div>
       </Link>

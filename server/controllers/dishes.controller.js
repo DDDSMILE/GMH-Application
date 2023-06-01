@@ -3,14 +3,14 @@ import { DishesModel } from "../models/dishes.model.js";
 export const getDishesWithPaginate = async (req, res) => {
   try {
     // Get data from database according to page value
-    const page = req.params.page || 1;
+    const page = req.params.page || 10;
     const productType = decodeURIComponent(req.params.type);
-    const pageSize = 1;
+    const pageSize = 10;
     const offset = (page - 1) * pageSize;
 
     // Get data from database according to (min,max) price
     const minPrice = req.params.min || 0;
-    const maxPrice = req.params.max || Infinity;
+    const maxPrice = req.params.max || 10000000;
 
     // Get data from database according to (asc, desc) price
     const sortDishes = req.params.sort || "asc";
@@ -23,17 +23,14 @@ export const getDishesWithPaginate = async (req, res) => {
     }
 
     let dishes = [];
-
-    if ((search === null || search === undefined) && productType === "all") {
+    if (!search && productType === "all") {
       dishes = await DishesModel.find({
         price: { $gte: minPrice, $lte: maxPrice },
       })
         .limit(pageSize)
         .skip(offset)
         .sort(sortParam);
-    }
-
-    if ((search === null || search === undefined) && productType !== "all") {
+    } else if (!search && productType !== "all") {
       dishes = await DishesModel.find({
         type: productType,
         price: { $gte: minPrice, $lte: maxPrice },
@@ -41,9 +38,7 @@ export const getDishesWithPaginate = async (req, res) => {
         .limit(pageSize)
         .skip(offset)
         .sort(sortParam);
-    }
-
-    if (search && productType == "all") {
+    } else if (search && productType === "all") {
       dishes = await DishesModel.find({
         name: { $regex: search, $options: "i" },
         price: { $gte: minPrice, $lte: maxPrice },
@@ -51,9 +46,7 @@ export const getDishesWithPaginate = async (req, res) => {
         .limit(pageSize)
         .skip(offset)
         .sort(sortParam);
-    }
-
-    if (search && productType !== "all") {
+    } else if (search && productType !== "all") {
       dishes = await DishesModel.find({
         name: { $regex: search, $options: "i" },
         type: productType,
@@ -62,14 +55,11 @@ export const getDishesWithPaginate = async (req, res) => {
         .limit(pageSize)
         .skip(offset)
         .sort(sortParam);
-    }
-
-    if (page === "all") {
+    } else if (page === "all") {
       dishes = await DishesModel.find({
         price: { $gte: minPrice, $lte: maxPrice },
       }).sort(sortParam);
     }
-
     res.status(200).json({ success: true, message: "Done", dishes: dishes });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });

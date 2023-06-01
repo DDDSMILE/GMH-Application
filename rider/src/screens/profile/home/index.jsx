@@ -15,7 +15,6 @@ import colors from "../../../constants/colors";
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const [notifications, setNotifications] = useState(true);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -27,9 +26,7 @@ const HomeScreen = ({ navigation }) => {
         <Image
           style={styles.userImg}
           resizeMode="contain"
-          source={{
-            uri: "https://res.cloudinary.com/du93troxt/image/upload/v1682403822/shipper/aveqfofhd6pjvnqnqyrt.jpg",
-          }}
+          source={{ uri: user.avatar.url }}
         />
         <View style={styles.headerContent}>
           <Text style={styles.headerName}>{user.name}</Text>

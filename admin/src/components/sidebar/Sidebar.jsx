@@ -9,8 +9,8 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="top">
-        <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">GMH</span>
+        <Link to="/dishes" style={{ textDecoration: "none" }}>
+          <span className="logo">iMarket</span>
         </Link>
       </div>
       <hr />
@@ -35,11 +35,6 @@ const Sidebar = () => {
               <span>Nhân viên</span>
             </li>
           </Link>
-          <p className="title">Chức năng</p>
-          <li>
-            <ExitToAppIcon className="icon" />
-            <span>Đăng xuất</span>
-          </li>
         </ul>
       </div>
     </div>

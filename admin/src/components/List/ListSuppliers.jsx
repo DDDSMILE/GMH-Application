@@ -14,7 +14,7 @@ const ListSuppliers = () => {
 
   return (
     <div className="datatable">
-      <div className="datatableTitle">Danh sách sản phẩm</div>
+      <div className="datatableTitle">Danh sách đại lý</div>
       <DataGrid
         className="datagrid"
         rows={data}

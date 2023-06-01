@@ -37,6 +37,25 @@ export const login = async (req, res) => {
   }
 };
 
+export const changeAddress = async (req, res) => {
+  try {
+    const { address, lat, lng, shipper_name } = req.body;
+    const user = await ShipperModel.findOne({ name: shipper_name });
+
+    if (address) user.address = address;
+    if (lat) user.lat = lat;
+    if (lng) user.lng = lng;
+
+    await user.save();
+
+    res
+      .status(200)
+      .json({ success: true, message: "Profile Updated successfully" });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
+};
+
 /* LOGOUT */
 export const logout = async (req, res) => {
   try {
@@ -65,28 +84,12 @@ export const getMyProfile = async (req, res) => {
 /* UPDATE PROFILE */
 export const updateProfile = async (req, res) => {
   try {
-    const shipper = await ShipperModel.findById(req.shipper._id);
+    const { phone_number, name_shipper } = req.body;
+    const user = await ShipperModel.findOne({ name: name_shipper });
+    console.log(user);
 
-    const { name } = req.body;
-    const avatar = req.files.avatar.tempFilePath;
-
-    if (name) shipper.name = name;
-    if (avatar) {
-      await cloudinary.v2.uploader.destroy(shipper.avatar.public_id);
-
-      const mycloud = await cloudinary.v2.uploader.upload(avatar, {
-        folder: "shippers",
-      });
-
-      fs.rmSync("./tmp", { recursive: true });
-
-      shipper.avatar = {
-        public_id: mycloud.public_id,
-        url: mycloud.secure_url,
-      };
-    }
-
-    await shipper.save();
+    if (phone_number) user.phone_number = phone_number;
+    await user.save();
 
     res
       .status(200)
@@ -99,11 +102,10 @@ export const updateProfile = async (req, res) => {
 /* UPDATE PASSWORD */
 export const updatePassword = async (req, res) => {
   try {
-    const shipper = await ShipperModel.findById(req.shipper._id).select(
-      "+password"
-    );
-
-    const { oldPassword, newPassword } = req.body;
+    const { oldPassword, newPassword, shipper_name } = req.body;
+    const shipper = await ShipperModel.findOne({
+      name: shipper_name,
+    });
 
     if (!oldPassword || !newPassword) {
       return res

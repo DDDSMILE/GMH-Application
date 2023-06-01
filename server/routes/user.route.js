@@ -32,9 +32,9 @@ router.route("/update_profile").put(isAuthenticated, updateProfile);
 
 router.route("/update_password").put(isAuthenticated, updatePassword);
 
-router.route("/forgetpassword").post(forgetPassword);
+router.route("/forget_password").post(forgetPassword);
 
-router.route("/resetpassword").put(resetPassword);
+router.route("/reset_password").put(resetPassword);
 
 router.route("/chatgpt").post(answerChatGPT);
 

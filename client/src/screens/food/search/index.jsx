@@ -54,7 +54,6 @@ const SearchScreen = ({ route, navigation }) => {
     sortOrder === "asc" ? setSortOrder("desc") : setSortOrder("asc");
   };
   const [search, setSearch] = useState(searchText);
-  console.log(search);
 
   return (
     <View>

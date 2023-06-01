@@ -45,7 +45,10 @@ const Addresses = ({ navigation }) => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
-        setErrorMsg("Permission to access location was denied");
+        showMessage({
+          message: "Bấm 'allow' để lấy tọa độ",
+          type: "danger",
+        });
         return;
       }
     })();

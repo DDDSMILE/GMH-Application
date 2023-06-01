@@ -30,8 +30,8 @@ const RegisterLocation = ({ navigation }) => {
   const handleGetLocation = async () => {
     // DEFAULT LOCATION
     const DEFAULT_LOCATION = {
-      latitude: 16.059918402224724,
-      longitude: 108.20964027606065,
+      latitude: 16.049372951103447,
+      longitude: 108.16047413865257,
     };
 
     const loc = {

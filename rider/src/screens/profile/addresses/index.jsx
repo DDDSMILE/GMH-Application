@@ -12,6 +12,7 @@ import { DismissKeyboardView, Input } from "../../../components/common";
 import { useSelector } from "react-redux";
 import * as Location from "expo-location";
 import colors from "../../../constants/colors";
+import { changeAddress } from "../../../services/shipper";
 import FlashMessage, { showMessage } from "react-native-flash-message";
 
 const Addresses = ({ navigation }) => {
@@ -21,12 +22,31 @@ const Addresses = ({ navigation }) => {
     new_address: user.address,
   });
 
+  const convertAddressToCoordinates = async (address) => {
+    try {
+      const response = await fetch(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(
+          address
+        )}.json?access_token=pk.eyJ1IjoidGhhaXJ5byIsImEiOiJjbGk2dmt6bmczZzNiM2VudGRkc2xhY2dxIn0.j5FbXoxE7wJOwi9STKSLBw&limit=1`
+      );
+      const data = await response.json();
+      if (data.features.length > 0) {
+        const { center } = data.features[0];
+        return { lat: center[1], lng: center[0] };
+      }
+      return null;
+    } catch (error) {
+      console.error("Error converting address to coordinates:", error);
+      return null;
+    }
+  };
+
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         showMessage({
-          message: "Hãy bấm 'allow' để cập nhật vị trí",
+          message: "Bấm 'allow' để lấy tọa độ",
           type: "danger",
         });
         return;
@@ -37,8 +57,8 @@ const Addresses = ({ navigation }) => {
   const handleGetLocation = async () => {
     // DEFAULT LOCATION
     const DEFAULT_LOCATION = {
-      latitude: 16.049372951103447,
-      longitude: 108.16047413865257,
+      latitude: 16.059948395515388,
+      longitude: 108.20970310839263,
     };
 
     let adrs = await Location.reverseGeocodeAsync(DEFAULT_LOCATION);
@@ -47,15 +67,28 @@ const Addresses = ({ navigation }) => {
       name || streetNumber
     }, ${street}, ${subregion}, ${region}`;
     setNewAddress({ new_address: address });
-  };
-
-  const handleChange = () => {
     showMessage({
-      message: "Thay đổi thành công",
+      message: "Lấy tọa độ thành công",
       type: "success",
     });
   };
-  
+
+  const handleChange = async () => {
+    const { new_address } = newAddress;
+    const { lat, lng } = await convertAddressToCoordinates(new_address);
+
+    await changeAddress({
+      address: new_address,
+      lat: lat,
+      lng: lng,
+      shipper_name: user.name,
+    });
+    showMessage({
+      message: "Lưu thanh đổi",
+      type: "success",
+    });
+  };
+
   return (
     <DismissKeyboardView style={styles.container}>
       <FlashMessage position="top" />

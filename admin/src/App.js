@@ -19,24 +19,22 @@ function App() {
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
-          <Route path="/">
-            <Route index element={<Home />} />
-            <Route path="dishes">
-              <Route index element={<Dishes />} />
-            </Route>
-            <Route path="suppliers">
-              <Route index element={<Suppliers />} />
-            </Route>
-            <Route path="shippers">
-              <Route index element={<Shippers />} />
-              <Route path=":shipperId" element={<Profile />} />
-              <Route path=":shipperId/updated" element={<Updated />} />
-              <Route
-                path="create"
-                element={<Create inputs={userInputs} />}
-                title="Thêm nhân viên"
-              />
-            </Route>
+          <Route index element={<Dishes />} />
+          <Route path="dishes">
+            <Route index element={<Dishes />} />
+          </Route>
+          <Route path="suppliers">
+            <Route index element={<Suppliers />} />
+          </Route>
+          <Route path="shippers">
+            <Route index element={<Shippers />} />
+            <Route path=":shipperId" element={<Profile />} />
+            <Route path=":shipperId/updated" element={<Updated />} />
+            <Route
+              path="create"
+              element={<Create inputs={userInputs} />}
+              title="Thêm nhân viên"
+            />
           </Route>
         </Routes>
       </BrowserRouter>

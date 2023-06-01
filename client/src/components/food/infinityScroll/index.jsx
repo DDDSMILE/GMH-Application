@@ -1,4 +1,10 @@
-import { ActivityIndicator, FlatList, View, Text } from "react-native";
+import {
+  ActivityIndicator,
+  FlatList,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
 import ProductItem from "../productItem";
 import { useEffect, useState } from "react";
 import { getDishes } from "../../../services/dishes";
@@ -10,7 +16,7 @@ const InfinityScroll = (props) => {
     searchText = "",
     minPrice = "",
     maxPrice = "",
-    sortOrder = "",
+    sortOrder = "asc",
     navigation,
   } = props;
   const [dishes, setDishes] = useState([]);
@@ -29,7 +35,7 @@ const InfinityScroll = (props) => {
         maxPrice,
         sortOrder,
       });
-      setDishes([...dishes, ...data.dishes]);
+      setDishes([...data.dishes]);
       setIsLoading(false);
     } catch (err) {
       console.log(err);
@@ -55,7 +61,7 @@ const InfinityScroll = (props) => {
   useEffect(() => {
     setDishes([]);
     getDishesPerPage();
-  }, [minPrice, maxPrice, sortOrder, typeProduct, searchText]);
+  }, [minPrice, maxPrice, sortOrder, searchText, sortOrder]);
 
   const [isRefreshing, setIsRefreshing] = useState(false);
 
@@ -65,7 +71,7 @@ const InfinityScroll = (props) => {
     getDishesPerPage();
     setIsRefreshing(false);
   };
-
+  
   return (
     <View
       style={{
@@ -88,8 +94,13 @@ const InfinityScroll = (props) => {
           refreshing={isRefreshing}
         />
       ) : (
-        <View
-          style={{ flex: 0.85, justifyContent: "center", alignItems: "center" }}
+        <TouchableOpacity
+          style={{
+            justifyContent: "center",
+            alignItems: "center",
+            paddingBottom: 200,
+          }}
+          onPress={handleRefresh}
         >
           <Ionicons name="ios-warning-outline" size={28} color="#000" />
           <Text
@@ -102,7 +113,7 @@ const InfinityScroll = (props) => {
           >
             Không tồn tại sản phẩm "{searchText}"
           </Text>
-        </View>
+        </TouchableOpacity>
       )}
     </View>
   );

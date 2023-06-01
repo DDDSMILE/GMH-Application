@@ -23,7 +23,7 @@ const Profile = () => {
           <div className="top">
             <div className="left">
               <Link to="updated" style={{ textDecoration: "none" }}>
-                <div className="editButton">Edit</div>
+                <div className="editButton">Chỉnh sửa</div>
               </Link>
               <h1 className="title">Thông tin của nhân viên:</h1>
               <div className="item">
