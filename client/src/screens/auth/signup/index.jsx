@@ -120,9 +120,9 @@ const SignUpScreen = ({ navigation }) => {
           />
         }
       />
-      {(error || formError !== "") && (
+      {formError !== "" && (
         <View>
-          <Text>{error ? error : formError}</Text>
+          <Text style={{ color: "red" }}>{formError}</Text>
         </View>
       )}
       <ButtonForm

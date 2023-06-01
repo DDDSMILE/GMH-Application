@@ -172,7 +172,7 @@ const InputPhoneScreen = ({ navigation }) => {
       )}
       {formError !== "" && (
         <View>
-          <Text>{formError}</Text>
+          <Text style={{ color: "red" }}>{formError}</Text>
         </View>
       )}
       <View style={{ alignItems: "center", justifyContent: "center" }}>

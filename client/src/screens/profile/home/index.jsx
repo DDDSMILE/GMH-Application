@@ -98,7 +98,7 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        <View style={styles.section}>
+        {/* <View style={styles.section}>
           <Text style={styles.sectionTitle}>Thông báo</Text>
 
           <View style={styles.sectionItem}>
@@ -126,7 +126,7 @@ const HomeScreen = ({ navigation }) => {
               </View>
             </TouchableOpacity>
           </View>
-        </View>
+        </View> */}
 
         <View style={styles.logoutContainer}>
           <TouchableOpacity onPress={handleLogout}>

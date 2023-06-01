@@ -96,23 +96,11 @@ const SignInScreen = ({ navigation }) => {
       />
       {(error || formError !== "") && (
         <View>
-          <Text>
+          <Text style={{ color: "red" }}>
             {error ? "Tài khoản hoặc mật khẩu không chính xác" : formError}
           </Text>
         </View>
       )}
-      <Text
-        style={{
-          color: Colors.GREEN_LOGO_TWO,
-          fontFamily: "inter_medium",
-          fontSize: 13,
-          textDecorationLine: "underline",
-          paddingBottom: 20,
-        }}
-        onPress={() => navigation.navigate("inputphonenumber")}
-      >
-        Quên mật khẩu?
-      </Text>
       <Text
         style={{
           color: Colors.DEFAULT_BLACK,

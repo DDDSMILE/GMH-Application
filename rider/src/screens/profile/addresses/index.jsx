@@ -36,7 +36,6 @@ const Addresses = ({ navigation }) => {
       }
       return null;
     } catch (error) {
-      console.error("Error converting address to coordinates:", error);
       return null;
     }
   };
@@ -57,8 +56,8 @@ const Addresses = ({ navigation }) => {
   const handleGetLocation = async () => {
     // DEFAULT LOCATION
     const DEFAULT_LOCATION = {
-      latitude: 16.059948395515388,
-      longitude: 108.20970310839263,
+      latitude: 16.0599622048561,
+      longitude: 108.20961344940662,
     };
 
     let adrs = await Location.reverseGeocodeAsync(DEFAULT_LOCATION);

@@ -19,7 +19,7 @@ const PageForm = ({ children }) => {
     <View style={styles.page}>
       <ImageBackground
         style={{
-          height: 350,
+          height: 300,
           width: "100%",
           opacity: 0.9,
         }}
