@@ -32,11 +32,11 @@ https://github.com/fumodayo/GMH-Application/assets/85737371/4db1743e-1c39-4e6f-8
 
 ### Rider
 
-![](https://github.com/fumodayo/GMH-Application/blob/master/assets/assets_sign-up.mov)
+https://github.com/fumodayo/GMH-Application/assets/85737371/1cb970c8-ff79-4af4-a8f6-85642bbf6d7f
 
 ### Admin
 
-![](https://github.com/fumodayo/GMH-Application/blob/master/assets/admin.mov)
+https://github.com/fumodayo/GMH-Application/assets/85737371/dbedf7bd-0eec-4322-a2a2-b369616739f8
 
 ## Config file (Để vào trong server/config/config.env)
 
