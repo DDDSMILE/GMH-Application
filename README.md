@@ -28,7 +28,7 @@ https://github.com/fumodayo/GMH-Application/assets/85737371/320fc827-b9d9-4e01-b
 
 ### User
 
-![](https://github.com/fumodayo/GMH-Application/blob/master/assets/user.mov)
+https://github.com/fumodayo/GMH-Application/assets/85737371/4db1743e-1c39-4e6f-83f5-df3d0be869fd
 
 ### Rider
 
