@@ -32,7 +32,7 @@ iMarket is developed with React Native, expo and ReactJS.
 
 ### Rider
 
-![](https://github.com/fumodayo/GMH-Application/blob/master/assets/rider.mov)
+![](https://github.com/fumodayo/GMH-Application/blob/master/assets/assets_sign-up.mov)
 
 ### Admin
 
