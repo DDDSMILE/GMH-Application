@@ -153,7 +153,7 @@ export const forgetPassword = async (req, res) => {
 
     await shipper.save();
 
-    // await sendSMS(phone_number, "Your OTP for reset the password", otp);
+    await sendSMS(phone_number, "Your OTP for reset the password", otp);
 
     res
       .status(200)

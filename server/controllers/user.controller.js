@@ -33,7 +33,7 @@ export const register = async (req, res) => {
       otp_expiry: new Date(Date.now() + process.env.OTP_EXPIRY * 60 * 1000),
     });
 
-    // await sendSMS(phone_number, "Verify your account by OTP", otp);
+    await sendSMS(phone_number, "Verify your account by OTP", otp);
 
     sendToken(
       res,
@@ -200,7 +200,7 @@ export const forgetPassword = async (req, res) => {
 
     await user.save();
 
-    // await sendSMS(phone_number, "Your OTP for reset the password", otp);
+    await sendSMS(phone_number, "Your OTP for reset the password", otp);
 
     res
       .status(200)
